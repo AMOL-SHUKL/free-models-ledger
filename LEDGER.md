@@ -27,10 +27,10 @@ Fallback chain when a route throttles: beam-free, minimax-m3.1-flash-free, glm-5
 | Pick | Ref | Why |
 | :--- | :--- | :--- |
 | 1 | opencode/beam-free | 1M in, 131k out, text |
-| 2 | opencode/nemotron-3-ultra-free | 1M in, 128k out, largest model in the Nemotron 3 line |
-| 3 | opencode/minimax-m3.1-flash-free | 1M in, 512k out, image and video |
+| 2 | opencode/minimax-m3.1-flash-free | 1M in, 512k out, image and video |
+| 3 | opencode/longcat-2.5-preview-free | 1M in, 131k out, image input |
 
-Alternates: opencode/longcat-2.5-preview-free (1M, image), openrouter/thinkingmachines/inkling:free (1M in, 262k out, audio and image), openrouter/openrouter/pareto-code (2M in, 200k out, no tools, analysis only).
+Alternates: openrouter/thinkingmachines/inkling:free (1M in, 262k out, audio and image), opencode/glm-5.3-flash-free (200k, document input), openrouter/openrouter/pareto-code (2M in, 200k out, no tools, analysis only).
 
 ### 1.3 Vision and multimodal
 
@@ -40,27 +40,27 @@ Alternates: opencode/longcat-2.5-preview-free (1M, image), openrouter/thinkingma
 | 2 | opencode/glm-5.3-flash-free | Image, video, and pdf input |
 | 3 | opencode/minimax-m3.1-flash-free | Image and video input, 1M context, 512k output, coding focus |
 
-Alternates: opencode/mimo-v2.6-flash-free (audio and video input), opencode/longcat-2.5-preview-free (image), openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free (audio and video), openrouter/google/gemma-4-31b-it:free and gemma-4-26b-a4b-it:free (image and video), openrouter/dots-studio/dots-3-note-preview:free (512k in, 460k out), opencode/deepseek-v4.1-flash-free (image).
+Alternates: opencode/mimo-v2.6-flash-free (audio and video input), opencode/longcat-2.5-preview-free (image), openrouter/google/gemma-4-31b-it:free and gemma-4-26b-a4b-it:free (image and video), openrouter/dots-studio/dots-3-note-preview:free (512k in, 460k out), opencode/deepseek-v4.1-flash-free (image).
 
 ### 1.4 Fast bulk execution and subagents
 
 | Pick | Ref | Why |
 | :--- | :--- | :--- |
 | 1 | opencode/deepseek-v4.1-flash-free | Flash class, 200k context, 32k out, effort low, high, max |
-| 2 | opencode/nemotron-3.5-lightning-free | 262k in and 262k out, built for reliable fast agent chores |
-| 3 | opencode/mimo-v2.6-flash-free | Flash class, 200k, multimodal input |
+| 2 | opencode/mimo-v2.6-flash-free | Flash class, 200k, multimodal input |
+| 3 | opencode/minimax-m3.1-flash-free#low | 1M in, 512k out, when bulk work needs long context |
 
-Alternates: groq/groq/compound-mini (131k in, 8k out, no tools, text extraction only), openrouter/liquid/lfm-2.5-2.6b:free (65k), openrouter/nvidia/nemotron-3.5-lightning:free (1M in, 65k out), opencode/minimax-m3.1-flash-free#low (1M in, 512k out, when bulk work needs long context).
+Alternates: groq/groq/compound-mini (131k in, 8k out, no tools, text extraction only), openrouter/liquid/lfm-2.5-2.6b:free (65k), opencode/glm-5.3-flash-free (200k, document input).
 
 ### 1.5 Deliberate reasoning and review
 
 | Pick | Ref | Why |
 | :--- | :--- | :--- |
 | 1 | opencode/beam-free#max | Full effort budget on the largest first-party route |
-| 2 | opencode/nemotron-3-ultra-free | Deep reasoner, text, 1M context |
-| 3 | openrouter/thinkingmachines/inkling:free#max | Different family for adversarial second opinions, 1M in, 262k out, six effort levels |
+| 2 | openrouter/thinkingmachines/inkling:free#max | Different family for adversarial second opinions, 1M in, 262k out, six effort levels |
+| 3 | opencode/minimax-m3.1-flash-free#max | Different family, 1M in, 512k output, effort low to max |
 
-Alternates: opencode/minimax-m3.1-flash-free#max (different family, 512k output), opencode/big-pickle (stealth reasoning), openrouter/nvidia/nemotron-3-super-120b-a12b:free (effort plus budget tokens), openrouter/nvidia/nemotron-3-ultra-550b-a55b:free (effort plus budget tokens).
+Alternates: opencode/big-pickle (stealth reasoning), opencode/deepseek-v4.1-flash-free#max (different family), opencode/longcat-2.5-preview-free (1M, reasoning toggle).
 
 ### 1.6 Specialists and narrow utility
 
@@ -77,7 +77,7 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 - Pick for the current session: `/models` in the TUI. The selection applies to the session and does not change config.
 - One command run: `opencode run --model opencode/beam-free#high "Refactor parseToken"`.
 - Default model: `"model": "opencode/glm-5.3-flash-free"` in `opencode.json`. The root model keeps provider and model only, not a variant.
-- Agent model: `"agents": { "reviewer": { "model": "opencode/nemotron-3-ultra-free" } }`. Expanded form accepts providerID, model, and variant. A subagent without its own model inherits the parent session model.
+- Agent model: `"agents": { "reviewer": { "model": "opencode/glm-5.3-flash-free" } }`. Expanded form accepts providerID, model, and variant. A subagent without its own model inherits the parent session model.
 - Command model: `"commands": { "audit": { "template": "Audit $ARGUMENTS.", "model": "opencode/beam-free#high" } }`.
 - Variants: append `#name`. Names come from the catalog, listed per model in sections 3 and 4. Unknown variants fail model resolution. Custom variants can be added with a `variants` array on a provider model entry; reasoning controls can be declared with `capabilities.reasoning`.
 - Auth: first-party free routes use `OPENCODE_API_KEY` through OpenCode Console or Go. `GROQ_API_KEY` for Groq, `OPENROUTER_API_KEY` for OpenRouter. `/connect` is the TUI path.
@@ -224,6 +224,7 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 - Family: nemotron-free. Canonical: nvidia/nemotron-3.5-lightning. In Console free list: yes.
 - Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
 - Policy: nvidia-trial-terms. NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.
+- Notes: Deprioritised by user preference on 2026-10-19. Quality ranks below other free routes. Do not use for picks.
 
 ### opencode/nemotron-3.5-super-vl-free
 - Name: Nemotron 3.5 Super VL Free. Status: active. Released: 2026-10-15. Last updated: 2026-10-15. Knowledge cutoff: -.
@@ -246,6 +247,7 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 - Family: nemotron-free. Canonical: nvidia/nemotron-3-ultra-550b-a55b. In Console free list: yes.
 - Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
 - Policy: nvidia-trial-terms. NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.
+- Notes: Deprioritised by user preference on 2026-10-19. Quality ranks below other free routes. Do not use for picks.
 
 ### opencode-go/beam-free
 - Name: Beam Free. Status: active. Released: 2026-10-05. Last updated: 2026-10-16. Knowledge cutoff: 2026-06-30.
@@ -659,7 +661,8 @@ Documented but not on this device today, privacy rows for the watchlist: LL Alph
 - R4 data policy preference: zero-retention before 30-day retention before may-use before upstream-unverified.
 - R5 review work prefers a different model family than the primary pick.
 - R6 fallback chain: beam-free, minimax-m3.1-flash-free, glm-5.3-flash-free, deepseek-v4.1-flash-free, openrouter/openrouter/free.
-- Override rule: only a dated measurement with a stated method replaces a pick. Record it in the changelog and in the card notes.
+- R7 family preference: avoid Nemotron chat and reasoning routes. User judgement, 2026-10-19: quality ranks below other free routes. Exception: opencode/nemotron-3.5-super-vl-free stays eligible for vision work. The Nemotron content-safety classifier stays eligible as a narrow utility. This is a preference, not a measured benchmark.
+- Override rule: a dated measurement with a stated method replaces a capability pick. A dated user preference replaces a family preference. Record both in CHANGELOG.md and in the card notes.
 
 ## 9. Provenance and sources
 

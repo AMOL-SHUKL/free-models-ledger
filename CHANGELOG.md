@@ -2,6 +2,16 @@
 
 Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed changed`.
 
+## 2026-10-19, user preference override, no new snapshot
+
+- R7 added to the ranking policy. Exclude Nemotron chat and reasoning routes from picks. User judgement: quality ranks below other free routes.
+- Exception kept: opencode/nemotron-3.5-super-vl-free stays eligible for vision work.
+- Exception kept: openrouter/nvidia/nemotron-3.5-content-safety:free stays eligible as a classifier.
+- Picks changed. 1.2 long-context: Ultra replaced by MiniMax M3.1 Flash and LongCat. 1.4 subagents: Lightning replaced by MiMo. 1.5 review: Ultra replaced by Inkling and MiniMax.
+- Agent config example changed from Ultra to glm-5.3-flash-free.
+- Card notes added to opencode/nemotron-3.5-lightning-free and opencode/nemotron-3-ultra-free.
+- Inventory, stats, and privacy sections unchanged. No catalog change.
+
 ## 2026-10-19, run 2026-10-19-laptop-f7fu0ssn
 
 - +3 -1. Added opencode/minimax-m3.1-flash-free, opencode-go/minimax-m3.1-flash-free, openrouter/minimax/minimax-m3.1-flash:free. Removed opencode/space-bunny-free.
