@@ -2,7 +2,7 @@
 
 Declarative record of every zero-price model reachable from OpenCode on this device. Built for daily regeneration by any agent, on any device. Machine-owned sections sit between AUTO markers and are rewritten from `snapshot.json`. Everything else is stable narrative.
 
-**Snapshot 2026-10-17. Run 2026-10-17-laptop-f7fu0ssn. OpenCode 2.0.31. Catalog 489 models, 5 providers. Free 38.**
+**Snapshot 2026-10-19. Run 2026-10-19-laptop-f7fu0ssn. OpenCode 2.0.32. Catalog 488 models, 5 providers. Free 40.**
 
 Sections: 1 Top 3 by category, 2 How to use, 3 Inventory, 4 Cards, 5 Devices, 6 Drift, 7 Privacy, 8 Ranking policy, 9 Provenance, 10 Stats.
 
@@ -15,12 +15,12 @@ Picks are heuristic. They derive from catalog metadata and the routing rules in 
 | Pick | Ref | Why | Call |
 | :--- | :--- | :--- | :--- |
 | 1 | opencode/beam-free | 501B MoE, 23B active. 1M context, 131k output. Coding and agentic focus. Updated 2026-10-16 | `opencode run --model opencode/beam-free#high "task"` |
-| 2 | opencode/glm-5.3-flash-free | Efficient coding agent. Image, video, and pdf input. Zero-retention provider | driver for mixed document and code work |
-| 3 | opencode/space-bunny-free | Stealth reasoning model. 1M context, 524k output, image and video input, effort low through max | long agent runs with big outputs |
+| 2 | opencode/minimax-m3.1-flash-free | Frontier multimodal coding model. 1M context, 512k output, image and video input, effort low through max, zero retention. Appeared the day Space Bunny Free retired | `opencode run --model opencode/minimax-m3.1-flash-free#high "task"` |
+| 3 | opencode/glm-5.3-flash-free | Efficient coding agent. Image, video, and pdf input. Zero-retention provider | driver for mixed document and code work |
 
 Alternates: opencode/deepseek-v4.1-flash-free, opencode/longcat-2.5-preview-free, openrouter/thinkingmachines/inkling:free.
 
-Fallback chain when a route throttles: beam-free, glm-5.3-flash-free, space-bunny-free, deepseek-v4.1-flash-free, openrouter/openrouter/free.
+Fallback chain when a route throttles: beam-free, minimax-m3.1-flash-free, glm-5.3-flash-free, deepseek-v4.1-flash-free, openrouter/openrouter/free.
 
 ### 1.2 Long-context analysis, 1M class
 
@@ -28,7 +28,7 @@ Fallback chain when a route throttles: beam-free, glm-5.3-flash-free, space-bunn
 | :--- | :--- | :--- |
 | 1 | opencode/beam-free | 1M in, 131k out, text |
 | 2 | opencode/nemotron-3-ultra-free | 1M in, 128k out, largest model in the Nemotron 3 line |
-| 3 | opencode/space-bunny-free | 1M in, 524k out, image and video |
+| 3 | opencode/minimax-m3.1-flash-free | 1M in, 512k out, image and video |
 
 Alternates: opencode/longcat-2.5-preview-free (1M, image), openrouter/thinkingmachines/inkling:free (1M in, 262k out, audio and image), openrouter/openrouter/pareto-code (2M in, 200k out, no tools, analysis only).
 
@@ -38,9 +38,9 @@ Alternates: opencode/longcat-2.5-preview-free (1M, image), openrouter/thinkingma
 | :--- | :--- | :--- |
 | 1 | opencode/nemotron-3.5-super-vl-free | Dedicated vision-language reasoning model, 1M context, image input |
 | 2 | opencode/glm-5.3-flash-free | Image, video, and pdf input |
-| 3 | opencode/mimo-v2.6-flash-free | Image, audio, and video input. Only first-party free route with audio in |
+| 3 | opencode/minimax-m3.1-flash-free | Image and video input, 1M context, 512k output, coding focus |
 
-Alternates: opencode/space-bunny-free (video), opencode/longcat-2.5-preview-free (image), openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free (audio and video), openrouter/google/gemma-4-31b-it:free and gemma-4-26b-a4b-it:free (image and video), openrouter/dots-studio/dots-3-note-preview:free (512k in, 460k out), opencode/deepseek-v4.1-flash-free (image).
+Alternates: opencode/mimo-v2.6-flash-free (audio and video input), opencode/longcat-2.5-preview-free (image), openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free (audio and video), openrouter/google/gemma-4-31b-it:free and gemma-4-26b-a4b-it:free (image and video), openrouter/dots-studio/dots-3-note-preview:free (512k in, 460k out), opencode/deepseek-v4.1-flash-free (image).
 
 ### 1.4 Fast bulk execution and subagents
 
@@ -50,7 +50,7 @@ Alternates: opencode/space-bunny-free (video), opencode/longcat-2.5-preview-free
 | 2 | opencode/nemotron-3.5-lightning-free | 262k in and 262k out, built for reliable fast agent chores |
 | 3 | opencode/mimo-v2.6-flash-free | Flash class, 200k, multimodal input |
 
-Alternates: groq/groq/compound-mini (131k in, 8k out, no tools, text extraction only), openrouter/liquid/lfm-2.5-2.6b:free (65k), openrouter/nvidia/nemotron-3.5-lightning:free (1M in, 65k out).
+Alternates: groq/groq/compound-mini (131k in, 8k out, no tools, text extraction only), openrouter/liquid/lfm-2.5-2.6b:free (65k), openrouter/nvidia/nemotron-3.5-lightning:free (1M in, 65k out), opencode/minimax-m3.1-flash-free#low (1M in, 512k out, when bulk work needs long context).
 
 ### 1.5 Deliberate reasoning and review
 
@@ -60,7 +60,7 @@ Alternates: groq/groq/compound-mini (131k in, 8k out, no tools, text extraction 
 | 2 | opencode/nemotron-3-ultra-free | Deep reasoner, text, 1M context |
 | 3 | openrouter/thinkingmachines/inkling:free#max | Different family for adversarial second opinions, 1M in, 262k out, six effort levels |
 
-Alternates: opencode/big-pickle (stealth reasoning), openrouter/nvidia/nemotron-3-super-120b-a12b:free (effort plus budget tokens), openrouter/nvidia/nemotron-3-ultra-550b-a55b:free (effort plus budget tokens).
+Alternates: opencode/minimax-m3.1-flash-free#max (different family, 512k output), opencode/big-pickle (stealth reasoning), openrouter/nvidia/nemotron-3-super-120b-a12b:free (effort plus budget tokens), openrouter/nvidia/nemotron-3-ultra-550b-a55b:free (effort plus budget tokens).
 
 ### 1.6 Specialists and narrow utility
 
@@ -96,12 +96,13 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 | opencode/glm-5.3-flash-free | 200,000 | 32,000 | text, image, video, pdf | yes | low, high, max | 2026-08-26 | zero-retention | zhipuai/glm-5.3-flash |
 | opencode/longcat-2.5-preview-free | 1,000,000 | 131,072 | text, image | yes | - | 2026-09-25 | zero-retention | meituan/longcat-2.5-preview |
 | opencode/mimo-v2.6-flash-free | 200,000 | 32,000 | text, image, audio, video | yes | - | 2026-09-22 | may-use-during-free-period | xiaomi/mimo-v2.6-flash |
+| opencode/minimax-m3.1-flash-free | 1,000,000 | 512,000 | text, image, video | yes | low, medium, high, xhigh, max | 2026-10-19 | zero-retention | minimax/MiniMax-M3.1-Flash |
 | opencode/nemotron-3.5-lightning-free | 262,144 | 262,144 | text | yes | - | 2026-08-11 | nvidia-trial-terms | nvidia/nemotron-3.5-lightning |
 | opencode/nemotron-3.5-super-vl-free | 1,048,576 | 131,072 | text, image | yes | none, minimal, low, medium, high, xhigh | 2026-10-15 | nvidia-trial-terms | nvidia/nemotron-3.5-super-vl-120b-a12b |
 | opencode/nemotron-3-ultra-free | 1,000,000 | 128,000 | text | yes | - | 2026-06-04 | nvidia-trial-terms | nvidia/nemotron-3-ultra-550b-a55b |
-| opencode/space-bunny-free | 1,048,576 | 524,288 | text, image, video | yes | low, medium, high, xhigh, max | 2026-09-23 | zero-retention | - |
 | opencode-go/beam-free | 1,048,576 | 131,072 | text | yes | low, medium, high, xhigh, max | 2026-10-05 | retained-30-days | reflection/beam-1.0-501b-a23b |
 | opencode-go/longcat-2.5-preview-free | 1,000,000 | 131,072 | text, image | yes | - | 2026-09-25 | zero-retention | meituan/longcat-2.5-preview |
+| opencode-go/minimax-m3.1-flash-free | 1,000,000 | 512,000 | text, image, video | yes | low, medium, high, xhigh, max | 2026-10-19 | zero-retention | minimax/MiniMax-M3.1-Flash |
 | openrouter/cohere/north-mini-code:free | 256,000 | 64,000 | text | yes | none, thinking | 2026-06-17 | upstream-unverified | - |
 | openrouter/dots-studio/dots-3-note-preview:free | 512,000 | 460,800 | text, image | yes | none, thinking | 2026-08-14 | upstream-unverified | - |
 | openrouter/google/gemma-4-26b-a4b-it:free | 262,144 | 32,768 | image, text, video | yes | none, thinking | 2026-04-02 | upstream-unverified | google/gemma-4-26b-a4b-it |
@@ -109,6 +110,7 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 | openrouter/google/lyria-3-clip-preview | 1,048,576 | 65,536 | text, image | no | - | 2026-03-25 | upstream-unverified | google/lyria-3-clip-preview |
 | openrouter/google/lyria-3-pro-preview | 1,048,576 | 65,536 | text, image | no | - | 2026-03-25 | upstream-unverified | google/lyria-3-pro-preview |
 | openrouter/liquid/lfm-2.5-2.6b:free | 65,536 | 8,192 | text | yes | - | 2026-08-11 | upstream-unverified | - |
+| openrouter/minimax/minimax-m3.1-flash:free | 1,000,000 | 524,288 | text, image, video | yes | low, medium, high, xhigh, max | 2026-10-19 | upstream-unverified | minimax/MiniMax-M3.1-Flash |
 | openrouter/nvidia/nemotron-3.5-content-safety:free | 128,000 | 8,192 | text, image | no | none, thinking | 2026-06-04 | upstream-unverified | nvidia/nemotron-3.5-content-safety |
 | openrouter/nvidia/nemotron-3.5-lightning:free | 1,000,000 | 65,536 | text | yes | none, thinking | 2026-08-11 | upstream-unverified | nvidia/nemotron-3.5-lightning |
 | openrouter/nvidia/nemotron-3.5-super-vl:free | 1,000,000 | 131,072 | text, image, video | yes | none, thinking | 2026-10-15 | upstream-unverified | - |
@@ -200,6 +202,18 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 - Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
 - Policy: may-use-during-free-period. During the free period, collected data may be used to improve the model.
 
+### opencode/minimax-m3.1-flash-free
+- Name: MiniMax M3.1 Flash Free. Status: active. Released: 2026-10-19. Last updated: 2026-10-19. Knowledge cutoff: -.
+- Description: Frontier multimodal coding model with 1M context window and tunable thinking depth
+- Context: 1,000,000 in, 512,000 out.
+- Modalities: input text, image, video. output text.
+- Tools: yes. Reasoning: yes. Reasoning options: effort low, medium, high, xhigh, max. Host variants: low, medium, high, xhigh, max.
+- Structured output: -. Temperature: no. Attachment: yes. Open weights: yes. Interleaved field: reasoning_content.
+- Family: minimax. Canonical: minimax/MiniMax-M3.1-Flash. In Console free list: yes.
+- Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
+- Policy: zero-retention. Prompts and responses are not used for training. Console states a zero-retention policy for these routes.
+- Notes: Revealed as the model behind Space Bunny. Space Bunny Free retired on 2026-10-19, the same day this route appeared. Reported reveal, not stated in the docs. Zero retention verified in Console docs.
+
 ### opencode/nemotron-3.5-lightning-free
 - Name: Nemotron 3.5 Lightning Free. Status: active. Released: 2026-08-11. Last updated: 2026-08-11. Knowledge cutoff: -.
 - Description: Fast NVIDIA Nemotron MoE for reliable agentic tasks across enterprise workloads
@@ -233,17 +247,6 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 - Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
 - Policy: nvidia-trial-terms. NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.
 
-### opencode/space-bunny-free
-- Name: Space Bunny Free. Status: active. Released: 2026-09-23. Last updated: 2026-09-23. Knowledge cutoff: -.
-- Description: Anonymous preview reasoning model for coding, agentic tasks, tool use, and multimodal input
-- Context: 1,048,576 in, 524,288 out.
-- Modalities: input text, image, video. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: effort low, medium, high, xhigh, max. Host variants: low, medium, high, xhigh, max.
-- Structured output: -. Temperature: -. Attachment: yes. Open weights: no. Interleaved field: reasoning_content.
-- Family: -. Canonical: -. In Console free list: yes.
-- Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
-- Policy: zero-retention. Prompts and responses are not used for training. Console states a zero-retention policy for these routes.
-
 ### opencode-go/beam-free
 - Name: Beam Free. Status: active. Released: 2026-10-05. Last updated: 2026-10-16. Knowledge cutoff: 2026-06-30.
 - Description: Sparse mixture-of-experts reasoning model with 23B active parameters for coding and agentic workflows
@@ -268,6 +271,18 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 - Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/go/openai/v1/chat/completions (go). SDK: @ai-sdk/openai-compatible.
 - Policy: zero-retention. Prompts and responses are not used for training. Console states a zero-retention policy for these routes.
 - Notes: OpenCode Go route mirror of opencode/longcat-2.5-preview-free. Listed as limited time in Go..
+
+### opencode-go/minimax-m3.1-flash-free
+- Name: MiniMax M3.1 Flash Free. Status: active. Released: 2026-10-19. Last updated: 2026-10-19. Knowledge cutoff: -.
+- Description: Frontier multimodal coding model with 1M context window and tunable thinking depth
+- Context: 1,000,000 in, 512,000 out.
+- Modalities: input text, image, video. output text.
+- Tools: yes. Reasoning: yes. Reasoning options: effort low, medium, high, xhigh, max. Host variants: low, medium, high, xhigh, max.
+- Structured output: -. Temperature: no. Attachment: yes. Open weights: yes. Interleaved field: reasoning_content.
+- Family: minimax. Canonical: minimax/MiniMax-M3.1-Flash. In Console free list: yes.
+- Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/go/openai/v1/chat/completions (go). SDK: @ai-sdk/openai-compatible.
+- Policy: zero-retention. Prompts and responses are not used for training. Console states a zero-retention policy for these routes.
+- Notes: OpenCode Go route. Free and unlimited while the Go plan is active, limited time. Go privacy table: not used for training, 0 days retention..
 
 ### openrouter/cohere/north-mini-code:free
 - Name: North Mini Code (free). Status: active. Released: 2026-06-17. Last updated: 2026-06-17. Knowledge cutoff: -.
@@ -352,6 +367,18 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 - Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
 - Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
 - Notes: OpenRouter free route. Rate limits depend on the OpenRouter account..
+
+### openrouter/minimax/minimax-m3.1-flash:free
+- Name: MiniMax M3.1 Flash (free). Status: active. Released: 2026-10-19. Last updated: 2026-10-19. Knowledge cutoff: -.
+- Description: MiniMax multimodal coding model for long-context reasoning and agent tasks
+- Context: 1,000,000 in, 524,288 out.
+- Modalities: input text, image, video. output text.
+- Tools: yes. Reasoning: yes. Reasoning options: effort low, medium, high, xhigh, max. Host variants: low, medium, high, xhigh, max.
+- Structured output: no. Temperature: yes. Attachment: yes. Open weights: yes. Interleaved field: -.
+- Family: minimax. Canonical: minimax/MiniMax-M3.1-Flash. In Console free list: no.
+- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
+- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
+- Notes: Upstream OpenRouter free route of MiniMax M3.1 Flash. Limits depend on the account..
 
 ### openrouter/nvidia/nemotron-3.5-content-safety:free
 - Name: Nemotron 3.5 Content Safety (free). Status: active. Released: 2026-06-04. Last updated: 2026-06-04. Knowledge cutoff: -.
@@ -587,7 +614,7 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 
 ### LAPTOP-F7FU0SSN, Windows, recorded 2026-10-17
 
-- OpenCode 2.0.31 via the pi-node wrapper. Config source: `C:\Users\Amol\.config\opencode`.
+- OpenCode 2.0.32 via the pi-node wrapper. Config source: `C:\Users\Amol\.config\opencode`.
 - Credentials by environment variable name: OPENCODE_API_KEY (Console and Go), GROQ_API_KEY, MISTRAL_API_KEY, OPENROUTER_API_KEY. No values recorded.
 - Local model servers on 11434, 1234, 8000: all closed.
 - Agents: build and plan primary, explore and general subagents, hidden system agents present.
@@ -595,6 +622,8 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 ## 6. Drift watchlist
 
 Documented free offers absent from this device catalog today: ll-alpha-free, exo-free, mimo-v2.5-free, muse-spark-1.3-contributor-free, jev-1.13-free (System One endpoint, not a chat model).
+
+Reveal and retirement, 2026-10-19: Space Bunny Free left the catalog. MiniMax M3.1 Flash Free appeared on Console, Go, and OpenRouter the same day. You report that Space Bunny was MiniMax M3.1 Flash. The docs replace Space Bunny with MiniMax in the free list. The mapping is recorded as reported, not officially confirmed.
 
 Catalog entries outside the Console free list: the OpenRouter routes are OpenRouter's own free offers. Groq entries are Groq free-tier routes. Routers, the Lyria audio models, and the safety classifier are priced free in the catalog but are not chat agent drivers.
 
@@ -609,12 +638,14 @@ Console states: all models hosted in the US and EU, zero-retention default, no t
 | Scope | Training | Retention |
 | :--- | :--- | :--- |
 | Console default | not used | zero retention |
-| GLM-5.3-Flash Free, DeepSeek V4.1 Flash Free, Space Bunny Free, LongCat 2.5 Preview Free | not used | zero retention |
+| GLM-5.3-Flash Free, DeepSeek V4.1 Flash Free, MiniMax M3.1 Flash Free, LongCat 2.5 Preview Free | not used | zero retention |
 | Beam Free, both routes | not used | 30 days for safety |
 | Big Pickle, MiMo-V2.6-Flash Free | may be used to improve the model during the free period | not stated |
 | Nemotron 3 Ultra, 3.5 Lightning, 3.5 Super VL Free first-party routes | NVIDIA trial terms, logged for security and product improvement, not linked to identity | do not submit personal or confidential data |
 | OpenRouter free routes | upstream policy, not covered by Console statements | account-dependent |
 | Groq free routes | upstream policy | account-dependent |
+
+Go privacy table, checked 2026-10-19: MiniMax M3.1 Flash Free is not used for training and retains data for 0 days.
 
 Beam Free region blocklist: Angola, Belarus, Cambodia, China including Hong Kong and Macau, Cuba, Democratic Republic of the Congo, Equatorial Guinea, Iran, Iraq, Laos, Libya, Nigeria, North Korea, Russia, Syria, Turkmenistan, Uzbekistan, Venezuela, Crimea, Donetsk and Luhansk regions of Ukraine.
 
@@ -627,12 +658,12 @@ Documented but not on this device today, privacy rows for the watchlist: LL Alph
 - R3 recency: newer release and last_updated wins ties.
 - R4 data policy preference: zero-retention before 30-day retention before may-use before upstream-unverified.
 - R5 review work prefers a different model family than the primary pick.
-- R6 fallback chain: beam-free, glm-5.3-flash-free, space-bunny-free, deepseek-v4.1-flash-free, openrouter/openrouter/free.
+- R6 fallback chain: beam-free, minimax-m3.1-flash-free, glm-5.3-flash-free, deepseek-v4.1-flash-free, openrouter/openrouter/free.
 - Override rule: only a dated measurement with a stated method replaces a pick. Record it in the changelog and in the card notes.
 
 ## 9. Provenance and sources
 
-Checked 2026-10-17: https://opencode.ai/v2/docs/console/models/, https://opencode.ai/v2/docs/console/go/, https://opencode.ai/v2/docs/models/, https://opencode.ai/v2/docs/agents/, https://opencode.ai/v2/docs/commands/, https://models.dev/api.json.
+Checked 2026-10-17 and 2026-10-19: https://opencode.ai/v2/docs/console/models/, https://opencode.ai/v2/docs/console/go/, https://opencode.ai/v2/docs/models/, https://opencode.ai/v2/docs/agents/, https://opencode.ai/v2/docs/commands/, https://models.dev/api.json. The Go privacy table was re-checked on 2026-10-19 for MiniMax M3.1 Flash Free.
 
 Host commands: `opencode --version`, `opencode auth list`, `opencode debug paths`, `opencode debug config`, `opencode debug agents`, `opencode models`. Catalog tool: models list paging, all=true, limit=100, offset 0 through 4.
 
@@ -641,19 +672,19 @@ Evidence tags: C host catalog, D models.dev, O OpenCode docs, A auth list, H hos
 ## 10. Stats
 
 <!-- BEGIN AUTO:stats -->
-- Catalog: 489 models across 5 providers.
-- opencode: 42 models, 10 free.
+- Catalog: 488 models across 5 providers.
+- opencode: 41 models, 10 free.
 - groq: 12 models, 3 free.
 - mistral: 18 models, 0 free.
-- opencode-go: 29 models, 2 free.
-- openrouter: 388 models, 23 free.
-- Free set: 38 entries.
+- opencode-go: 29 models, 3 free.
+- openrouter: 388 models, 24 free.
+- Free set: 40 entries.
 - opencode: 10 free.
 - groq: 3 free.
-- opencode-go: 2 free.
-- openrouter: 23 free.
-- Run: 2026-10-17-laptop-f7fu0ssn, collected 2026-10-17T08:42:32Z.
-- models.dev snapshot sha256: cc08621a7a825bdb902577b90c6302b2a3c524cc2cb96421a4dfe04b080d5e6c.
+- opencode-go: 3 free.
+- openrouter: 24 free.
+- Run: 2026-10-19-laptop-f7fu0ssn, collected 2026-10-19T14:06:46Z.
+- models.dev snapshot sha256: f6548e9a8644538a883c988fcfc981a1bb8ecf42d444e15d66228de3e3c4b52b.
 - Enrichment misses: none.
 <!-- END AUTO:stats -->
 

@@ -90,6 +90,7 @@ Append the changelog entry first, then commit `LEDGER.md`, `snapshot.json`, `CHA
 ## Traps
 
 - models.dev descriptions are auto-generated. Quote them, do not treat them as benchmarks. Record conflicts in the drift section.
+- Stealth models can be revealed. When a ref disappears and a new ref appears the same day, record the old ref as retired and the new ref as added. Mark the reveal as reported unless the docs state the mapping.
 - models.dev cost and host cost have matched in value so far. Trust the host catalog for the free determination.
 - OpenRouter free routes and Groq free tiers have account-dependent limits that this host cannot observe. Keep them marked unverified.
 - The Console Deprecated models table removes models on rolling dates. Check it monthly.
