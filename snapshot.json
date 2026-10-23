@@ -133,12 +133,12 @@
         "measured": false
       }
     },
-    "catalogVisibilityNote": "Signed out with no OPENCODE_API_KEY, the catalog exposes the nine Console free models of the opencode provider. Paid opencode models appear only after connecting."
+    "catalogVisibilityNote": "Signed out with no OPENCODE_API_KEY, the catalog exposes the Console free models of the opencode provider. Paid opencode models appear only after connecting."
   },
   "freeTotals": {
-    "count": 9,
+    "count": 8,
     "byProvider": {
-      "opencode": 9
+      "opencode": 8
     }
   },
   "free": [
@@ -269,70 +269,6 @@
       "sdkPackage": "@ai-sdk/openai-compatible",
       "policyClass": "may-use-during-free-period",
       "policyNote": "During the free period, collected data may be used to improve the model.",
-      "regionRestricted": false,
-      "regionBlocklist": [],
-      "inConsoleFreeList": true,
-      "notes": null
-    },
-    {
-      "ref": "opencode/deepseek-v4.1-flash-free",
-      "provider": "opencode",
-      "modelId": "deepseek-v4.1-flash-free",
-      "name": "DeepSeek V4.1 Flash Free",
-      "status": "active",
-      "releasedDate": "2026-09-10",
-      "lastUpdated": "2026-09-10",
-      "knowledgeCutoff": "2025-05",
-      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
-      "family": "deepseek-flash",
-      "canonicalModelId": "deepseek/deepseek-v4.1-flash",
-      "limits": {
-        "context": 200000,
-        "output": 32000
-      },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "toolCall": true,
-      "reasoning": true,
-      "reasoningOptions": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "hostVariants": [
-        "low",
-        "high",
-        "max"
-      ],
-      "structuredOutput": true,
-      "interleavedField": {
-        "field": "reasoning_content"
-      },
-      "attachment": true,
-      "temperature": true,
-      "openWeights": true,
-      "cost": "all tiers 0: input, output, cache read, cache write",
-      "authEnvVar": "OPENCODE_API_KEY",
-      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
-      "endpointKind": "console",
-      "sdkPackage": "@ai-sdk/openai-compatible",
-      "policyClass": "zero-retention",
-      "policyNote": "Prompts and responses are not used for training. Console states a zero-retention policy for these routes.",
       "regionRestricted": false,
       "regionBlocklist": [],
       "inConsoleFreeList": true,
@@ -718,13 +654,6 @@
     ],
     "changed": [
       {
-        "ref": "opencode/deepseek-v4.1-flash-free",
-        "fields": [
-          "reasoningOptions"
-        ],
-        "detail": "models.dev now lists an effort toggle and effort low, high, max."
-      },
-      {
         "ref": "opencode/nemotron-3.5-lightning-free",
         "fields": [
           "knowledgeCutoff"
@@ -806,17 +735,17 @@
     }
   ],
   "validation": {
-    "freeCount": 9,
+    "freeCount": 8,
     "providerCount": 2,
     "missingEnrichment": [],
     "allCostTiersZero": true,
-    "consoleListedFree": 9,
+    "consoleListedFree": 8,
     "unmeasuredProviders": [
       "omniroute"
     ],
     "reachabilityProbe": {
       "date": "2026-10-23",
-      "passed": 9,
+      "passed": 8,
       "failed": 0,
       "method": "opencode run --model <ref> \"Reply with OK only.\""
     }
