@@ -2,18 +2,13 @@
 
 Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed changed`.
 
-## 2026-10-23, ledger: drop flint-40b-free & big-pickle
+## 2026-10-23, docs(orchestration): designate DeepSeek V4.1 Flash as Primary Orchestrator
 
-- Free set 8 -> 7.
+- Free set: 8 entries.
+- Positioned opencode/deepseek-v4.1-flash-free as primary high-level orchestrator based on DeepSWE v1.1 (77.0) and Apex Bench (72.1) performance; delegates execution to subagents.
 - Purged opencode/big-pickle completely from ledger inventory, cards, and snapshot.
-- flint-40b-free dropped from fallback chains and primary picks; retained for surgical atomic edits.
-- Documented empirical quota thresholds: 100M tokens/day primary, 1.2M tokens/200 tool calls secondary across shared device ID and IP.
-
-## 2026-10-23, ledger: drop deepseek-v4.1-flash-free (PR #3)
-
-- Free set 9 -> 8.
-- Dropped opencode/deepseek-v4.1-flash-free from free model inventory, cards, and routing notes.
-- Updated fallback chain: beam-free, flint-40b-free, glm-5.3-flash-free.
+- flint-40b-free designated for surgical atomic edits; removed from general multi-file fallback chain.
+- Removed unverified personal quota and device telemetry notes.
 
 ## 2026-10-23, run 2026-10-23-arch-btw
 
