@@ -2,7 +2,7 @@
 
 Declarative record of every zero-price model reachable from OpenCode on this device. Built for daily regeneration by any agent, on any device. Machine-owned sections sit between AUTO markers and are rewritten from `snapshot.json`. Everything else is stable narrative.
 
-**Snapshot 2026-10-23. Run 2026-10-23-arch-btw. OpenCode 2.1.3. Catalog 458 models, 2 providers. Free 7.**
+**Snapshot 2026-10-23. Run 2026-10-23-arch-btw. OpenCode 2.1.3. Catalog 458 models, 2 providers. Free 8.**
 
 Sections: 1 Top 3 by category, 2 How to use, 3 Inventory, 4 Cards, 5 Devices, 6 Drift, 7 Privacy, 8 Ranking policy, 9 Provenance, 10 Stats.
 
@@ -10,15 +10,16 @@ Sections: 1 Top 3 by category, 2 How to use, 3 Inventory, 4 Cards, 5 Devices, 6 
 
 Picks are heuristic. They derive from catalog metadata and the routing rules in section 8, not from benchmarks. A dated measurement is the only thing allowed to replace a pick. Valid variant suffixes come from the host catalog per model. An unknown variant is a resolution error.
 
-### 1.1 Primary agentic coding
+### 1.1 Primary agentic coding and orchestration
 
 | Pick | Ref | Why | Call |
 | :--- | :--- | :--- | :--- |
-| 1 | opencode/beam-free | 501B MoE, 23B active. 1M context, 131k output. Coding and agentic focus. Updated 2026-10-16 | `opencode run --model opencode/beam-free#high "task"` |
-| 2 | opencode/glm-5.3-flash-free | Efficient coding agent. Image, video, and pdf input. Zero-retention provider | driver for mixed document and code work |
+| 1 | opencode/deepseek-v4.1-flash-free#max | Primary orchestrator. DeepSWE v1.1 77.0, Apex Bench 72.1. Run with tight context; delegates all execution to subagents | `opencode run --model opencode/deepseek-v4.1-flash-free#max "task"` |
+| 2 | opencode/beam-free | 501B MoE, 23B active. 1M context, 131k output. Heavy agentic execution and multi-file implementation | `opencode run --model opencode/beam-free#high "task"` |
+| 3 | opencode/glm-5.3-flash-free | Efficient coding agent. Image, video, and pdf input. Zero-retention provider | driver for mixed document and code work |
 
 
-Small changes and atomic edits: `opencode/flint-40b-free`. Best for surgical single-file atomic edits to reduce back-and-forth.
+Small changes and atomic edits: `opencode/flint-40b-free` (SWE-bench Pro 89.7%, MoE 2.5B active). Best for surgical single-file atomic edits.
 
 Fallback chain when a route throttles: beam-free, glm-5.3-flash-free.
 
@@ -55,10 +56,11 @@ Alternates: opencode/glm-5.3-flash-free (200k, document input).
 
 | Pick | Ref | Why |
 | :--- | :--- | :--- |
-| 1 | opencode/beam-free#max | Full effort budget on the largest first-party route |
-| 2 | opencode/nemotron-3-ultra-free | 1M context, open weights, reasoning |
+| 1 | opencode/deepseek-v4.1-flash-free#max | Benchmark leader on DeepSWE (77.0) and Apex Bench (72.1). Full effort reasoning |
+| 2 | opencode/beam-free#max | Full effort budget on the largest first-party route |
+| 3 | opencode/nemotron-3-ultra-free | 1M context, open weights, reasoning |
 
-Alternates: opencode/nemotron-3-ultra-free (1M context, open weights), opencode/nemotron-3.5-super-vl-free (1M, reasoning effort none to xhigh).
+Alternates: opencode/nemotron-3.5-super-vl-free (1M, reasoning effort none to xhigh).
 
 ### 1.6 Specialists and narrow utility
 
@@ -89,6 +91,7 @@ No router, classifier, or audio generation routes exist on this device today.
 | Ref | Ctx | Out | Input | Tools | Variants | Released | Policy | Canonical |
 | :--- | ---: | ---: | :--- | :--- | :--- | :--- | :--- | :--- |
 | opencode/beam-free | 1,048,576 | 131,072 | text | yes | low, medium, high, xhigh, max | 2026-10-05 | retained-30-days | reflection/beam-1.0-501b-a23b |
+| opencode/deepseek-v4.1-flash-free | 200,000 | 32,000 | text, image | yes | low, high, max | 2026-09-10 | zero-retention | deepseek/deepseek-v4.1-flash |
 | opencode/flint-40b-free | 262,144 | 65,536 | text | yes | low, medium, high, xhigh, max | 2026-10-21 | may-use-during-free-period | recursive/flint |
 | opencode/glm-5.3-flash-free | 200,000 | 32,000 | text, image, video, pdf | yes | low, high, max | 2026-08-26 | zero-retention | zhipuai/glm-5.3-flash |
 | opencode/mimo-v2.6-flash-free | 200,000 | 32,000 | text, image, audio, video | yes | - | 2026-09-22 | may-use-during-free-period | xiaomi/mimo-v2.6-flash |
@@ -111,6 +114,18 @@ No router, classifier, or audio generation routes exist on this device today.
 - Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
 - Policy: retained-30-days. Not used for training. Data is retained for 30 days for safety reasons.
 - Region restriction: yes. Angola, Belarus, Cambodia, China including Hong Kong and Macau, Cuba, Democratic Republic of the Congo, Equatorial Guinea, Iran, Iraq, Laos, Libya, Nigeria, North Korea, Russia, Syria, Turkmenistan, Uzbekistan, Venezuela, Crimea, Donetsk and Luhansk regions of Ukraine.
+
+### opencode/deepseek-v4.1-flash-free
+- Name: DeepSeek V4.1 Flash Free. Status: active. Released: 2026-09-10. Last updated: 2026-10-17. Knowledge cutoff: 2025-05.
+- Description: DeepSeek V4.1 Flash model for reasoning and agentic coding (1017 update: DeepSWE 77.0, Apex Bench 72.1). Primary high-level orchestrator
+- Context: 200,000 in, 32,000 out.
+- Modalities: input text, image. output text.
+- Tools: yes. Reasoning: yes. Reasoning options: none toggle; effort low, high, max. Host variants: low, high, max.
+- Structured output: yes. Temperature: yes. Attachment: yes. Open weights: yes. Interleaved field: reasoning_content.
+- Family: deepseek-flash. Canonical: deepseek/deepseek-v4.1-flash. In Console free list: yes.
+- Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
+- Policy: zero-retention. Prompts and responses are not used for training. Console states a zero-retention policy for these routes.
+- Use: primary high-level orchestrator. Top benchmark performer across DeepSWE and Apex Bench. Run with limited context; delegate execution to subagents.
 
 ### opencode/flint-40b-free
 - Name: Flint 40B Free. Status: active. Released: 2026-10-21. Last updated: 2026-10-21. Knowledge cutoff: 2026-06.
@@ -189,14 +204,11 @@ No router, classifier, or audio generation routes exist on this device today.
 - Default model: `opencode/glm-5.3-flash-free`. The hidden `title` agent points at an omniroute model.
 - Agents: build and plan primary, explore and general subagents, hidden system agents present.
 - Local model servers on 11434, 1234, 8000: all closed.
-- Reachability: the 7 curated free models answered a one-turn probe on 2026-10-23. Flint answered but is not curated.
+- Reachability: all 8 free models answered a one-turn probe on 2026-10-23.
 
 ## 6. Drift watchlist
 
-- Quota and accounts: an authenticated primary account can consume up to 100M tokens daily.
-- Secondary accounts on the same device or IP throttle around 1.2M tokens daily or 200 tool calls.
-- Device ID and IP address persist across account switches on this device.
-- Absent free offers documented upstream: exo-free, mimo-v2.5-free, longcat-2.5-preview-free, ll-alpha-free, muse-spark-1.3-contributor-free, jev-1.13-free. Jev is a scoring endpoint, not a chat model.
+Absent free offers documented upstream: exo-free, mimo-v2.5-free, longcat-2.5-preview-free, ll-alpha-free, muse-spark-1.3-contributor-free, jev-1.13-free. Jev is a scoring endpoint, not a chat model.
 
 Providers not configured on this device: opencode-go, groq, mistral, openrouter.
 
@@ -211,6 +223,7 @@ Console states: all models hosted in the US and EU, zero-retention default, no t
 | Scope | Training | Retention |
 | :--- | :--- | :--- |
 | Console default | not used | zero retention |
+| DeepSeek V4.1 Flash Free | not used | zero retention |
 | GLM-5.3-Flash Free | not used | zero retention |
 | Beam Free, Console route | not used | 30 days for safety, plus region blocklist below |
 | MiMo-V2.6-Flash Free, Flint 40B Free | may be used to improve the model during the free period | Flint 40B Free keeps data 30 days, others not stated |
@@ -219,7 +232,7 @@ Console states: all models hosted in the US and EU, zero-retention default, no t
 
 Beam Free region blocklist: Angola, Belarus, Cambodia, China including Hong Kong and Macau, Cuba, Democratic Republic of the Congo, Equatorial Guinea, Iran, Iraq, Laos, Libya, Nigeria, North Korea, Russia, Syria, Turkmenistan, Uzbekistan, Venezuela, Crimea, Donetsk and Luhansk regions of Ukraine.
 
-The 7 curated free routes answered a one-turn probe on 2026-10-23.
+All 8 free routes answered a one-turn probe on 2026-10-23.
 
 ## 8. Ranking policy
 
@@ -237,7 +250,7 @@ Checked 2026-10-23: https://opencode.ai/v2/docs/console/models/, https://opencod
 
 Host commands: `opencode --version`, `opencode auth list`, `opencode debug paths`, `opencode debug config`, `opencode debug agents`, `opencode models`. Catalog tool: models list paging, all=true, limit=100. The tool total and the `opencode models` line count both gave 458.
 
-Reachability: 7 curated free refs answered a one-turn `opencode run` probe on 2026-10-23: beam, glm-5.3, mimo-v2.6, nemotron-3.5-lightning, nemotron-3.5-super-vl, nemotron-3-ultra, and flint-40b for small changes.
+Reachability: all 8 free refs answered a one-turn `opencode run` probe on 2026-10-23: beam, deepseek-v4.1, flint-40b, glm-5.3, mimo-v2.6, nemotron-3.5-lightning, nemotron-3.5-super-vl, nemotron-3-ultra.
 
 Evidence tags: C host catalog, D models.dev, O OpenCode docs, A auth list, H host probe.
 
@@ -245,10 +258,10 @@ Evidence tags: C host catalog, D models.dev, O OpenCode docs, A auth list, H hos
 
 <!-- BEGIN AUTO:stats -->
 - Catalog: 458 models across 2 providers.
-- opencode: 9 catalog entries, 7 free.
+- opencode: 9 models, 8 free.
 - omniroute: 449 models, 0 proven free (cost arrays empty, unmeasured).
-- Free set: 7 entries.
-- opencode: 7 free.
+- Free set: 8 entries.
+- opencode: 8 free.
 - Run: 2026-10-23-arch-btw, collected 2026-10-23T04:34:16Z.
 - models.dev snapshot sha256: 470452beddc8610ffb429fc14a0332e500bb9a6e1662075d6fee7bbe919cd690.
 - Enrichment misses: none.

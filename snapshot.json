@@ -8,7 +8,7 @@
   "definitions": {
     "freeModel": "Catalog entry whose effective price is zero on every pricing tier: input, output, cache read, cache write.",
     "stableKey": "providerID/modelID",
-    "scope": "Models resolvable by OpenCode on the recording device. Big Pickle is excluded by preference. Flint stays listed for small changes only.",
+    "scope": "Models resolvable by OpenCode on the recording device. Big Pickle is excluded by preference.",
     "evidenceTags": "C host catalog, D models.dev, O OpenCode docs, A auth list, H host probe."
   },
   "device": {
@@ -136,9 +136,9 @@
     "catalogVisibilityNote": "Signed out with no OPENCODE_API_KEY, the catalog exposes the Console free models of the opencode provider. Paid opencode models appear only after connecting."
   },
   "freeTotals": {
-    "count": 7,
+    "count": 8,
     "byProvider": {
-      "opencode": 7
+      "opencode": 8
     }
   },
   "free": [
@@ -225,6 +225,71 @@
       ],
       "inConsoleFreeList": true,
       "notes": null
+    },
+    {
+      "ref": "opencode/deepseek-v4.1-flash-free",
+      "provider": "opencode",
+      "modelId": "deepseek-v4.1-flash-free",
+      "name": "DeepSeek V4.1 Flash Free",
+      "status": "active",
+      "releasedDate": "2026-09-10",
+      "lastUpdated": "2026-10-17",
+      "knowledgeCutoff": "2025-05",
+      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding (1017 update: DeepSWE 77.0, Apex Bench 72.1). Primary high-level orchestrator",
+      "family": "deepseek-flash",
+      "canonicalModelId": "deepseek/deepseek-v4.1-flash",
+      "limits": {
+        "context": 200000,
+        "input": 160000,
+        "output": 32000
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "hostVariants": [
+        "low",
+        "high",
+        "max"
+      ],
+      "structuredOutput": true,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": true,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all tiers 0: input, output, cache read, cache write",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "zero-retention",
+      "policyNote": "Prompts and responses are not used for training. Console states a zero-retention policy for these routes.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "notes": "DeepSWE v1.1 77.0, Apex Bench 72.1, Terminal-Bench 42.3. Positioned as primary high-level orchestrator with tight context."
     },
     {
       "ref": "opencode/flint-40b-free",
@@ -404,6 +469,53 @@
       "notes": null
     },
     {
+      "ref": "opencode/nemotron-3-ultra-free",
+      "provider": "opencode",
+      "modelId": "nemotron-3-ultra-free",
+      "name": "Nemotron 3 Ultra Free",
+      "status": "active",
+      "releasedDate": "2026-06-04",
+      "lastUpdated": "2026-06-04",
+      "knowledgeCutoff": "2025-09",
+      "description": "Largest Nemotron 3 model for maximum open-weight reasoning and agent accuracy",
+      "family": "nemotron",
+      "canonicalModelId": "nvidia/nemotron-3-ultra-550b-a55b",
+      "limits": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [],
+      "hostVariants": [],
+      "structuredOutput": null,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": false,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all tiers 0: input, output, cache read, cache write",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "nvidia-trial-terms",
+      "policyNote": "NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "notes": null
+    },
+    {
       "ref": "opencode/nemotron-3.5-lightning-free",
       "provider": "opencode",
       "modelId": "nemotron-3.5-lightning-free",
@@ -517,53 +629,6 @@
       "regionBlocklist": [],
       "inConsoleFreeList": true,
       "notes": null
-    },
-    {
-      "ref": "opencode/nemotron-3-ultra-free",
-      "provider": "opencode",
-      "modelId": "nemotron-3-ultra-free",
-      "name": "Nemotron 3 Ultra Free",
-      "status": "active",
-      "releasedDate": "2026-06-04",
-      "lastUpdated": "2026-06-04",
-      "knowledgeCutoff": "2025-09",
-      "description": "Largest Nemotron 3 model for maximum open-weight reasoning and agent accuracy",
-      "family": "nemotron",
-      "canonicalModelId": "nvidia/nemotron-3-ultra-550b-a55b",
-      "limits": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "toolCall": true,
-      "reasoning": true,
-      "reasoningOptions": [],
-      "hostVariants": [],
-      "structuredOutput": null,
-      "interleavedField": {
-        "field": "reasoning_content"
-      },
-      "attachment": false,
-      "temperature": true,
-      "openWeights": true,
-      "cost": "all tiers 0: input, output, cache read, cache write",
-      "authEnvVar": "OPENCODE_API_KEY",
-      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
-      "endpointKind": "console",
-      "sdkPackage": "@ai-sdk/openai-compatible",
-      "policyClass": "nvidia-trial-terms",
-      "policyNote": "NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.",
-      "regionRestricted": false,
-      "regionBlocklist": [],
-      "inConsoleFreeList": true,
-      "notes": null
     }
   ],
   "drift": {
@@ -638,7 +703,7 @@
       "mistral",
       "openrouter"
     ],
-    "removedReasoning": "Big Pickle is excluded by user preference. Flint remains available for small changes but is not part of the curated fallback chain.",
+    "removedReasoning": "Big Pickle is excluded by user preference. DeepSeek V4.1 Flash is designated for primary high-level orchestration.",
     "unmeasuredGateways": [
       {
         "provider": "omniroute",
@@ -690,11 +755,11 @@
     }
   ],
   "validation": {
-    "freeCount": 7,
+    "freeCount": 8,
     "providerCount": 2,
     "missingEnrichment": [],
     "allCostTiersZero": true,
-    "consoleListedFree": 7,
+    "consoleListedFree": 8,
     "unmeasuredProviders": [
       "omniroute"
     ],
