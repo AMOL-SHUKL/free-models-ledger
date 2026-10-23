@@ -10,6 +10,7 @@ Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed 
 - Changed: deepseek-v4.1-flash-free reasoning options gained a toggle; nemotron-3-ultra-free and nemotron-3.5-lightning-free knowledge cutoffs read 2025-09 in models.dev.
 - Sources re-checked: Console models, Console Go, Models docs, models.dev. Device prose replaced. Windows device block retired as unverified.
 - Ledger reset to current facts only. Top 3 picks, drift, privacy, ranking policy, devices, and narrative rewritten from the nine-model free set.
+- Subagent picks use MiMo, Flint, and Nemotron Lightning. DeepSeek is manual use only.
 - Snapshot: history/2026-10-23-arch-btw.snapshot.json. models.dev sha256 470452beddc8610ffb429fc14a0332e500bb9a6e1662075d6fee7bbe919cd690.
 
 ## 2026-10-19, user preference override, no new snapshot
