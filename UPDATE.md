@@ -20,7 +20,7 @@ Agent-only. No scripts live in this repo. Any agent, on any device, follows the 
 
 ## Step 2: catalog pull
 
-Call the models tool with `{ all: true, limit: 100, offset: 0 }` and follow `next` until null. Expected shape today: 5 pages, 489 models.
+Call the models tool with `{ all: true, limit: 100, offset: 0 }` and follow `next` until null. Expected shape today: 5 pages, 458 models, 2 providers.
 
 Cross-check with `opencode models` and count the lines. The two numbers must match.
 

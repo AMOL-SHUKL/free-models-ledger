@@ -2,6 +2,16 @@
 
 Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed changed`.
 
+## 2026-10-23, run 2026-10-23-arch-btw
+
+- First run on arch-btw, Arch Linux ARM64 chroot, OpenCode 2.1.3. +1 -32. Added opencode/flint-40b-free.
+- Free set rebuilt: 32 routes left because their providers are not configured on this device. opencode/minimax-m3.1-flash-free also left the Console free list and Console models table.
+- Catalog 458 models, 2 providers: opencode 9 (9 free), omniroute local gateway 449 (0 proven free, empty cost arrays, recorded unmeasured).
+- Changed: deepseek-v4.1-flash-free reasoning options gained a toggle; nemotron-3-ultra-free and nemotron-3.5-lightning-free knowledge cutoffs read 2025-09 in models.dev.
+- Sources re-checked: Console models, Console Go, Models docs, models.dev. Device prose replaced. Windows device block retired as unverified.
+- Ledger reset to current facts only. Top 3 picks, drift, privacy, ranking policy, devices, and narrative rewritten from the nine-model free set.
+- Snapshot: history/2026-10-23-arch-btw.snapshot.json. models.dev sha256 470452beddc8610ffb429fc14a0332e500bb9a6e1662075d6fee7bbe919cd690.
+
 ## 2026-10-19, user preference override, no new snapshot
 
 - R7 added to the ranking policy. Exclude Nemotron chat and reasoning routes from picks. User judgement: quality ranks below other free routes.

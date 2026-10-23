@@ -1,2623 +1,824 @@
 {
-    "schemaVersion":  1,
-    "ledgerVersion":  1,
-    "runId":  "2026-10-19-laptop-f7fu0ssn",
-    "runDate":  "2026-10-19",
-    "collectedAt":  "2026-10-19T14:06:46Z",
-    "catalogPulledAt":  "2026-10-19T14:04:19Z",
-    "definitions":  {
-                        "freeModel":  "Catalog entry whose effective price is zero on every pricing tier: input, output, cache read, cache write.",
-                        "stableKey":  "providerID/modelID",
-                        "scope":  "Models resolvable by OpenCode on the recording device, plus local zero-cost discovery when present.",
-                        "evidenceTags":  "C host catalog, D models.dev, O OpenCode docs, A auth list, H host probe."
-                    },
-    "device":  {
-                   "hostname":  "LAPTOP-F7FU0SSN",
-                   "os":  "Microsoft Windows 11 Pro",
-                   "user":  "Amol",
-                   "opencodeVersion":  "2.0.32",
-                   "opencodeRaw":  "opencode v2.0.32",
-                   "installPath":  "C:\\Users\\Amol\\AppData\\Local\\pi-node\\current\\opencode.ps1",
-                   "powershell":  "5.1.26100.9711"
-               },
-    "host":  {
-                 "paths":  {
-                               "home":  "C:\\Users\\Amol",
-                               "data":  "C:\\Users\\Amol\\.local\\share\\opencode",
-                               "cache":  "C:\\Users\\Amol\\.cache\\opencode",
-                               "config":  "C:\\Users\\Amol\\.config\\opencode",
-                               "state":  "C:\\Users\\Amol\\.local\\state\\opencode",
-                               "tmp":  "C:\\Users\\Amol\\AppData\\Local\\Temp\\opencode",
-                               "bin":  "C:\\Users\\Amol\\.cache\\opencode\\bin",
-                               "log":  "C:\\Users\\Amol\\.local\\share\\opencode\\log",
-                               "repos":  "C:\\Users\\Amol\\.local\\share\\opencode\\repos",
-                               "db":  "C:\\Users\\Amol\\.local\\share\\opencode\\opencode.db"
-                           },
-                 "configSources":  [
-                                       "C:\\Users\\Amol\\.config\\opencode\\opencode.json",
-                                       "C:\\Users\\Amol\\.config\\opencode",
-                                       "C:\\Users\\Amol\\.opencode"
-                                   ],
-                 "auth":  [
-                              {
-                                  "provider":  "OpenCode Go",
-                                  "credential":  "OPENCODE_API_KEY",
-                                  "method":  "environment"
-                              },
-                              {
-                                  "provider":  "Groq",
-                                  "credential":  "GROQ_API_KEY",
-                                  "method":  "environment"
-                              },
-                              {
-                                  "provider":  "Mistral",
-                                  "credential":  "MISTRAL_API_KEY",
-                                  "method":  "environment"
-                              },
-                              {
-                                  "provider":  "notion",
-                                  "credential":  "notion",
-                                  "method":  "stored"
-                              },
-                              {
-                                  "provider":  "OpenCode Console",
-                                  "credential":  "OPENCODE_API_KEY",
-                                  "method":  "environment"
-                              },
-                              {
-                                  "provider":  "OpenRouter",
-                                  "credential":  "OPENROUTER_API_KEY",
-                                  "method":  "environment"
-                              }
-                          ],
-                 "localServers":  [
-                                      {
-                                          "port":  11434,
-                                          "listening":  false
-                                      },
-                                      {
-                                          "port":  1234,
-                                          "listening":  false
-                                      },
-                                      {
-                                          "port":  8000,
-                                          "listening":  false
-                                      }
-                                  ],
-                 "agents":  [
-                                {
-                                    "id":  "build",
-                                    "mode":  "primary",
-                                    "hidden":  false
-                                },
-                                {
-                                    "id":  "compaction",
-                                    "mode":  "primary",
-                                    "hidden":  true
-                                },
-                                {
-                                    "id":  "explore",
-                                    "mode":  "subagent",
-                                    "hidden":  false
-                                },
-                                {
-                                    "id":  "general",
-                                    "mode":  "subagent",
-                                    "hidden":  false
-                                },
-                                {
-                                    "id":  "plan",
-                                    "mode":  "primary",
-                                    "hidden":  false
-                                },
-                                {
-                                    "id":  "summary",
-                                    "mode":  "primary",
-                                    "hidden":  true
-                                },
-                                {
-                                    "id":  "title",
-                                    "mode":  "primary",
-                                    "hidden":  true
-                                }
-                            ]
-             },
-    "catalog":  {
-                    "totalModels":  488,
-                    "providerCount":  5,
-                    "providers":  [
-                                      {
-                                          "id":  "opencode",
-                                          "name":  "Github / OpenCode",
-                                          "models":  41,
-                                          "freeModels":  10
-                                      },
-                                      {
-                                          "id":  "groq",
-                                          "name":  "Groq",
-                                          "models":  12,
-                                          "freeModels":  3
-                                      },
-                                      {
-                                          "id":  "mistral",
-                                          "name":  "Mistral",
-                                          "models":  18,
-                                          "freeModels":  0
-                                      },
-                                      {
-                                          "id":  "opencode-go",
-                                          "name":  "OpenCode Go",
-                                          "models":  29,
-                                          "freeModels":  3
-                                      },
-                                      {
-                                          "id":  "openrouter",
-                                          "name":  "OpenRouter",
-                                          "models":  388,
-                                          "freeModels":  24
-                                      }
-                                  ],
-                    "providerMeta":  {
-                                         "opencode":  {
-                                                          "name":  "OpenCode",
-                                                          "api":  "https://opencode.ai/inference/openai/v1",
-                                                          "env":  "OPENCODE_API_KEY",
-                                                          "doc":  "https://opencode.ai/v2/docs/console/models/"
-                                                      },
-                                         "opencode-go":  {
-                                                             "name":  "OpenCode Go",
-                                                             "api":  "https://opencode.ai/inference/go/openai/v1",
-                                                             "env":  "OPENCODE_API_KEY",
-                                                             "doc":  "https://opencode.ai/v2/docs/console/go/"
-                                                         },
-                                         "groq":  {
-                                                      "name":  "Groq",
-                                                      "api":  null,
-                                                      "env":  "GROQ_API_KEY",
-                                                      "doc":  "https://console.groq.com/docs/models"
-                                                  },
-                                         "mistral":  {
-                                                         "name":  "Mistral",
-                                                         "api":  null,
-                                                         "env":  "MISTRAL_API_KEY",
-                                                         "doc":  "https://docs.mistral.ai/getting-started/models/"
-                                                     },
-                                         "openrouter":  {
-                                                            "name":  "OpenRouter",
-                                                            "api":  "https://openrouter.ai/api/v1",
-                                                            "env":  "OPENROUTER_API_KEY",
-                                                            "doc":  "https://openrouter.ai/models"
-                                                        }
-                                     }
-                },
-    "freeTotals":  {
-                       "count":  40,
-                       "byProvider":  {
-                                          "opencode":  10,
-                                          "groq":  3,
-                                          "opencode-go":  3,
-                                          "openrouter":  24
-                                      }
-                   },
-    "free":  [
-                 {
-                     "ref":  "opencode/minimax-m3.1-flash-free",
-                     "provider":  "opencode",
-                     "modelId":  "minimax-m3.1-flash-free",
-                     "name":  "MiniMax M3.1 Flash Free",
-                     "status":  "active",
-                     "releasedDate":  "2026-10-19",
-                     "lastUpdated":  "2026-10-19",
-                     "knowledgeCutoff":  null,
-                     "description":  "Frontier multimodal coding model with 1M context window and tunable thinking depth",
-                     "family":  "minimax",
-                     "canonicalModelId":  "minimax/MiniMax-M3.1-Flash",
-                     "limits":  {
-                                    "context":  1000000,
-                                    "output":  512000
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image",
-                                                      "video"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "effort",
-                                                  "values":  [
-                                                                 "low",
-                                                                 "medium",
-                                                                 "high",
-                                                                 "xhigh",
-                                                                 "max"
-                                                             ]
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "low",
-                                          "medium",
-                                          "high",
-                                          "xhigh",
-                                          "max"
-                                      ],
-                     "structuredOutput":  null,
-                     "interleavedField":  {
-                                              "field":  "reasoning_content"
-                                          },
-                     "attachment":  true,
-                     "temperature":  false,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENCODE_API_KEY",
-                     "endpoint":  "https://opencode.ai/inference/openai/v1/chat/completions",
-                     "endpointKind":  "console",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "zero-retention",
-                     "policyNote":  "Prompts and responses are not used for training. Console states a zero-retention policy for these routes.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  true,
-                     "notes":  "Revealed as the model behind Space Bunny. Space Bunny Free retired on 2026-10-19, the same day this route appeared. Reported reveal, not stated in the docs. Zero retention verified in Console docs"
-                 },
-                 {
-                     "ref":  "opencode/nemotron-3.5-super-vl-free",
-                     "provider":  "opencode",
-                     "modelId":  "nemotron-3.5-super-vl-free",
-                     "name":  "Nemotron 3.5 Super VL Free",
-                     "status":  "active",
-                     "releasedDate":  "2026-10-15",
-                     "lastUpdated":  "2026-10-15",
-                     "knowledgeCutoff":  null,
-                     "description":  "NVIDIA vision-language reasoning model for text, image, and video understanding and agentic tool use",
-                     "family":  "nemotron-free",
-                     "canonicalModelId":  "nvidia/nemotron-3.5-super-vl-120b-a12b",
-                     "limits":  {
-                                    "context":  1048576,
-                                    "input":  1048576,
-                                    "output":  131072
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "effort",
-                                                  "values":  [
-                                                                 "none",
-                                                                 "minimal",
-                                                                 "low",
-                                                                 "medium",
-                                                                 "high",
-                                                                 "xhigh"
-                                                             ]
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "none",
-                                          "minimal",
-                                          "low",
-                                          "medium",
-                                          "high",
-                                          "xhigh"
-                                      ],
-                     "structuredOutput":  null,
-                     "interleavedField":  {
-                                              "field":  "reasoning_content"
-                                          },
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENCODE_API_KEY",
-                     "endpoint":  "https://opencode.ai/inference/openai/v1/chat/completions",
-                     "endpointKind":  "console",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "nvidia-trial-terms",
-                     "policyNote":  "NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  true,
-                     "notes":  null
-                 },
-                 {
-                     "ref":  "opencode/beam-free",
-                     "provider":  "opencode",
-                     "modelId":  "beam-free",
-                     "name":  "Beam Free",
-                     "status":  "active",
-                     "releasedDate":  "2026-10-05",
-                     "lastUpdated":  "2026-10-16",
-                     "knowledgeCutoff":  "2026-06-30",
-                     "description":  "Sparse mixture-of-experts reasoning model with 23B active parameters for coding and agentic workflows",
-                     "family":  "beam",
-                     "canonicalModelId":  "reflection/beam-1.0-501b-a23b",
-                     "limits":  {
-                                    "context":  1048576,
-                                    "output":  131072
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "effort",
-                                                  "values":  [
-                                                                 "low",
-                                                                 "medium",
-                                                                 "high",
-                                                                 "xhigh",
-                                                                 "max"
-                                                             ]
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "low",
-                                          "medium",
-                                          "high",
-                                          "xhigh",
-                                          "max"
-                                      ],
-                     "structuredOutput":  true,
-                     "interleavedField":  {
-                                              "field":  "reasoning_content"
-                                          },
-                     "attachment":  false,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENCODE_API_KEY",
-                     "endpoint":  "https://opencode.ai/inference/openai/v1/chat/completions",
-                     "endpointKind":  "console",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "retained-30-days",
-                     "policyNote":  "Not used for training. Data is retained for 30 days for safety reasons.",
-                     "regionRestricted":  true,
-                     "regionBlocklist":  [
-                                             "Angola",
-                                             "Belarus",
-                                             "Cambodia",
-                                             "China including Hong Kong and Macau",
-                                             "Cuba",
-                                             "Democratic Republic of the Congo",
-                                             "Equatorial Guinea",
-                                             "Iran",
-                                             "Iraq",
-                                             "Laos",
-                                             "Libya",
-                                             "Nigeria",
-                                             "North Korea",
-                                             "Russia",
-                                             "Syria",
-                                             "Turkmenistan",
-                                             "Uzbekistan",
-                                             "Venezuela",
-                                             "Crimea, Donetsk and Luhansk regions of Ukraine"
-                                         ],
-                     "inConsoleFreeList":  true,
-                     "notes":  null
-                 },
-                 {
-                     "ref":  "opencode/longcat-2.5-preview-free",
-                     "provider":  "opencode",
-                     "modelId":  "longcat-2.5-preview-free",
-                     "name":  "LongCat 2.5 Preview Free",
-                     "status":  "active",
-                     "releasedDate":  "2026-09-25",
-                     "lastUpdated":  "2026-09-25",
-                     "knowledgeCutoff":  null,
-                     "description":  "Meituan\u0027s multimodal reasoning model for coding and agent tasks, with image understanding and a 1M-token context window",
-                     "family":  "longcat",
-                     "canonicalModelId":  "meituan/longcat-2.5-preview",
-                     "limits":  {
-                                    "context":  1000000,
-                                    "output":  131072
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "toggle"
-                                              }
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  null,
-                     "interleavedField":  {
-                                              "field":  "reasoning_content"
-                                          },
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  false,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENCODE_API_KEY",
-                     "endpoint":  "https://opencode.ai/inference/openai/v1/chat/completions",
-                     "endpointKind":  "console",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "zero-retention",
-                     "policyNote":  "Prompts and responses are not used for training. Console states a zero-retention policy for these routes.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  true,
-                     "notes":  null
-                 },
-                 {
-                     "ref":  "opencode/mimo-v2.6-flash-free",
-                     "provider":  "opencode",
-                     "modelId":  "mimo-v2.6-flash-free",
-                     "name":  "MiMo-V2.6-Flash Free",
-                     "status":  "active",
-                     "releasedDate":  "2026-09-22",
-                     "lastUpdated":  "2026-09-22",
-                     "knowledgeCutoff":  null,
-                     "description":  "MiMo Flash model for multimodal coding agents and long-context automation",
-                     "family":  "mimo",
-                     "canonicalModelId":  "xiaomi/mimo-v2.6-flash",
-                     "limits":  {
-                                    "context":  200000,
-                                    "output":  32000
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image",
-                                                      "audio",
-                                                      "video"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  null,
-                     "interleavedField":  {
-                                              "field":  "reasoning_content"
-                                          },
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENCODE_API_KEY",
-                     "endpoint":  "https://opencode.ai/inference/openai/v1/chat/completions",
-                     "endpointKind":  "console",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "may-use-during-free-period",
-                     "policyNote":  "During the free period, collected data may be used to improve the model.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  true,
-                     "notes":  null
-                 },
-                 {
-                     "ref":  "opencode/deepseek-v4.1-flash-free",
-                     "provider":  "opencode",
-                     "modelId":  "deepseek-v4.1-flash-free",
-                     "name":  "DeepSeek V4.1 Flash Free",
-                     "status":  "active",
-                     "releasedDate":  "2026-09-10",
-                     "lastUpdated":  "2026-09-10",
-                     "knowledgeCutoff":  "2025-05",
-                     "description":  "DeepSeek V4.1 Flash model for reasoning and agentic coding",
-                     "family":  "deepseek-flash",
-                     "canonicalModelId":  "deepseek/deepseek-v4.1-flash",
-                     "limits":  {
-                                    "context":  200000,
-                                    "output":  32000
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "effort",
-                                                  "values":  [
-                                                                 "low",
-                                                                 "high",
-                                                                 "max"
-                                                             ]
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "low",
-                                          "high",
-                                          "max"
-                                      ],
-                     "structuredOutput":  true,
-                     "interleavedField":  {
-                                              "field":  "reasoning_content"
-                                          },
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENCODE_API_KEY",
-                     "endpoint":  "https://opencode.ai/inference/openai/v1/chat/completions",
-                     "endpointKind":  "console",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "zero-retention",
-                     "policyNote":  "Prompts and responses are not used for training. Console states a zero-retention policy for these routes.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  true,
-                     "notes":  null
-                 },
-                 {
-                     "ref":  "opencode/glm-5.3-flash-free",
-                     "provider":  "opencode",
-                     "modelId":  "glm-5.3-flash-free",
-                     "name":  "GLM-5.3-Flash Free",
-                     "status":  "active",
-                     "releasedDate":  "2026-08-26",
-                     "lastUpdated":  "2026-08-26",
-                     "knowledgeCutoff":  null,
-                     "description":  "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-                     "family":  "glm-flash",
-                     "canonicalModelId":  "zhipuai/glm-5.3-flash",
-                     "limits":  {
-                                    "context":  200000,
-                                    "output":  32000
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image",
-                                                      "video",
-                                                      "pdf"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "effort",
-                                                  "values":  [
-                                                                 "low",
-                                                                 "high",
-                                                                 "max"
-                                                             ]
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "low",
-                                          "high",
-                                          "max"
-                                      ],
-                     "structuredOutput":  true,
-                     "interleavedField":  {
-                                              "field":  "reasoning_content"
-                                          },
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENCODE_API_KEY",
-                     "endpoint":  "https://opencode.ai/inference/openai/v1/chat/completions",
-                     "endpointKind":  "console",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "zero-retention",
-                     "policyNote":  "Prompts and responses are not used for training. Console states a zero-retention policy for these routes.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  true,
-                     "notes":  null
-                 },
-                 {
-                     "ref":  "opencode/nemotron-3.5-lightning-free",
-                     "provider":  "opencode",
-                     "modelId":  "nemotron-3.5-lightning-free",
-                     "name":  "Nemotron 3.5 Lightning Free",
-                     "status":  "active",
-                     "releasedDate":  "2026-08-11",
-                     "lastUpdated":  "2026-08-11",
-                     "knowledgeCutoff":  null,
-                     "description":  "Fast NVIDIA Nemotron MoE for reliable agentic tasks across enterprise workloads",
-                     "family":  "nemotron-free",
-                     "canonicalModelId":  "nvidia/nemotron-3.5-lightning",
-                     "limits":  {
-                                    "context":  262144,
-                                    "output":  262144
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  true,
-                     "interleavedField":  {
-                                              "field":  "reasoning_content"
-                                          },
-                     "attachment":  false,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENCODE_API_KEY",
-                     "endpoint":  "https://opencode.ai/inference/openai/v1/chat/completions",
-                     "endpointKind":  "console",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "nvidia-trial-terms",
-                     "policyNote":  "NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  true,
-                     "notes":  null
-                 },
-                 {
-                     "ref":  "opencode/nemotron-3-ultra-free",
-                     "provider":  "opencode",
-                     "modelId":  "nemotron-3-ultra-free",
-                     "name":  "Nemotron 3 Ultra Free",
-                     "status":  "active",
-                     "releasedDate":  "2026-06-04",
-                     "lastUpdated":  "2026-06-04",
-                     "knowledgeCutoff":  "2026-02",
-                     "description":  "Largest Nemotron 3 model for maximum open-weight reasoning and agent accuracy",
-                     "family":  "nemotron-free",
-                     "canonicalModelId":  "nvidia/nemotron-3-ultra-550b-a55b",
-                     "limits":  {
-                                    "context":  1000000,
-                                    "output":  128000
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  null,
-                     "interleavedField":  {
-                                              "field":  "reasoning_content"
-                                          },
-                     "attachment":  false,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENCODE_API_KEY",
-                     "endpoint":  "https://opencode.ai/inference/openai/v1/chat/completions",
-                     "endpointKind":  "console",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "nvidia-trial-terms",
-                     "policyNote":  "NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  true,
-                     "notes":  null
-                 },
-                 {
-                     "ref":  "opencode/big-pickle",
-                     "provider":  "opencode",
-                     "modelId":  "big-pickle",
-                     "name":  "Big Pickle",
-                     "status":  "active",
-                     "releasedDate":  "2025-10-17",
-                     "lastUpdated":  "2025-10-17",
-                     "knowledgeCutoff":  "2025-01",
-                     "description":  "Reasoning model for deliberate analysis, multi-step problem solving, and tool use",
-                     "family":  "big-pickle",
-                     "canonicalModelId":  null,
-                     "limits":  {
-                                    "context":  200000,
-                                    "input":  160000,
-                                    "output":  32000
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  true,
-                     "interleavedField":  {
-                                              "field":  "reasoning_content"
-                                          },
-                     "attachment":  false,
-                     "temperature":  true,
-                     "openWeights":  false,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENCODE_API_KEY",
-                     "endpoint":  "https://opencode.ai/inference/openai/v1/chat/completions",
-                     "endpointKind":  "console",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "may-use-during-free-period",
-                     "policyNote":  "During the free period, collected data may be used to improve the model.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  true,
-                     "notes":  null
-                 },
-                 {
-                     "ref":  "groq/groq/compound",
-                     "provider":  "groq",
-                     "modelId":  "groq/compound",
-                     "name":  "Compound",
-                     "status":  "active",
-                     "releasedDate":  "2025-09-04",
-                     "lastUpdated":  "2025-09-04",
-                     "knowledgeCutoff":  null,
-                     "description":  "General-purpose chat model for instruction following, writing, and analysis",
-                     "family":  "groq",
-                     "canonicalModelId":  null,
-                     "limits":  {
-                                    "context":  131072,
-                                    "output":  8192
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  false,
-                     "reasoning":  false,
-                     "reasoningOptions":  [
-
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  null,
-                     "interleavedField":  null,
-                     "attachment":  false,
-                     "temperature":  true,
-                     "openWeights":  false,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "GROQ_API_KEY",
-                     "endpoint":  null,
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "Groq free-tier route. Limits depend on the Groq account."
-                 },
-                 {
-                     "ref":  "groq/groq/compound-mini",
-                     "provider":  "groq",
-                     "modelId":  "groq/compound-mini",
-                     "name":  "Compound Mini",
-                     "status":  "active",
-                     "releasedDate":  "2025-09-04",
-                     "lastUpdated":  "2025-09-04",
-                     "knowledgeCutoff":  null,
-                     "description":  "Efficient model for low-latency assistance, extraction, and routine automation",
-                     "family":  "groq",
-                     "canonicalModelId":  null,
-                     "limits":  {
-                                    "context":  131072,
-                                    "output":  8192
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  false,
-                     "reasoning":  false,
-                     "reasoningOptions":  [
-
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  null,
-                     "interleavedField":  null,
-                     "attachment":  false,
-                     "temperature":  true,
-                     "openWeights":  false,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "GROQ_API_KEY",
-                     "endpoint":  null,
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "Groq free-tier route. Limits depend on the Groq account."
-                 },
-                 {
-                     "ref":  "groq/allam-2-7b",
-                     "provider":  "groq",
-                     "modelId":  "allam-2-7b",
-                     "name":  "ALLaM-2-7b",
-                     "status":  "active",
-                     "releasedDate":  "2025-01-23",
-                     "lastUpdated":  "2025-01-23",
-                     "knowledgeCutoff":  null,
-                     "description":  "ALLaM-2-7b instruction tuned model by SDAIA",
-                     "family":  null,
-                     "canonicalModelId":  "sdaia/allam-2-7b",
-                     "limits":  {
-                                    "context":  4096,
-                                    "output":  4096
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  false,
-                     "reasoning":  false,
-                     "reasoningOptions":  [
-
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  null,
-                     "interleavedField":  null,
-                     "attachment":  false,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "GROQ_API_KEY",
-                     "endpoint":  null,
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "Groq free-tier route. Limits depend on the Groq account."
-                 },
-                 {
-                     "ref":  "opencode-go/minimax-m3.1-flash-free",
-                     "provider":  "opencode-go",
-                     "modelId":  "minimax-m3.1-flash-free",
-                     "name":  "MiniMax M3.1 Flash Free",
-                     "status":  "active",
-                     "releasedDate":  "2026-10-19",
-                     "lastUpdated":  "2026-10-19",
-                     "knowledgeCutoff":  null,
-                     "description":  "Frontier multimodal coding model with 1M context window and tunable thinking depth",
-                     "family":  "minimax",
-                     "canonicalModelId":  "minimax/MiniMax-M3.1-Flash",
-                     "limits":  {
-                                    "context":  1000000,
-                                    "output":  512000
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image",
-                                                      "video"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "effort",
-                                                  "values":  [
-                                                                 "low",
-                                                                 "medium",
-                                                                 "high",
-                                                                 "xhigh",
-                                                                 "max"
-                                                             ]
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "low",
-                                          "medium",
-                                          "high",
-                                          "xhigh",
-                                          "max"
-                                      ],
-                     "structuredOutput":  null,
-                     "interleavedField":  {
-                                              "field":  "reasoning_content"
-                                          },
-                     "attachment":  true,
-                     "temperature":  false,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENCODE_API_KEY",
-                     "endpoint":  "https://opencode.ai/inference/go/openai/v1/chat/completions",
-                     "endpointKind":  "go",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "zero-retention",
-                     "policyNote":  "Prompts and responses are not used for training. Console states a zero-retention policy for these routes.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  true,
-                     "notes":  "OpenCode Go route. Free and unlimited while the Go plan is active, limited time. Go privacy table: not used for training, 0 days retention."
-                 },
-                 {
-                     "ref":  "opencode-go/beam-free",
-                     "provider":  "opencode-go",
-                     "modelId":  "beam-free",
-                     "name":  "Beam Free",
-                     "status":  "active",
-                     "releasedDate":  "2026-10-05",
-                     "lastUpdated":  "2026-10-16",
-                     "knowledgeCutoff":  "2026-06-30",
-                     "description":  "Sparse mixture-of-experts reasoning model with 23B active parameters for coding and agentic workflows",
-                     "family":  "beam",
-                     "canonicalModelId":  "reflection/beam-1.0-501b-a23b",
-                     "limits":  {
-                                    "context":  1048576,
-                                    "output":  131072
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "effort",
-                                                  "values":  [
-                                                                 "low",
-                                                                 "medium",
-                                                                 "high",
-                                                                 "xhigh",
-                                                                 "max"
-                                                             ]
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "low",
-                                          "medium",
-                                          "high",
-                                          "xhigh",
-                                          "max"
-                                      ],
-                     "structuredOutput":  true,
-                     "interleavedField":  {
-                                              "field":  "reasoning_content"
-                                          },
-                     "attachment":  false,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENCODE_API_KEY",
-                     "endpoint":  "https://opencode.ai/inference/go/openai/v1/chat/completions",
-                     "endpointKind":  "go",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "retained-30-days",
-                     "policyNote":  "Not used for training. Data is retained for 30 days for safety reasons.",
-                     "regionRestricted":  true,
-                     "regionBlocklist":  [
-                                             "Angola",
-                                             "Belarus",
-                                             "Cambodia",
-                                             "China including Hong Kong and Macau",
-                                             "Cuba",
-                                             "Democratic Republic of the Congo",
-                                             "Equatorial Guinea",
-                                             "Iran",
-                                             "Iraq",
-                                             "Laos",
-                                             "Libya",
-                                             "Nigeria",
-                                             "North Korea",
-                                             "Russia",
-                                             "Syria",
-                                             "Turkmenistan",
-                                             "Uzbekistan",
-                                             "Venezuela",
-                                             "Crimea, Donetsk and Luhansk regions of Ukraine"
-                                         ],
-                     "inConsoleFreeList":  true,
-                     "notes":  "OpenCode Go route mirror of opencode/beam-free. Free models keep working after Go usage limits."
-                 },
-                 {
-                     "ref":  "opencode-go/longcat-2.5-preview-free",
-                     "provider":  "opencode-go",
-                     "modelId":  "longcat-2.5-preview-free",
-                     "name":  "LongCat 2.5 Preview Free",
-                     "status":  "active",
-                     "releasedDate":  "2026-09-25",
-                     "lastUpdated":  "2026-09-25",
-                     "knowledgeCutoff":  null,
-                     "description":  "Meituan\u0027s multimodal reasoning model for coding and agent tasks, with image understanding and a 1M-token context window",
-                     "family":  "longcat",
-                     "canonicalModelId":  "meituan/longcat-2.5-preview",
-                     "limits":  {
-                                    "context":  1000000,
-                                    "output":  131072
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "toggle"
-                                              }
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  null,
-                     "interleavedField":  {
-                                              "field":  "reasoning_content"
-                                          },
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  false,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENCODE_API_KEY",
-                     "endpoint":  "https://opencode.ai/inference/go/openai/v1/chat/completions",
-                     "endpointKind":  "go",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "zero-retention",
-                     "policyNote":  "Prompts and responses are not used for training. Console states a zero-retention policy for these routes.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  true,
-                     "notes":  "OpenCode Go route mirror of opencode/longcat-2.5-preview-free. Listed as limited time in Go."
-                 },
-                 {
-                     "ref":  "openrouter/minimax/minimax-m3.1-flash:free",
-                     "provider":  "openrouter",
-                     "modelId":  "minimax/minimax-m3.1-flash:free",
-                     "name":  "MiniMax M3.1 Flash (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-10-19",
-                     "lastUpdated":  "2026-10-19",
-                     "knowledgeCutoff":  null,
-                     "description":  "MiniMax multimodal coding model for long-context reasoning and agent tasks",
-                     "family":  "minimax",
-                     "canonicalModelId":  "minimax/MiniMax-M3.1-Flash",
-                     "limits":  {
-                                    "context":  1000000,
-                                    "output":  524288
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image",
-                                                      "video"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "effort",
-                                                  "values":  [
-                                                                 "low",
-                                                                 "medium",
-                                                                 "high",
-                                                                 "xhigh",
-                                                                 "max"
-                                                             ]
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "low",
-                                          "medium",
-                                          "high",
-                                          "xhigh",
-                                          "max"
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "Upstream OpenRouter free route of MiniMax M3.1 Flash. Limits depend on the account."
-                 },
-                 {
-                     "ref":  "openrouter/xingchen-agi/xing4.0-29b-a4b:free",
-                     "provider":  "openrouter",
-                     "modelId":  "xingchen-agi/xing4.0-29b-a4b:free",
-                     "name":  "Xing4.0 29B A4B (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-10-16",
-                     "lastUpdated":  "2026-10-16",
-                     "knowledgeCutoff":  null,
-                     "description":  "Free provider route for experiments, demos, and cost-sensitive chat workloads",
-                     "family":  "agi",
-                     "canonicalModelId":  null,
-                     "limits":  {
-                                    "context":  262144,
-                                    "output":  235929
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "toggle"
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "none",
-                                          "thinking"
-                                      ],
-                     "structuredOutput":  true,
-                     "interleavedField":  null,
-                     "attachment":  false,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "OpenRouter free route. Rate limits depend on the OpenRouter account."
-                 },
-                 {
-                     "ref":  "openrouter/nvidia/nemotron-3.5-super-vl:free",
-                     "provider":  "openrouter",
-                     "modelId":  "nvidia/nemotron-3.5-super-vl:free",
-                     "name":  "Nemotron 3.5 Super VL (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-10-15",
-                     "lastUpdated":  "2026-10-15",
-                     "knowledgeCutoff":  null,
-                     "description":  "Nemotron multimodal model for visual reasoning and agentic AI workflows",
-                     "family":  "nemotron",
-                     "canonicalModelId":  null,
-                     "limits":  {
-                                    "context":  1000000,
-                                    "output":  131072
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image",
-                                                      "video"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "toggle"
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "none",
-                                          "thinking"
-                                      ],
-                     "structuredOutput":  true,
-                     "interleavedField":  null,
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "OpenRouter free route. Rate limits depend on the OpenRouter account."
-                 },
-                 {
-                     "ref":  "openrouter/dots-studio/dots-3-note-preview:free",
-                     "provider":  "openrouter",
-                     "modelId":  "dots-studio/dots-3-note-preview:free",
-                     "name":  "Dots3-Note Preview (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-08-14",
-                     "lastUpdated":  "2026-08-14",
-                     "knowledgeCutoff":  null,
-                     "description":  "Multimodal reasoning model for visual analysis, planning, and tool use",
-                     "family":  null,
-                     "canonicalModelId":  null,
-                     "limits":  {
-                                    "context":  512000,
-                                    "output":  460800
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "toggle"
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "none",
-                                          "thinking"
-                                      ],
-                     "structuredOutput":  true,
-                     "interleavedField":  null,
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  false,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "OpenRouter free route. Rate limits depend on the OpenRouter account."
-                 },
-                 {
-                     "ref":  "openrouter/nvidia/nemotron-3.5-lightning:free",
-                     "provider":  "openrouter",
-                     "modelId":  "nvidia/nemotron-3.5-lightning:free",
-                     "name":  "Nemotron 3.5 Lightning (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-08-11",
-                     "lastUpdated":  "2026-08-11",
-                     "knowledgeCutoff":  null,
-                     "description":  "Nemotron model for efficient reasoning, coding, and specialized AI agents",
-                     "family":  "nemotron",
-                     "canonicalModelId":  "nvidia/nemotron-3.5-lightning",
-                     "limits":  {
-                                    "context":  1000000,
-                                    "output":  65536
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "toggle"
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "none",
-                                          "thinking"
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  false,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "OpenRouter free route. Rate limits depend on the OpenRouter account."
-                 },
-                 {
-                     "ref":  "openrouter/liquid/lfm-2.5-2.6b:free",
-                     "provider":  "openrouter",
-                     "modelId":  "liquid/lfm-2.5-2.6b:free",
-                     "name":  "LFM2.5-2.6B (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-08-11",
-                     "lastUpdated":  "2026-08-11",
-                     "knowledgeCutoff":  null,
-                     "description":  "Free provider route for experiments, demos, and cost-sensitive chat workloads",
-                     "family":  "liquid",
-                     "canonicalModelId":  null,
-                     "limits":  {
-                                    "context":  65536,
-                                    "output":  8192
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  true,
-                     "interleavedField":  null,
-                     "attachment":  false,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "OpenRouter free route. Rate limits depend on the OpenRouter account."
-                 },
-                 {
-                     "ref":  "openrouter/thinkingmachines/inkling-small:free",
-                     "provider":  "openrouter",
-                     "modelId":  "thinkingmachines/inkling-small:free",
-                     "name":  "Inkling Small (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-07-30",
-                     "lastUpdated":  "2026-07-30",
-                     "knowledgeCutoff":  null,
-                     "description":  "Multimodal reasoning model for visual analysis, planning, and tool use",
-                     "family":  "ling",
-                     "canonicalModelId":  "thinkingmachines/inkling-small",
-                     "limits":  {
-                                    "context":  1048576,
-                                    "output":  262144
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image",
-                                                      "audio"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "effort",
-                                                  "values":  [
-                                                                 "none",
-                                                                 "minimal",
-                                                                 "low",
-                                                                 "medium",
-                                                                 "high",
-                                                                 "max"
-                                                             ]
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "none",
-                                          "minimal",
-                                          "low",
-                                          "medium",
-                                          "high",
-                                          "max"
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "OpenRouter free route. Rate limits depend on the OpenRouter account."
-                 },
-                 {
-                     "ref":  "openrouter/poolside/laguna-s-2.1:free",
-                     "provider":  "openrouter",
-                     "modelId":  "poolside/laguna-s-2.1:free",
-                     "name":  "Laguna S 2.1 (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-07-21",
-                     "lastUpdated":  "2026-07-21",
-                     "knowledgeCutoff":  null,
-                     "description":  "Free provider route for experiments, demos, and cost-sensitive chat workloads",
-                     "family":  "laguna-s",
-                     "canonicalModelId":  null,
-                     "limits":  {
-                                    "context":  262144,
-                                    "output":  32768
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "toggle"
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "none",
-                                          "thinking"
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  false,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "OpenRouter free route. Rate limits depend on the OpenRouter account."
-                 },
-                 {
-                     "ref":  "openrouter/thinkingmachines/inkling:free",
-                     "provider":  "openrouter",
-                     "modelId":  "thinkingmachines/inkling:free",
-                     "name":  "Inkling (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-07-15",
-                     "lastUpdated":  "2026-07-15",
-                     "knowledgeCutoff":  null,
-                     "description":  "Multimodal reasoning model for visual analysis, planning, and tool use",
-                     "family":  "ling",
-                     "canonicalModelId":  "thinkingmachines/inkling",
-                     "limits":  {
-                                    "context":  1048576,
-                                    "output":  262144
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image",
-                                                      "audio"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "effort",
-                                                  "values":  [
-                                                                 "none",
-                                                                 "minimal",
-                                                                 "low",
-                                                                 "medium",
-                                                                 "high",
-                                                                 "max"
-                                                             ]
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "none",
-                                          "minimal",
-                                          "low",
-                                          "medium",
-                                          "high",
-                                          "max"
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "OpenRouter free route. Rate limits depend on the OpenRouter account."
-                 },
-                 {
-                     "ref":  "openrouter/poolside/laguna-xs-2.1:free",
-                     "provider":  "openrouter",
-                     "modelId":  "poolside/laguna-xs-2.1:free",
-                     "name":  "Laguna XS 2.1 (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-07-02",
-                     "lastUpdated":  "2026-07-02",
-                     "knowledgeCutoff":  null,
-                     "description":  "Free provider route for experiments, demos, and cost-sensitive chat workloads",
-                     "family":  "laguna",
-                     "canonicalModelId":  "poolside/laguna-xs-2.1",
-                     "limits":  {
-                                    "context":  262144,
-                                    "output":  32768
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "toggle"
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "none",
-                                          "thinking"
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  false,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "OpenRouter free route. Rate limits depend on the OpenRouter account."
-                 },
-                 {
-                     "ref":  "openrouter/cohere/north-mini-code:free",
-                     "provider":  "openrouter",
-                     "modelId":  "cohere/north-mini-code:free",
-                     "name":  "North Mini Code (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-06-17",
-                     "lastUpdated":  "2026-06-17",
-                     "knowledgeCutoff":  null,
-                     "description":  "Cohere coding model for practical software engineering and agentic edits",
-                     "family":  "north",
-                     "canonicalModelId":  null,
-                     "limits":  {
-                                    "context":  256000,
-                                    "output":  64000
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "toggle"
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "none",
-                                          "thinking"
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  false,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "OpenRouter free route. Rate limits depend on the OpenRouter account."
-                 },
-                 {
-                     "ref":  "openrouter/openrouter/fusion",
-                     "provider":  "openrouter",
-                     "modelId":  "openrouter/fusion",
-                     "name":  "Fusion",
-                     "status":  "active",
-                     "releasedDate":  "2026-06-13",
-                     "lastUpdated":  "2026-06-13",
-                     "knowledgeCutoff":  null,
-                     "description":  "General-purpose chat model for instruction following, writing, and analysis",
-                     "family":  null,
-                     "canonicalModelId":  null,
-                     "limits":  {
-                                    "context":  1000000,
-                                    "output":  128000
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  false,
-                     "reasoning":  false,
-                     "reasoningOptions":  [
-
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  false,
-                     "temperature":  false,
-                     "openWeights":  false,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "Chat model."
-                 },
-                 {
-                     "ref":  "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
-                     "provider":  "openrouter",
-                     "modelId":  "nvidia/nemotron-3-ultra-550b-a55b:free",
-                     "name":  "Nemotron 3 Ultra (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-06-04",
-                     "lastUpdated":  "2026-06-04",
-                     "knowledgeCutoff":  null,
-                     "description":  "Largest Nemotron 3 model for maximum open-weight reasoning and agent accuracy",
-                     "family":  "nemotron",
-                     "canonicalModelId":  "nvidia/nemotron-3-ultra-550b-a55b",
-                     "limits":  {
-                                    "context":  1000000,
-                                    "output":  65536
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "effort",
-                                                  "values":  [
-                                                                 "none",
-                                                                 "medium",
-                                                                 "high"
-                                                             ]
-                                              },
-                                              {
-                                                  "type":  "budget_tokens"
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "none",
-                                          "medium",
-                                          "high"
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  false,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "OpenRouter free route. Rate limits depend on the OpenRouter account."
-                 },
-                 {
-                     "ref":  "openrouter/nvidia/nemotron-3.5-content-safety:free",
-                     "provider":  "openrouter",
-                     "modelId":  "nvidia/nemotron-3.5-content-safety:free",
-                     "name":  "Nemotron 3.5 Content Safety (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-06-04",
-                     "lastUpdated":  "2026-06-04",
-                     "knowledgeCutoff":  null,
-                     "description":  "Safety model for policy screening, moderation, and risk-aware routing workflows",
-                     "family":  "nemotron",
-                     "canonicalModelId":  "nvidia/nemotron-3.5-content-safety",
-                     "limits":  {
-                                    "context":  128000,
-                                    "output":  8192
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  false,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "toggle"
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "none",
-                                          "thinking"
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "Content safety classifier."
-                 },
-                 {
-                     "ref":  "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
-                     "provider":  "openrouter",
-                     "modelId":  "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
-                     "name":  "Nemotron 3 Nano Omni (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-04-28",
-                     "lastUpdated":  "2026-04-28",
-                     "knowledgeCutoff":  null,
-                     "description":  "Open Nemotron omni model combining reasoning with text, vision, and audio",
-                     "family":  "nemotron",
-                     "canonicalModelId":  "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
-                     "limits":  {
-                                    "context":  256000,
-                                    "output":  65536
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image",
-                                                      "video",
-                                                      "audio"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "toggle"
-                                              },
-                                              {
-                                                  "type":  "budget_tokens"
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "none",
-                                          "high",
-                                          "max"
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "Small omni model, audio and video input."
-                 },
-                 {
-                     "ref":  "openrouter/openrouter/pareto-code",
-                     "provider":  "openrouter",
-                     "modelId":  "openrouter/pareto-code",
-                     "name":  "Pareto Code Router",
-                     "status":  "active",
-                     "releasedDate":  "2026-04-21",
-                     "lastUpdated":  "2026-04-21",
-                     "knowledgeCutoff":  null,
-                     "description":  "Coding model for repository understanding, refactors, and agentic engineering tasks",
-                     "family":  null,
-                     "canonicalModelId":  null,
-                     "limits":  {
-                                    "context":  2000000,
-                                    "output":  200000
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  false,
-                     "reasoning":  false,
-                     "reasoningOptions":  [
-
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  false,
-                     "temperature":  false,
-                     "openWeights":  false,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "Code router; large-context fallback."
-                 },
-                 {
-                     "ref":  "openrouter/google/gemma-4-26b-a4b-it:free",
-                     "provider":  "openrouter",
-                     "modelId":  "google/gemma-4-26b-a4b-it:free",
-                     "name":  "Gemma 4 26B A4B  (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-04-02",
-                     "lastUpdated":  "2026-04-02",
-                     "knowledgeCutoff":  null,
-                     "description":  "Open Gemma instruction model for efficient chat and self-hosted deployments",
-                     "family":  "gemma",
-                     "canonicalModelId":  "google/gemma-4-26b-a4b-it",
-                     "limits":  {
-                                    "context":  262144,
-                                    "output":  32768
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "image",
-                                                      "text",
-                                                      "video"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "toggle"
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "none",
-                                          "thinking"
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "OpenRouter free route. Rate limits depend on the OpenRouter account."
-                 },
-                 {
-                     "ref":  "openrouter/google/gemma-4-31b-it:free",
-                     "provider":  "openrouter",
-                     "modelId":  "google/gemma-4-31b-it:free",
-                     "name":  "Gemma 4 31B (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-04-02",
-                     "lastUpdated":  "2026-04-02",
-                     "knowledgeCutoff":  null,
-                     "description":  "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
-                     "family":  "gemma",
-                     "canonicalModelId":  "google/gemma-4-31b-it",
-                     "limits":  {
-                                    "context":  262144,
-                                    "output":  32768
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "image",
-                                                      "text",
-                                                      "video"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "toggle"
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "none",
-                                          "thinking"
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "OpenRouter free route. Rate limits depend on the OpenRouter account."
-                 },
-                 {
-                     "ref":  "openrouter/google/lyria-3-clip-preview",
-                     "provider":  "openrouter",
-                     "modelId":  "google/lyria-3-clip-preview",
-                     "name":  "Lyria 3 Clip Preview",
-                     "status":  "active",
-                     "releasedDate":  "2026-03-25",
-                     "lastUpdated":  "2026-03-25",
-                     "knowledgeCutoff":  null,
-                     "description":  "Speech generation model for controllable voice, narration, and audio delivery",
-                     "family":  "lyria",
-                     "canonicalModelId":  "google/lyria-3-clip-preview",
-                     "limits":  {
-                                    "context":  1048576,
-                                    "output":  65536
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image"
-                                                  ],
-                                        "output":  [
-                                                       "text",
-                                                       "audio"
-                                                   ]
-                                    },
-                     "toolCall":  false,
-                     "reasoning":  false,
-                     "reasoningOptions":  [
-
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  false,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "Audio generation, short clips."
-                 },
-                 {
-                     "ref":  "openrouter/google/lyria-3-pro-preview",
-                     "provider":  "openrouter",
-                     "modelId":  "google/lyria-3-pro-preview",
-                     "name":  "Lyria 3 Pro Preview",
-                     "status":  "active",
-                     "releasedDate":  "2026-03-25",
-                     "lastUpdated":  "2026-03-25",
-                     "knowledgeCutoff":  null,
-                     "description":  "Speech generation model for controllable voice, narration, and audio delivery",
-                     "family":  "lyria",
-                     "canonicalModelId":  "google/lyria-3-pro-preview",
-                     "limits":  {
-                                    "context":  1048576,
-                                    "output":  65536
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image"
-                                                  ],
-                                        "output":  [
-                                                       "text",
-                                                       "audio"
-                                                   ]
-                                    },
-                     "toolCall":  false,
-                     "reasoning":  false,
-                     "reasoningOptions":  [
-
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  false,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "Audio generation."
-                 },
-                 {
-                     "ref":  "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
-                     "provider":  "openrouter",
-                     "modelId":  "nvidia/nemotron-3-super-120b-a12b:free",
-                     "name":  "Nemotron 3 Super (free)",
-                     "status":  "active",
-                     "releasedDate":  "2026-03-11",
-                     "lastUpdated":  "2026-03-11",
-                     "knowledgeCutoff":  null,
-                     "description":  "Nemotron middle tier for collaborative agents and high-volume reasoning workloads",
-                     "family":  "nemotron",
-                     "canonicalModelId":  "nvidia/nemotron-3-super-120b-a12b",
-                     "limits":  {
-                                    "context":  262144,
-                                    "output":  235929
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-                                              {
-                                                  "type":  "effort",
-                                                  "values":  [
-                                                                 "none",
-                                                                 "low",
-                                                                 "medium"
-                                                             ]
-                                              },
-                                              {
-                                                  "type":  "budget_tokens"
-                                              }
-                                          ],
-                     "hostVariants":  [
-                                          "none",
-                                          "low",
-                                          "medium"
-                                      ],
-                     "structuredOutput":  true,
-                     "interleavedField":  null,
-                     "attachment":  false,
-                     "temperature":  true,
-                     "openWeights":  true,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "OpenRouter free route. Rate limits depend on the OpenRouter account."
-                 },
-                 {
-                     "ref":  "openrouter/openrouter/free",
-                     "provider":  "openrouter",
-                     "modelId":  "openrouter/free",
-                     "name":  "Free Models Router",
-                     "status":  "active",
-                     "releasedDate":  "2026-02-01",
-                     "lastUpdated":  "2026-02-01",
-                     "knowledgeCutoff":  null,
-                     "description":  "Multimodal reasoning model for visual analysis, planning, and tool use",
-                     "family":  null,
-                     "canonicalModelId":  null,
-                     "limits":  {
-                                    "context":  200000,
-                                    "input":  200000,
-                                    "output":  8000
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  true,
-                     "interleavedField":  null,
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  false,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "Router that selects among free models."
-                 },
-                 {
-                     "ref":  "openrouter/openrouter/bodybuilder",
-                     "provider":  "openrouter",
-                     "modelId":  "openrouter/bodybuilder",
-                     "name":  "Body Builder (beta)",
-                     "status":  "active",
-                     "releasedDate":  "2025-12-05",
-                     "lastUpdated":  "2025-12-05",
-                     "knowledgeCutoff":  null,
-                     "description":  "Preview model for early access evaluation, prototyping, and compatibility testing",
-                     "family":  null,
-                     "canonicalModelId":  null,
-                     "limits":  {
-                                    "context":  128000,
-                                    "output":  128000
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text"
-                                                  ],
-                                        "output":  [
-                                                       "text"
-                                                   ]
-                                    },
-                     "toolCall":  false,
-                     "reasoning":  false,
-                     "reasoningOptions":  [
-
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  false,
-                     "interleavedField":  null,
-                     "attachment":  false,
-                     "temperature":  false,
-                     "openWeights":  false,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "Beta."
-                 },
-                 {
-                     "ref":  "openrouter/openrouter/auto",
-                     "provider":  "openrouter",
-                     "modelId":  "openrouter/auto",
-                     "name":  "Auto Router",
-                     "status":  "active",
-                     "releasedDate":  "2023-11-08",
-                     "lastUpdated":  "2023-11-08",
-                     "knowledgeCutoff":  null,
-                     "description":  "Image model for prompt-driven generation, editing, and visual design workflows",
-                     "family":  "auto",
-                     "canonicalModelId":  null,
-                     "limits":  {
-                                    "context":  2000000,
-                                    "output":  2000000
-                                },
-                     "modalities":  {
-                                        "input":  [
-                                                      "text",
-                                                      "image",
-                                                      "audio",
-                                                      "pdf",
-                                                      "video"
-                                                  ],
-                                        "output":  [
-                                                       "text",
-                                                       "image"
-                                                   ]
-                                    },
-                     "toolCall":  true,
-                     "reasoning":  true,
-                     "reasoningOptions":  [
-
-                                          ],
-                     "hostVariants":  [
-
-                                      ],
-                     "structuredOutput":  true,
-                     "interleavedField":  null,
-                     "attachment":  true,
-                     "temperature":  true,
-                     "openWeights":  false,
-                     "cost":  "all tiers 0: input, output, cache read, cache write",
-                     "authEnvVar":  "OPENROUTER_API_KEY",
-                     "endpoint":  "https://openrouter.ai/api/v1",
-                     "endpointKind":  "upstream",
-                     "sdkPackage":  "@ai-sdk/openai-compatible",
-                     "policyClass":  "upstream-unverified",
-                     "policyNote":  "Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.",
-                     "regionRestricted":  false,
-                     "regionBlocklist":  [
-
-                                         ],
-                     "inConsoleFreeList":  false,
-                     "notes":  "General router; catalog lists text and image output modalities."
-                 }
-             ],
-    "drift":  {
-                  "documentedFreeNotInCatalog":  [
-                                                     "ll-alpha-free",
-                                                     "exo-free",
-                                                     "mimo-v2.5-free",
-                                                     "muse-spark-1.3-contributor-free",
-                                                     "jev-1.13-free"
-                                                 ],
-                  "catalogFreeNotInConsoleList":  [
-
-                                                  ],
-                  "upstreamFreeRouteCounts":  {
-                                                  "openrouter":  24,
-                                                  "groq":  3
-                                              },
-                  "openQuestions":  [
-                                        "Console free model rate limits are not stated in the docs.",
-                                        "OpenRouter free route limits depend on the account.",
-                                        "Groq free-tier limits are not verified from this device.",
-                                        "Deprecated models are removed on rolling dates; check the Deprecated models table monthly."
-                                    ]
-              },
-    "sources":  [
-                    {
-                        "type":  "docs",
-                        "url":  "https://opencode.ai/v2/docs/console/models/",
-                        "checked":  "2026-10-19"
-                    },
-                    {
-                        "type":  "docs",
-                        "url":  "https://opencode.ai/v2/docs/console/go/",
-                        "checked":  "2026-10-19"
-                    },
-                    {
-                        "type":  "docs",
-                        "url":  "https://opencode.ai/v2/docs/models/",
-                        "checked":  "2026-10-19"
-                    },
-                    {
-                        "type":  "docs",
-                        "url":  "https://opencode.ai/v2/docs/agents/",
-                        "checked":  "2026-10-19"
-                    },
-                    {
-                        "type":  "docs",
-                        "url":  "https://opencode.ai/v2/docs/commands/",
-                        "checked":  "2026-10-19"
-                    },
-                    {
-                        "type":  "catalog",
-                        "url":  "https://models.dev/api.json",
-                        "checked":  "2026-10-19",
-                        "sha256":  "f6548e9a8644538a883c988fcfc981a1bb8ecf42d444e15d66228de3e3c4b52b"
-                    },
-                    {
-                        "type":  "tool",
-                        "command":  "tools.opencode.models paging, all=true, limit=100, offset 0..4",
-                        "checked":  "2026-10-19"
-                    },
-                    {
-                        "type":  "cli",
-                        "command":  "opencode models",
-                        "checked":  "2026-10-19"
-                    },
-                    {
-                        "type":  "cli",
-                        "command":  "opencode auth list, debug paths, debug config, debug agents",
-                        "checked":  "2026-10-19"
-                    }
-                ],
-    "validation":  {
-                       "freeCount":  40,
-                       "providerCount":  5,
-                       "missingEnrichment":  [
-
-                                             ],
-                       "allCostTiersZero":  true,
-                       "consoleListedFree":  13,
-                       "upstreamFreeRoutes":  27
-                   }
+  "schemaVersion": 1,
+  "ledgerVersion": 1,
+  "runId": "2026-10-23-arch-btw",
+  "runDate": "2026-10-23",
+  "collectedAt": "2026-10-23T04:34:16Z",
+  "catalogPulledAt": "2026-10-23T04:34:16Z",
+  "definitions": {
+    "freeModel": "Catalog entry whose effective price is zero on every pricing tier: input, output, cache read, cache write.",
+    "stableKey": "providerID/modelID",
+    "scope": "Models resolvable by OpenCode on the recording device, plus local zero-cost discovery when present.",
+    "evidenceTags": "C host catalog, D models.dev, O OpenCode docs, A auth list, H host probe."
+  },
+  "device": {
+    "hostname": "arch-btw",
+    "os": "Arch Linux ARM64 chroot",
+    "user": "root",
+    "opencodeVersion": "2.1.3",
+    "opencodeRaw": "opencode v2.1.3",
+    "installPath": "/usr/bin/opencode",
+    "shell": "bash"
+  },
+  "host": {
+    "paths": {
+      "home": "/root",
+      "data": "/root/.local/share/opencode",
+      "cache": "/root/.cache/opencode",
+      "config": "/root/.config/opencode",
+      "state": "/root/.local/state/opencode",
+      "tmp": "/tmp/opencode",
+      "bin": "/root/.cache/opencode/bin",
+      "log": "/root/.local/share/opencode/log",
+      "repos": "/root/.local/share/opencode/repos",
+      "db": "/root/.local/share/opencode/opencode.db"
+    },
+    "configSources": [
+      "/root/.config/opencode/opencode.json",
+      "/root/.config/opencode"
+    ],
+    "auth": [
+      {
+        "provider": "omniroute",
+        "credential": "stored in opencode.json provider settings",
+        "method": "inline-value",
+        "valuesRecorded": false
+      }
+    ],
+    "localServers": [
+      {
+        "port": 11434,
+        "listening": false
+      },
+      {
+        "port": 1234,
+        "listening": false
+      },
+      {
+        "port": 8000,
+        "listening": false
+      }
+    ],
+    "agents": [
+      {
+        "id": "build",
+        "mode": "primary",
+        "hidden": false
+      },
+      {
+        "id": "compaction",
+        "mode": "primary",
+        "hidden": true
+      },
+      {
+        "id": "explore",
+        "mode": "subagent",
+        "hidden": false
+      },
+      {
+        "id": "general",
+        "mode": "subagent",
+        "hidden": false
+      },
+      {
+        "id": "plan",
+        "mode": "primary",
+        "hidden": false
+      },
+      {
+        "id": "summary",
+        "mode": "primary",
+        "hidden": true
+      },
+      {
+        "id": "title",
+        "mode": "primary",
+        "hidden": true
+      }
+    ],
+    "defaultModel": {
+      "providerID": "opencode",
+      "model": "glm-5.3-flash-free"
+    }
+  },
+  "catalog": {
+    "totalModels": 458,
+    "providerCount": 2,
+    "providers": [
+      {
+        "id": "opencode",
+        "name": "OpenCode",
+        "models": 9,
+        "freeModels": 9
+      },
+      {
+        "id": "omniroute",
+        "name": "OmniRoute local gateway",
+        "models": 449,
+        "freeModels": 0
+      }
+    ],
+    "providerMeta": {
+      "opencode": {
+        "name": "OpenCode",
+        "api": "https://opencode.ai/inference/openai/v1",
+        "env": "OPENCODE_API_KEY",
+        "doc": "https://opencode.ai/v2/docs/console/models/"
+      },
+      "omniroute": {
+        "name": "OmniRoute local gateway",
+        "api": "http://localhost:20128/v1",
+        "env": null,
+        "doc": null,
+        "measured": false
+      }
+    },
+    "catalogVisibilityNote": "Signed out with no OPENCODE_API_KEY, the catalog exposes the nine Console free models of the opencode provider. Paid opencode models appear only after connecting."
+  },
+  "freeTotals": {
+    "count": 9,
+    "byProvider": {
+      "opencode": 9
+    }
+  },
+  "free": [
+    {
+      "ref": "opencode/beam-free",
+      "provider": "opencode",
+      "modelId": "beam-free",
+      "name": "Beam Free",
+      "status": "active",
+      "releasedDate": "2026-10-05",
+      "lastUpdated": "2026-10-16",
+      "knowledgeCutoff": "2026-06-30",
+      "description": "Sparse mixture-of-experts reasoning model with 23B active parameters for coding and agentic workflows",
+      "family": "beam",
+      "canonicalModelId": "reflection/beam-1.0-501b-a23b",
+      "limits": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "hostVariants": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "structuredOutput": true,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": false,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all tiers 0: input, output, cache read, cache write",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "retained-30-days",
+      "policyNote": "Not used for training. Data is retained for 30 days for safety reasons.",
+      "regionRestricted": true,
+      "regionBlocklist": [
+        "Angola",
+        "Belarus",
+        "Cambodia",
+        "China including Hong Kong and Macau",
+        "Cuba",
+        "Democratic Republic of the Congo",
+        "Equatorial Guinea",
+        "Iran",
+        "Iraq",
+        "Laos",
+        "Libya",
+        "Nigeria",
+        "North Korea",
+        "Russia",
+        "Syria",
+        "Turkmenistan",
+        "Uzbekistan",
+        "Venezuela",
+        "Crimea, Donetsk and Luhansk regions of Ukraine"
+      ],
+      "inConsoleFreeList": true,
+      "notes": null
+    },
+    {
+      "ref": "opencode/big-pickle",
+      "provider": "opencode",
+      "modelId": "big-pickle",
+      "name": "Big Pickle",
+      "status": "active",
+      "releasedDate": "2025-10-17",
+      "lastUpdated": "2025-10-17",
+      "knowledgeCutoff": "2025-01",
+      "description": "Reasoning model for deliberate analysis, multi-step problem solving, and tool use",
+      "family": "big-pickle",
+      "canonicalModelId": null,
+      "limits": {
+        "context": 200000,
+        "input": 160000,
+        "output": 32000
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [],
+      "hostVariants": [],
+      "structuredOutput": true,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": false,
+      "temperature": true,
+      "openWeights": false,
+      "cost": "all tiers 0: input, output, cache read, cache write",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "may-use-during-free-period",
+      "policyNote": "During the free period, collected data may be used to improve the model.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "notes": null
+    },
+    {
+      "ref": "opencode/deepseek-v4.1-flash-free",
+      "provider": "opencode",
+      "modelId": "deepseek-v4.1-flash-free",
+      "name": "DeepSeek V4.1 Flash Free",
+      "status": "active",
+      "releasedDate": "2026-09-10",
+      "lastUpdated": "2026-09-10",
+      "knowledgeCutoff": "2025-05",
+      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
+      "family": "deepseek-flash",
+      "canonicalModelId": "deepseek/deepseek-v4.1-flash",
+      "limits": {
+        "context": 200000,
+        "output": 32000
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "hostVariants": [
+        "low",
+        "high",
+        "max"
+      ],
+      "structuredOutput": true,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": true,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all tiers 0: input, output, cache read, cache write",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "zero-retention",
+      "policyNote": "Prompts and responses are not used for training. Console states a zero-retention policy for these routes.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "notes": null
+    },
+    {
+      "ref": "opencode/flint-40b-free",
+      "provider": "opencode",
+      "modelId": "flint-40b-free",
+      "name": "Flint 40B Free",
+      "status": "active",
+      "releasedDate": "2026-10-21",
+      "lastUpdated": "2026-10-21",
+      "knowledgeCutoff": "2026-06",
+      "description": "Open-weight mixture-of-experts model with about 2.5B active parameters for local coding agents",
+      "family": "flint",
+      "canonicalModelId": "recursive/flint",
+      "limits": {
+        "context": 262144,
+        "output": 65536
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "hostVariants": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "structuredOutput": true,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": false,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all tiers 0: input, output, cache read, cache write",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "may-use-during-free-period",
+      "policyNote": "During the free period, collected data may be used to improve the model. Data is retained for 30 days.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "notes": null
+    },
+    {
+      "ref": "opencode/glm-5.3-flash-free",
+      "provider": "opencode",
+      "modelId": "glm-5.3-flash-free",
+      "name": "GLM-5.3-Flash Free",
+      "status": "active",
+      "releasedDate": "2026-08-26",
+      "lastUpdated": "2026-08-26",
+      "knowledgeCutoff": null,
+      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
+      "family": "glm-flash",
+      "canonicalModelId": "zhipuai/glm-5.3-flash",
+      "limits": {
+        "context": 200000,
+        "output": 32000
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "hostVariants": [
+        "low",
+        "high",
+        "max"
+      ],
+      "structuredOutput": true,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": true,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all tiers 0: input, output, cache read, cache write",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "zero-retention",
+      "policyNote": "Prompts and responses are not used for training. Console states a zero-retention policy for these routes.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "notes": null
+    },
+    {
+      "ref": "opencode/mimo-v2.6-flash-free",
+      "provider": "opencode",
+      "modelId": "mimo-v2.6-flash-free",
+      "name": "MiMo-V2.6-Flash Free",
+      "status": "active",
+      "releasedDate": "2026-09-22",
+      "lastUpdated": "2026-09-22",
+      "knowledgeCutoff": null,
+      "description": "MiMo Flash model for multimodal coding agents and long-context automation",
+      "family": "mimo",
+      "canonicalModelId": "xiaomi/mimo-v2.6-flash",
+      "limits": {
+        "context": 200000,
+        "output": 32000
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [],
+      "hostVariants": [],
+      "structuredOutput": null,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": true,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all tiers 0: input, output, cache read, cache write",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "may-use-during-free-period",
+      "policyNote": "During the free period, collected data may be used to improve the model.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "notes": null
+    },
+    {
+      "ref": "opencode/nemotron-3.5-lightning-free",
+      "provider": "opencode",
+      "modelId": "nemotron-3.5-lightning-free",
+      "name": "Nemotron 3.5 Lightning Free",
+      "status": "active",
+      "releasedDate": "2026-08-11",
+      "lastUpdated": "2026-08-11",
+      "knowledgeCutoff": "2025-09",
+      "description": "Fast NVIDIA Nemotron MoE for reliable agentic tasks across enterprise workloads",
+      "family": "nemotron",
+      "canonicalModelId": "nvidia/nemotron-3.5-lightning",
+      "limits": {
+        "context": 262144,
+        "output": 262144
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [],
+      "hostVariants": [],
+      "structuredOutput": true,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": false,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all tiers 0: input, output, cache read, cache write",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "nvidia-trial-terms",
+      "policyNote": "NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "notes": null
+    },
+    {
+      "ref": "opencode/nemotron-3.5-super-vl-free",
+      "provider": "opencode",
+      "modelId": "nemotron-3.5-super-vl-free",
+      "name": "Nemotron 3.5 Super VL Free",
+      "status": "active",
+      "releasedDate": "2026-10-15",
+      "lastUpdated": "2026-10-15",
+      "knowledgeCutoff": null,
+      "description": "NVIDIA vision-language reasoning model for text, image, and video understanding and agentic tool use",
+      "family": "nemotron",
+      "canonicalModelId": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "limits": {
+        "context": 1048576,
+        "input": 1048576,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "hostVariants": [
+        "none",
+        "minimal",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "structuredOutput": null,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": true,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all tiers 0: input, output, cache read, cache write",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "nvidia-trial-terms",
+      "policyNote": "NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "notes": null
+    },
+    {
+      "ref": "opencode/nemotron-3-ultra-free",
+      "provider": "opencode",
+      "modelId": "nemotron-3-ultra-free",
+      "name": "Nemotron 3 Ultra Free",
+      "status": "active",
+      "releasedDate": "2026-06-04",
+      "lastUpdated": "2026-06-04",
+      "knowledgeCutoff": "2025-09",
+      "description": "Largest Nemotron 3 model for maximum open-weight reasoning and agent accuracy",
+      "family": "nemotron",
+      "canonicalModelId": "nvidia/nemotron-3-ultra-550b-a55b",
+      "limits": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [],
+      "hostVariants": [],
+      "structuredOutput": null,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": false,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all tiers 0: input, output, cache read, cache write",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "nvidia-trial-terms",
+      "policyNote": "NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "notes": null
+    }
+  ],
+  "drift": {
+    "added": [
+      "opencode/flint-40b-free"
+    ],
+    "removed": [
+      "groq/allam-2-7b",
+      "groq/groq/compound",
+      "groq/groq/compound-mini",
+      "opencode-go/beam-free",
+      "opencode-go/longcat-2.5-preview-free",
+      "opencode-go/minimax-m3.1-flash-free",
+      "opencode/longcat-2.5-preview-free",
+      "opencode/minimax-m3.1-flash-free",
+      "openrouter/cohere/north-mini-code:free",
+      "openrouter/dots-studio/dots-3-note-preview:free",
+      "openrouter/google/gemma-4-26b-a4b-it:free",
+      "openrouter/google/gemma-4-31b-it:free",
+      "openrouter/google/lyria-3-clip-preview",
+      "openrouter/google/lyria-3-pro-preview",
+      "openrouter/liquid/lfm-2.5-2.6b:free",
+      "openrouter/minimax/minimax-m3.1-flash:free",
+      "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+      "openrouter/nvidia/nemotron-3.5-content-safety:free",
+      "openrouter/nvidia/nemotron-3.5-lightning:free",
+      "openrouter/nvidia/nemotron-3.5-super-vl:free",
+      "openrouter/openrouter/auto",
+      "openrouter/openrouter/bodybuilder",
+      "openrouter/openrouter/free",
+      "openrouter/openrouter/fusion",
+      "openrouter/openrouter/pareto-code",
+      "openrouter/poolside/laguna-s-2.1:free",
+      "openrouter/poolside/laguna-xs-2.1:free",
+      "openrouter/thinkingmachines/inkling-small:free",
+      "openrouter/thinkingmachines/inkling:free",
+      "openrouter/xingchen-agi/xing4.0-29b-a4b:free"
+    ],
+    "changed": [
+      {
+        "ref": "opencode/deepseek-v4.1-flash-free",
+        "fields": [
+          "reasoningOptions"
+        ],
+        "detail": "models.dev now lists an effort toggle and effort low, high, max."
+      },
+      {
+        "ref": "opencode/nemotron-3.5-lightning-free",
+        "fields": [
+          "knowledgeCutoff"
+        ],
+        "detail": "changed from null to 2025-09."
+      },
+      {
+        "ref": "opencode/nemotron-3-ultra-free",
+        "fields": [
+          "knowledgeCutoff"
+        ],
+        "detail": "changed from 2026-02 to 2025-09."
+      }
+    ],
+    "endedUpstream": [
+      "opencode/minimax-m3.1-flash-free"
+    ],
+    "documentedFreeNotInCatalog": [
+      "exo-free",
+      "mimo-v2.5-free",
+      "longcat-2.5-preview-free",
+      "ll-alpha-free",
+      "muse-spark-1.3-contributor-free",
+      "jev-1.13-free"
+    ],
+    "jevNote": "jev-1.13-free is a System One endpoint model, not a chat model.",
+    "providersNotConfiguredOnThisDevice": [
+      "opencode-go",
+      "groq",
+      "mistral",
+      "openrouter"
+    ],
+    "removedReasoning": "Removed refs are absent from this device catalog today. Provider omissions are device configuration, not upstream retirements, except opencode/minimax-m3.1-flash-free, which left the Console free list and the Console models table.",
+    "unmeasuredGateways": [
+      {
+        "provider": "omniroute",
+        "name": "OmniRoute local gateway",
+        "endpoint": "http://localhost:20128/v1",
+        "models": 449,
+        "reason": "Host catalog cost arrays are empty. Pricing is not measured, so none of these entries are classified free."
+      }
+    ],
+    "openQuestions": [
+      "Console free model rate limits are not stated in the docs.",
+      "Omniroute gateway pricing and policies are unmeasured.",
+      "Deprecated models are removed on rolling dates; check the Deprecated models table monthly."
+    ]
+  },
+  "sources": [
+    {
+      "type": "docs",
+      "url": "https://opencode.ai/v2/docs/console/models/",
+      "checked": "2026-10-23"
+    },
+    {
+      "type": "docs",
+      "url": "https://opencode.ai/v2/docs/console/go/",
+      "checked": "2026-10-23"
+    },
+    {
+      "type": "docs",
+      "url": "https://opencode.ai/v2/docs/models/",
+      "checked": "2026-10-23"
+    },
+    {
+      "type": "catalog",
+      "url": "https://models.dev/api.json",
+      "checked": "2026-10-23"
+    },
+    {
+      "type": "host",
+      "url": "opencode --version, opencode auth list, opencode debug paths, opencode debug config, opencode debug agents, opencode models",
+      "checked": "2026-10-23"
+    },
+    {
+      "type": "host",
+      "url": "models tool paging all=true limit=100",
+      "checked": "2026-10-23"
+    }
+  ],
+  "validation": {
+    "freeCount": 9,
+    "providerCount": 2,
+    "missingEnrichment": [],
+    "allCostTiersZero": true,
+    "consoleListedFree": 9,
+    "unmeasuredProviders": [
+      "omniroute"
+    ],
+    "reachabilityProbe": {
+      "date": "2026-10-23",
+      "passed": 9,
+      "failed": 0,
+      "method": "opencode run --model <ref> \"Reply with OK only.\""
+    }
+  }
 }
