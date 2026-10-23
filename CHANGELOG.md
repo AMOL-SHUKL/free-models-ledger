@@ -2,6 +2,19 @@
 
 Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed changed`.
 
+## 2026-10-23, ledger: drop flint-40b-free & big-pickle
+
+- Free set 8 -> 7.
+- Purged opencode/big-pickle completely from ledger inventory, cards, and snapshot.
+- flint-40b-free dropped from fallback chains and primary picks; retained for surgical atomic edits.
+- Documented empirical quota thresholds: 100M tokens/day primary, 1.2M tokens/200 tool calls secondary across shared device ID and IP.
+
+## 2026-10-23, ledger: drop deepseek-v4.1-flash-free (PR #3)
+
+- Free set 9 -> 8.
+- Dropped opencode/deepseek-v4.1-flash-free from free model inventory, cards, and routing notes.
+- Updated fallback chain: beam-free, flint-40b-free, glm-5.3-flash-free.
+
 ## 2026-10-23, run 2026-10-23-arch-btw
 
 - First run on arch-btw, Arch Linux ARM64 chroot, OpenCode 2.1.3. +1 -32. Added opencode/flint-40b-free.

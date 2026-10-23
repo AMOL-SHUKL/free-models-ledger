@@ -8,7 +8,7 @@
   "definitions": {
     "freeModel": "Catalog entry whose effective price is zero on every pricing tier: input, output, cache read, cache write.",
     "stableKey": "providerID/modelID",
-    "scope": "Models resolvable by OpenCode on the recording device, plus local zero-cost discovery when present.",
+    "scope": "Models resolvable by OpenCode on the recording device. Big Pickle is excluded by preference. Flint stays listed for small changes only.",
     "evidenceTags": "C host catalog, D models.dev, O OpenCode docs, A auth list, H host probe."
   },
   "device": {
@@ -136,9 +136,9 @@
     "catalogVisibilityNote": "Signed out with no OPENCODE_API_KEY, the catalog exposes the Console free models of the opencode provider. Paid opencode models appear only after connecting."
   },
   "freeTotals": {
-    "count": 8,
+    "count": 7,
     "byProvider": {
-      "opencode": 8
+      "opencode": 7
     }
   },
   "free": [
@@ -223,54 +223,6 @@
         "Venezuela",
         "Crimea, Donetsk and Luhansk regions of Ukraine"
       ],
-      "inConsoleFreeList": true,
-      "notes": null
-    },
-    {
-      "ref": "opencode/big-pickle",
-      "provider": "opencode",
-      "modelId": "big-pickle",
-      "name": "Big Pickle",
-      "status": "active",
-      "releasedDate": "2025-10-17",
-      "lastUpdated": "2025-10-17",
-      "knowledgeCutoff": "2025-01",
-      "description": "Reasoning model for deliberate analysis, multi-step problem solving, and tool use",
-      "family": "big-pickle",
-      "canonicalModelId": null,
-      "limits": {
-        "context": 200000,
-        "input": 160000,
-        "output": 32000
-      },
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "toolCall": true,
-      "reasoning": true,
-      "reasoningOptions": [],
-      "hostVariants": [],
-      "structuredOutput": true,
-      "interleavedField": {
-        "field": "reasoning_content"
-      },
-      "attachment": false,
-      "temperature": true,
-      "openWeights": false,
-      "cost": "all tiers 0: input, output, cache read, cache write",
-      "authEnvVar": "OPENCODE_API_KEY",
-      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
-      "endpointKind": "console",
-      "sdkPackage": "@ai-sdk/openai-compatible",
-      "policyClass": "may-use-during-free-period",
-      "policyNote": "During the free period, collected data may be used to improve the model.",
-      "regionRestricted": false,
-      "regionBlocklist": [],
       "inConsoleFreeList": true,
       "notes": null
     },
@@ -686,7 +638,7 @@
       "mistral",
       "openrouter"
     ],
-    "removedReasoning": "Removed refs are absent from this device catalog today. Provider omissions are device configuration, not upstream retirements, except opencode/minimax-m3.1-flash-free, which left the Console free list and the Console models table.",
+    "removedReasoning": "Big Pickle is excluded by user preference. Flint remains available for small changes but is not part of the curated fallback chain.",
     "unmeasuredGateways": [
       {
         "provider": "omniroute",
@@ -700,6 +652,9 @@
       "Console free model rate limits are not stated in the docs.",
       "Omniroute gateway pricing and policies are unmeasured.",
       "Deprecated models are removed on rolling dates; check the Deprecated models table monthly."
+    ],
+    "curationExcluded": [
+      "opencode/big-pickle"
     ]
   },
   "sources": [
@@ -735,11 +690,11 @@
     }
   ],
   "validation": {
-    "freeCount": 8,
+    "freeCount": 7,
     "providerCount": 2,
     "missingEnrichment": [],
     "allCostTiersZero": true,
-    "consoleListedFree": 8,
+    "consoleListedFree": 7,
     "unmeasuredProviders": [
       "omniroute"
     ],
