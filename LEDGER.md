@@ -2,7 +2,7 @@
 
 Declarative record of every zero-price model reachable from OpenCode on this device. Built for daily regeneration by any agent, on any device. Machine-owned sections sit between AUTO markers and are rewritten from `snapshot.json`. Everything else is stable narrative.
 
-**Snapshot 2026-10-19. Run 2026-10-19-laptop-f7fu0ssn. OpenCode 2.0.32. Catalog 488 models, 5 providers. Free 40.**
+**Snapshot 2026-10-23. Run 2026-10-23-arch-btw. OpenCode 2.1.3. Catalog 458 models, 2 providers. Free 9.**
 
 Sections: 1 Top 3 by category, 2 How to use, 3 Inventory, 4 Cards, 5 Devices, 6 Drift, 7 Privacy, 8 Ranking policy, 9 Provenance, 10 Stats.
 
@@ -15,22 +15,22 @@ Picks are heuristic. They derive from catalog metadata and the routing rules in 
 | Pick | Ref | Why | Call |
 | :--- | :--- | :--- | :--- |
 | 1 | opencode/beam-free | 501B MoE, 23B active. 1M context, 131k output. Coding and agentic focus. Updated 2026-10-16 | `opencode run --model opencode/beam-free#high "task"` |
-| 2 | opencode/minimax-m3.1-flash-free | Frontier multimodal coding model. 1M context, 512k output, image and video input, effort low through max, zero retention. Appeared the day Space Bunny Free retired | `opencode run --model opencode/minimax-m3.1-flash-free#high "task"` |
+| 2 | opencode/flint-40b-free | Newest free route, released 2026-10-21. Open-weight MoE for coding agents. 262k context, 64k output | `opencode run --model opencode/flint-40b-free#high "task"` |
 | 3 | opencode/glm-5.3-flash-free | Efficient coding agent. Image, video, and pdf input. Zero-retention provider | driver for mixed document and code work |
 
-Alternates: opencode/deepseek-v4.1-flash-free, opencode/longcat-2.5-preview-free, openrouter/thinkingmachines/inkling:free.
+Alternates: opencode/deepseek-v4.1-flash-free (image input, effort low, high, max).
 
-Fallback chain when a route throttles: beam-free, minimax-m3.1-flash-free, glm-5.3-flash-free, deepseek-v4.1-flash-free, openrouter/openrouter/free.
+Fallback chain when a route throttles: beam-free, flint-40b-free, glm-5.3-flash-free, deepseek-v4.1-flash-free.
 
 ### 1.2 Long-context analysis, 1M class
 
 | Pick | Ref | Why |
 | :--- | :--- | :--- |
 | 1 | opencode/beam-free | 1M in, 131k out, text |
-| 2 | opencode/minimax-m3.1-flash-free | 1M in, 512k out, image and video |
-| 3 | opencode/longcat-2.5-preview-free | 1M in, 131k out, image input |
+| 2 | opencode/nemotron-3.5-super-vl-free | 1M in, 131k out, image input |
+| 3 | opencode/nemotron-3-ultra-free | 1M in, 128k out, text, reasoning |
 
-Alternates: openrouter/thinkingmachines/inkling:free (1M in, 262k out, audio and image), opencode/glm-5.3-flash-free (200k, document input), openrouter/openrouter/pareto-code (2M in, 200k out, no tools, analysis only).
+Alternates: opencode/glm-5.3-flash-free (200k, document input), opencode/flint-40b-free (262k, coding focus).
 
 ### 1.3 Vision and multimodal
 
@@ -38,9 +38,9 @@ Alternates: openrouter/thinkingmachines/inkling:free (1M in, 262k out, audio and
 | :--- | :--- | :--- |
 | 1 | opencode/nemotron-3.5-super-vl-free | Dedicated vision-language reasoning model, 1M context, image input |
 | 2 | opencode/glm-5.3-flash-free | Image, video, and pdf input |
-| 3 | opencode/minimax-m3.1-flash-free | Image and video input, 1M context, 512k output, coding focus |
+| 3 | opencode/mimo-v2.6-flash-free | Image, audio, and video input |
 
-Alternates: opencode/mimo-v2.6-flash-free (audio and video input), opencode/longcat-2.5-preview-free (image), openrouter/google/gemma-4-31b-it:free and gemma-4-26b-a4b-it:free (image and video), openrouter/dots-studio/dots-3-note-preview:free (512k in, 460k out), opencode/deepseek-v4.1-flash-free (image).
+Alternates: opencode/deepseek-v4.1-flash-free (image input).
 
 ### 1.4 Fast bulk execution and subagents
 
@@ -48,29 +48,29 @@ Alternates: opencode/mimo-v2.6-flash-free (audio and video input), opencode/long
 | :--- | :--- | :--- |
 | 1 | opencode/deepseek-v4.1-flash-free | Flash class, 200k context, 32k out, effort low, high, max |
 | 2 | opencode/mimo-v2.6-flash-free | Flash class, 200k, multimodal input |
-| 3 | opencode/minimax-m3.1-flash-free#low | 1M in, 512k out, when bulk work needs long context |
+| 3 | opencode/flint-40b-free | Flash class, 262k in, 64k out, MoE with 2.5B active parameters |
 
-Alternates: groq/groq/compound-mini (131k in, 8k out, no tools, text extraction only), openrouter/liquid/lfm-2.5-2.6b:free (65k), opencode/glm-5.3-flash-free (200k, document input).
+Alternates: opencode/glm-5.3-flash-free (200k, document input).
 
 ### 1.5 Deliberate reasoning and review
 
 | Pick | Ref | Why |
 | :--- | :--- | :--- |
 | 1 | opencode/beam-free#max | Full effort budget on the largest first-party route |
-| 2 | openrouter/thinkingmachines/inkling:free#max | Different family for adversarial second opinions, 1M in, 262k out, six effort levels |
-| 3 | opencode/minimax-m3.1-flash-free#max | Different family, 1M in, 512k output, effort low to max |
+| 2 | opencode/deepseek-v4.1-flash-free#max | Different family, effort low to max |
+| 3 | opencode/big-pickle | Stealth reasoning model for deliberate analysis |
 
-Alternates: opencode/big-pickle (stealth reasoning), opencode/deepseek-v4.1-flash-free#max (different family), opencode/longcat-2.5-preview-free (1M, reasoning toggle).
+Alternates: opencode/nemotron-3-ultra-free (1M context, open weights), opencode/nemotron-3.5-super-vl-free (1M, reasoning effort none to xhigh).
 
 ### 1.6 Specialists and narrow utility
 
 | Pick | Ref | Why |
 | :--- | :--- | :--- |
-| 1 | openrouter/nvidia/nemotron-3.5-content-safety:free | Content safety classifier, image input, no tools. Pre and post filtering of agent traffic |
-| 2 | openrouter/google/lyria-3-pro-preview | Audio generation. lyria-3-clip-preview for short clips |
-| 3 | openrouter/openrouter/free | Free Models Router for emergency fallback when every named route throttles |
+| 1 | opencode/glm-5.3-flash-free | Only free route here with pdf input |
+| 2 | opencode/mimo-v2.6-flash-free | Only free route here with audio input |
+| 3 | opencode/big-pickle | Stealth model, weights closed, the only such free route |
 
-Also on record with limits: openrouter/openrouter/pareto-code (2M context router, no tools), openrouter/openrouter/fusion (1M, no tools), openrouter/openrouter/auto (router, text and image output), openrouter/openrouter/bodybuilder (beta), groq/groq/compound (131k, no tools), groq/allam-2-7b (Arabic, 4k context), openrouter/cohere/north-mini-code:free (256k, code), openrouter/poolside/laguna-s-2.1:free and laguna-xs-2.1:free (262k, code), openrouter/xingchen-agi/xing4.0-29b-a4b:free (MoE).
+No router, classifier, or audio generation routes exist on this device today.
 
 ## 2. How to use free models in OpenCode
 
@@ -80,10 +80,11 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 - Agent model: `"agents": { "reviewer": { "model": "opencode/glm-5.3-flash-free" } }`. Expanded form accepts providerID, model, and variant. A subagent without its own model inherits the parent session model.
 - Command model: `"commands": { "audit": { "template": "Audit $ARGUMENTS.", "model": "opencode/beam-free#high" } }`.
 - Variants: append `#name`. Names come from the catalog, listed per model in sections 3 and 4. Unknown variants fail model resolution. Custom variants can be added with a `variants` array on a provider model entry; reasoning controls can be declared with `capabilities.reasoning`.
-- Auth: first-party free routes use `OPENCODE_API_KEY` through OpenCode Console or Go. `GROQ_API_KEY` for Groq, `OPENROUTER_API_KEY` for OpenRouter. `/connect` is the TUI path.
+- Auth: first-party free routes use `OPENCODE_API_KEY` through OpenCode Console. `/connect` is the TUI path. Signed out, the paid `opencode` models stay hidden and the free set stays visible.
+- Omniroute gateway: this device also runs a local provider on `http://localhost:20128/v1` with 449 models. Its prices are unmeasured, so treat it as unknown cost.
 - Local zero-cost: OpenCode auto-discovers Ollama, LM Studio, and vLLM on default local addresses. None were listening on this device at collection time.
-- Direct HTTP for apps: Console free chat route `https://opencode.ai/inference/openai/v1/chat/completions`, Go `https://opencode.ai/inference/go/openai/v1/chat/completions`. Model lists: `https://opencode.ai/inference/v1/models` and `https://opencode.ai/inference/go/v1/models`.
-- Go clients should send a stable session id in `x-opencode-session`. OpenCode does this natively.
+- Direct HTTP for apps: Console free chat route `https://opencode.ai/inference/openai/v1/chat/completions`. Model list: `https://opencode.ai/inference/v1/models`.
+- Go endpoints exist but are not configured on this device. Go clients should send a stable session id in `x-opencode-session`. OpenCode does this natively.
 
 ## 3. Inventory
 
@@ -93,43 +94,12 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 | opencode/beam-free | 1,048,576 | 131,072 | text | yes | low, medium, high, xhigh, max | 2026-10-05 | retained-30-days | reflection/beam-1.0-501b-a23b |
 | opencode/big-pickle | 200,000 | 32,000 | text | yes | - | 2025-10-17 | may-use-during-free-period | - |
 | opencode/deepseek-v4.1-flash-free | 200,000 | 32,000 | text, image | yes | low, high, max | 2026-09-10 | zero-retention | deepseek/deepseek-v4.1-flash |
+| opencode/flint-40b-free | 262,144 | 65,536 | text | yes | low, medium, high, xhigh, max | 2026-10-21 | may-use-during-free-period | recursive/flint |
 | opencode/glm-5.3-flash-free | 200,000 | 32,000 | text, image, video, pdf | yes | low, high, max | 2026-08-26 | zero-retention | zhipuai/glm-5.3-flash |
-| opencode/longcat-2.5-preview-free | 1,000,000 | 131,072 | text, image | yes | - | 2026-09-25 | zero-retention | meituan/longcat-2.5-preview |
 | opencode/mimo-v2.6-flash-free | 200,000 | 32,000 | text, image, audio, video | yes | - | 2026-09-22 | may-use-during-free-period | xiaomi/mimo-v2.6-flash |
-| opencode/minimax-m3.1-flash-free | 1,000,000 | 512,000 | text, image, video | yes | low, medium, high, xhigh, max | 2026-10-19 | zero-retention | minimax/MiniMax-M3.1-Flash |
 | opencode/nemotron-3.5-lightning-free | 262,144 | 262,144 | text | yes | - | 2026-08-11 | nvidia-trial-terms | nvidia/nemotron-3.5-lightning |
 | opencode/nemotron-3.5-super-vl-free | 1,048,576 | 131,072 | text, image | yes | none, minimal, low, medium, high, xhigh | 2026-10-15 | nvidia-trial-terms | nvidia/nemotron-3.5-super-vl-120b-a12b |
 | opencode/nemotron-3-ultra-free | 1,000,000 | 128,000 | text | yes | - | 2026-06-04 | nvidia-trial-terms | nvidia/nemotron-3-ultra-550b-a55b |
-| opencode-go/beam-free | 1,048,576 | 131,072 | text | yes | low, medium, high, xhigh, max | 2026-10-05 | retained-30-days | reflection/beam-1.0-501b-a23b |
-| opencode-go/longcat-2.5-preview-free | 1,000,000 | 131,072 | text, image | yes | - | 2026-09-25 | zero-retention | meituan/longcat-2.5-preview |
-| opencode-go/minimax-m3.1-flash-free | 1,000,000 | 512,000 | text, image, video | yes | low, medium, high, xhigh, max | 2026-10-19 | zero-retention | minimax/MiniMax-M3.1-Flash |
-| openrouter/cohere/north-mini-code:free | 256,000 | 64,000 | text | yes | none, thinking | 2026-06-17 | upstream-unverified | - |
-| openrouter/dots-studio/dots-3-note-preview:free | 512,000 | 460,800 | text, image | yes | none, thinking | 2026-08-14 | upstream-unverified | - |
-| openrouter/google/gemma-4-26b-a4b-it:free | 262,144 | 32,768 | image, text, video | yes | none, thinking | 2026-04-02 | upstream-unverified | google/gemma-4-26b-a4b-it |
-| openrouter/google/gemma-4-31b-it:free | 262,144 | 32,768 | image, text, video | yes | none, thinking | 2026-04-02 | upstream-unverified | google/gemma-4-31b-it |
-| openrouter/google/lyria-3-clip-preview | 1,048,576 | 65,536 | text, image | no | - | 2026-03-25 | upstream-unverified | google/lyria-3-clip-preview |
-| openrouter/google/lyria-3-pro-preview | 1,048,576 | 65,536 | text, image | no | - | 2026-03-25 | upstream-unverified | google/lyria-3-pro-preview |
-| openrouter/liquid/lfm-2.5-2.6b:free | 65,536 | 8,192 | text | yes | - | 2026-08-11 | upstream-unverified | - |
-| openrouter/minimax/minimax-m3.1-flash:free | 1,000,000 | 524,288 | text, image, video | yes | low, medium, high, xhigh, max | 2026-10-19 | upstream-unverified | minimax/MiniMax-M3.1-Flash |
-| openrouter/nvidia/nemotron-3.5-content-safety:free | 128,000 | 8,192 | text, image | no | none, thinking | 2026-06-04 | upstream-unverified | nvidia/nemotron-3.5-content-safety |
-| openrouter/nvidia/nemotron-3.5-lightning:free | 1,000,000 | 65,536 | text | yes | none, thinking | 2026-08-11 | upstream-unverified | nvidia/nemotron-3.5-lightning |
-| openrouter/nvidia/nemotron-3.5-super-vl:free | 1,000,000 | 131,072 | text, image, video | yes | none, thinking | 2026-10-15 | upstream-unverified | - |
-| openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free | 256,000 | 65,536 | text, image, video, audio | yes | none, high, max | 2026-04-28 | upstream-unverified | nvidia/nemotron-3-nano-omni-30b-a3b-reasoning |
-| openrouter/nvidia/nemotron-3-super-120b-a12b:free | 262,144 | 235,929 | text | yes | none, low, medium | 2026-03-11 | upstream-unverified | nvidia/nemotron-3-super-120b-a12b |
-| openrouter/nvidia/nemotron-3-ultra-550b-a55b:free | 1,000,000 | 65,536 | text | yes | none, medium, high | 2026-06-04 | upstream-unverified | nvidia/nemotron-3-ultra-550b-a55b |
-| openrouter/openrouter/auto | 2,000,000 | 2,000,000 | text, image, audio, pdf, video | yes | - | 2023-11-08 | upstream-unverified | - |
-| openrouter/openrouter/bodybuilder | 128,000 | 128,000 | text | no | - | 2025-12-05 | upstream-unverified | - |
-| openrouter/openrouter/free | 200,000 | 8,000 | text, image | yes | - | 2026-02-01 | upstream-unverified | - |
-| openrouter/openrouter/fusion | 1,000,000 | 128,000 | text | no | - | 2026-06-13 | upstream-unverified | - |
-| openrouter/openrouter/pareto-code | 2,000,000 | 200,000 | text | no | - | 2026-04-21 | upstream-unverified | - |
-| openrouter/poolside/laguna-s-2.1:free | 262,144 | 32,768 | text | yes | none, thinking | 2026-07-21 | upstream-unverified | - |
-| openrouter/poolside/laguna-xs-2.1:free | 262,144 | 32,768 | text | yes | none, thinking | 2026-07-02 | upstream-unverified | poolside/laguna-xs-2.1 |
-| openrouter/thinkingmachines/inkling:free | 1,048,576 | 262,144 | text, image, audio | yes | none, minimal, low, medium, high, max | 2026-07-15 | upstream-unverified | thinkingmachines/inkling |
-| openrouter/thinkingmachines/inkling-small:free | 1,048,576 | 262,144 | text, image, audio | yes | none, minimal, low, medium, high, max | 2026-07-30 | upstream-unverified | thinkingmachines/inkling-small |
-| openrouter/xingchen-agi/xing4.0-29b-a4b:free | 262,144 | 235,929 | text | yes | none, thinking | 2026-10-16 | upstream-unverified | - |
-| groq/allam-2-7b | 4,096 | 4,096 | text | no | - | 2025-01-23 | upstream-unverified | sdaia/allam-2-7b |
-| groq/groq/compound | 131,072 | 8,192 | text | no | - | 2025-09-04 | upstream-unverified | - |
-| groq/groq/compound-mini | 131,072 | 8,192 | text | no | - | 2025-09-04 | upstream-unverified | - |
 <!-- END AUTO:inventory -->
 
 ## 4. Model cards
@@ -163,11 +133,22 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 - Description: DeepSeek V4.1 Flash model for reasoning and agentic coding
 - Context: 200,000 in, 32,000 out.
 - Modalities: input text, image. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: effort low, high, max. Host variants: low, high, max.
+- Tools: yes. Reasoning: yes. Reasoning options: none toggle; effort low, high, max. Host variants: low, high, max.
 - Structured output: yes. Temperature: yes. Attachment: yes. Open weights: yes. Interleaved field: reasoning_content.
 - Family: deepseek-flash. Canonical: deepseek/deepseek-v4.1-flash. In Console free list: yes.
 - Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
 - Policy: zero-retention. Prompts and responses are not used for training. Console states a zero-retention policy for these routes.
+
+### opencode/flint-40b-free
+- Name: Flint 40B Free. Status: active. Released: 2026-10-21. Last updated: 2026-10-21. Knowledge cutoff: 2026-06.
+- Description: Open-weight mixture-of-experts model with about 2.5B active parameters for local coding agents
+- Context: 262,144 in, 65,536 out.
+- Modalities: input text. output text.
+- Tools: yes. Reasoning: yes. Reasoning options: effort low, medium, high, xhigh, max. Host variants: low, medium, high, xhigh, max.
+- Structured output: yes. Temperature: yes. Attachment: no. Open weights: yes. Interleaved field: reasoning_content.
+- Family: flint. Canonical: recursive/flint. In Console free list: yes.
+- Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
+- Policy: may-use-during-free-period. During the free period, collected data may be used to improve the model. Data is retained for 30 days.
 
 ### opencode/glm-5.3-flash-free
 - Name: GLM-5.3-Flash Free. Status: active. Released: 2026-08-26. Last updated: 2026-08-26. Knowledge cutoff: -.
@@ -177,17 +158,6 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 - Tools: yes. Reasoning: yes. Reasoning options: effort low, high, max. Host variants: low, high, max.
 - Structured output: yes. Temperature: yes. Attachment: yes. Open weights: yes. Interleaved field: reasoning_content.
 - Family: glm-flash. Canonical: zhipuai/glm-5.3-flash. In Console free list: yes.
-- Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
-- Policy: zero-retention. Prompts and responses are not used for training. Console states a zero-retention policy for these routes.
-
-### opencode/longcat-2.5-preview-free
-- Name: LongCat 2.5 Preview Free. Status: active. Released: 2026-09-25. Last updated: 2026-09-25. Knowledge cutoff: -.
-- Description: Meituan's multimodal reasoning model for coding and agent tasks, with image understanding and a 1M-token context window
-- Context: 1,000,000 in, 131,072 out.
-- Modalities: input text, image. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: toggle. Host variants: -.
-- Structured output: -. Temperature: yes. Attachment: yes. Open weights: no. Interleaved field: reasoning_content.
-- Family: longcat. Canonical: meituan/longcat-2.5-preview. In Console free list: yes.
 - Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
 - Policy: zero-retention. Prompts and responses are not used for training. Console states a zero-retention policy for these routes.
 
@@ -202,29 +172,16 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 - Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
 - Policy: may-use-during-free-period. During the free period, collected data may be used to improve the model.
 
-### opencode/minimax-m3.1-flash-free
-- Name: MiniMax M3.1 Flash Free. Status: active. Released: 2026-10-19. Last updated: 2026-10-19. Knowledge cutoff: -.
-- Description: Frontier multimodal coding model with 1M context window and tunable thinking depth
-- Context: 1,000,000 in, 512,000 out.
-- Modalities: input text, image, video. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: effort low, medium, high, xhigh, max. Host variants: low, medium, high, xhigh, max.
-- Structured output: -. Temperature: no. Attachment: yes. Open weights: yes. Interleaved field: reasoning_content.
-- Family: minimax. Canonical: minimax/MiniMax-M3.1-Flash. In Console free list: yes.
-- Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
-- Policy: zero-retention. Prompts and responses are not used for training. Console states a zero-retention policy for these routes.
-- Notes: Revealed as the model behind Space Bunny. Space Bunny Free retired on 2026-10-19, the same day this route appeared. Reported reveal, not stated in the docs. Zero retention verified in Console docs.
-
 ### opencode/nemotron-3.5-lightning-free
-- Name: Nemotron 3.5 Lightning Free. Status: active. Released: 2026-08-11. Last updated: 2026-08-11. Knowledge cutoff: -.
+- Name: Nemotron 3.5 Lightning Free. Status: active. Released: 2026-08-11. Last updated: 2026-08-11. Knowledge cutoff: 2025-09.
 - Description: Fast NVIDIA Nemotron MoE for reliable agentic tasks across enterprise workloads
 - Context: 262,144 in, 262,144 out.
 - Modalities: input text. output text.
 - Tools: yes. Reasoning: yes. Reasoning options: -. Host variants: -.
 - Structured output: yes. Temperature: yes. Attachment: no. Open weights: yes. Interleaved field: reasoning_content.
-- Family: nemotron-free. Canonical: nvidia/nemotron-3.5-lightning. In Console free list: yes.
+- Family: nemotron. Canonical: nvidia/nemotron-3.5-lightning. In Console free list: yes.
 - Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
 - Policy: nvidia-trial-terms. NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.
-- Notes: Deprioritised by user preference on 2026-10-19. Quality ranks below other free routes. Do not use for picks.
 
 ### opencode/nemotron-3.5-super-vl-free
 - Name: Nemotron 3.5 Super VL Free. Status: active. Released: 2026-10-15. Last updated: 2026-10-15. Knowledge cutoff: -.
@@ -233,461 +190,89 @@ Also on record with limits: openrouter/openrouter/pareto-code (2M context router
 - Modalities: input text, image. output text.
 - Tools: yes. Reasoning: yes. Reasoning options: effort none, minimal, low, medium, high, xhigh. Host variants: none, minimal, low, medium, high, xhigh.
 - Structured output: -. Temperature: yes. Attachment: yes. Open weights: yes. Interleaved field: reasoning_content.
-- Family: nemotron-free. Canonical: nvidia/nemotron-3.5-super-vl-120b-a12b. In Console free list: yes.
+- Family: nemotron. Canonical: nvidia/nemotron-3.5-super-vl-120b-a12b. In Console free list: yes.
 - Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
 - Policy: nvidia-trial-terms. NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.
 
 ### opencode/nemotron-3-ultra-free
-- Name: Nemotron 3 Ultra Free. Status: active. Released: 2026-06-04. Last updated: 2026-06-04. Knowledge cutoff: 2026-02.
+- Name: Nemotron 3 Ultra Free. Status: active. Released: 2026-06-04. Last updated: 2026-06-04. Knowledge cutoff: 2025-09.
 - Description: Largest Nemotron 3 model for maximum open-weight reasoning and agent accuracy
 - Context: 1,000,000 in, 128,000 out.
 - Modalities: input text. output text.
 - Tools: yes. Reasoning: yes. Reasoning options: -. Host variants: -.
 - Structured output: -. Temperature: yes. Attachment: no. Open weights: yes. Interleaved field: reasoning_content.
-- Family: nemotron-free. Canonical: nvidia/nemotron-3-ultra-550b-a55b. In Console free list: yes.
+- Family: nemotron. Canonical: nvidia/nemotron-3-ultra-550b-a55b. In Console free list: yes.
 - Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/openai/v1/chat/completions (console). SDK: @ai-sdk/openai-compatible.
 - Policy: nvidia-trial-terms. NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.
-- Notes: Deprioritised by user preference on 2026-10-19. Quality ranks below other free routes. Do not use for picks.
-
-### opencode-go/beam-free
-- Name: Beam Free. Status: active. Released: 2026-10-05. Last updated: 2026-10-16. Knowledge cutoff: 2026-06-30.
-- Description: Sparse mixture-of-experts reasoning model with 23B active parameters for coding and agentic workflows
-- Context: 1,048,576 in, 131,072 out.
-- Modalities: input text. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: effort low, medium, high, xhigh, max. Host variants: low, medium, high, xhigh, max.
-- Structured output: yes. Temperature: yes. Attachment: no. Open weights: yes. Interleaved field: reasoning_content.
-- Family: beam. Canonical: reflection/beam-1.0-501b-a23b. In Console free list: yes.
-- Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/go/openai/v1/chat/completions (go). SDK: @ai-sdk/openai-compatible.
-- Policy: retained-30-days. Not used for training. Data is retained for 30 days for safety reasons.
-- Region restriction: yes. Angola, Belarus, Cambodia, China including Hong Kong and Macau, Cuba, Democratic Republic of the Congo, Equatorial Guinea, Iran, Iraq, Laos, Libya, Nigeria, North Korea, Russia, Syria, Turkmenistan, Uzbekistan, Venezuela, Crimea, Donetsk and Luhansk regions of Ukraine.
-- Notes: OpenCode Go route mirror of opencode/beam-free. Free models keep working after Go usage limits..
-
-### opencode-go/longcat-2.5-preview-free
-- Name: LongCat 2.5 Preview Free. Status: active. Released: 2026-09-25. Last updated: 2026-09-25. Knowledge cutoff: -.
-- Description: Meituan's multimodal reasoning model for coding and agent tasks, with image understanding and a 1M-token context window
-- Context: 1,000,000 in, 131,072 out.
-- Modalities: input text, image. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: toggle. Host variants: -.
-- Structured output: -. Temperature: yes. Attachment: yes. Open weights: no. Interleaved field: reasoning_content.
-- Family: longcat. Canonical: meituan/longcat-2.5-preview. In Console free list: yes.
-- Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/go/openai/v1/chat/completions (go). SDK: @ai-sdk/openai-compatible.
-- Policy: zero-retention. Prompts and responses are not used for training. Console states a zero-retention policy for these routes.
-- Notes: OpenCode Go route mirror of opencode/longcat-2.5-preview-free. Listed as limited time in Go..
-
-### opencode-go/minimax-m3.1-flash-free
-- Name: MiniMax M3.1 Flash Free. Status: active. Released: 2026-10-19. Last updated: 2026-10-19. Knowledge cutoff: -.
-- Description: Frontier multimodal coding model with 1M context window and tunable thinking depth
-- Context: 1,000,000 in, 512,000 out.
-- Modalities: input text, image, video. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: effort low, medium, high, xhigh, max. Host variants: low, medium, high, xhigh, max.
-- Structured output: -. Temperature: no. Attachment: yes. Open weights: yes. Interleaved field: reasoning_content.
-- Family: minimax. Canonical: minimax/MiniMax-M3.1-Flash. In Console free list: yes.
-- Auth: OPENCODE_API_KEY. Endpoint: https://opencode.ai/inference/go/openai/v1/chat/completions (go). SDK: @ai-sdk/openai-compatible.
-- Policy: zero-retention. Prompts and responses are not used for training. Console states a zero-retention policy for these routes.
-- Notes: OpenCode Go route. Free and unlimited while the Go plan is active, limited time. Go privacy table: not used for training, 0 days retention..
-
-### openrouter/cohere/north-mini-code:free
-- Name: North Mini Code (free). Status: active. Released: 2026-06-17. Last updated: 2026-06-17. Knowledge cutoff: -.
-- Description: Cohere coding model for practical software engineering and agentic edits
-- Context: 256,000 in, 64,000 out.
-- Modalities: input text. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: toggle. Host variants: none, thinking.
-- Structured output: no. Temperature: yes. Attachment: no. Open weights: yes. Interleaved field: -.
-- Family: north. Canonical: -. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: OpenRouter free route. Rate limits depend on the OpenRouter account..
-
-### openrouter/dots-studio/dots-3-note-preview:free
-- Name: Dots3-Note Preview (free). Status: active. Released: 2026-08-14. Last updated: 2026-08-14. Knowledge cutoff: -.
-- Description: Multimodal reasoning model for visual analysis, planning, and tool use
-- Context: 512,000 in, 460,800 out.
-- Modalities: input text, image. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: toggle. Host variants: none, thinking.
-- Structured output: yes. Temperature: yes. Attachment: yes. Open weights: no. Interleaved field: -.
-- Family: -. Canonical: -. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: OpenRouter free route. Rate limits depend on the OpenRouter account..
-
-### openrouter/google/gemma-4-26b-a4b-it:free
-- Name: Gemma 4 26B A4B  (free). Status: active. Released: 2026-04-02. Last updated: 2026-04-02. Knowledge cutoff: -.
-- Description: Open Gemma instruction model for efficient chat and self-hosted deployments
-- Context: 262,144 in, 32,768 out.
-- Modalities: input image, text, video. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: toggle. Host variants: none, thinking.
-- Structured output: no. Temperature: yes. Attachment: yes. Open weights: yes. Interleaved field: -.
-- Family: gemma. Canonical: google/gemma-4-26b-a4b-it. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: OpenRouter free route. Rate limits depend on the OpenRouter account..
-
-### openrouter/google/gemma-4-31b-it:free
-- Name: Gemma 4 31B (free). Status: active. Released: 2026-04-02. Last updated: 2026-04-02. Knowledge cutoff: -.
-- Description: Largest Gemma 4 instruction model for open, self-hosted chat and reasoning
-- Context: 262,144 in, 32,768 out.
-- Modalities: input image, text, video. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: toggle. Host variants: none, thinking.
-- Structured output: no. Temperature: yes. Attachment: yes. Open weights: yes. Interleaved field: -.
-- Family: gemma. Canonical: google/gemma-4-31b-it. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: OpenRouter free route. Rate limits depend on the OpenRouter account..
-
-### openrouter/google/lyria-3-clip-preview
-- Name: Lyria 3 Clip Preview. Status: active. Released: 2026-03-25. Last updated: 2026-03-25. Knowledge cutoff: -.
-- Description: Speech generation model for controllable voice, narration, and audio delivery
-- Context: 1,048,576 in, 65,536 out.
-- Modalities: input text, image. output text, audio.
-- Tools: no. Reasoning: no. Reasoning options: -. Host variants: -.
-- Structured output: no. Temperature: yes. Attachment: yes. Open weights: no. Interleaved field: -.
-- Family: lyria. Canonical: google/lyria-3-clip-preview. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: Audio generation, short clips..
-
-### openrouter/google/lyria-3-pro-preview
-- Name: Lyria 3 Pro Preview. Status: active. Released: 2026-03-25. Last updated: 2026-03-25. Knowledge cutoff: -.
-- Description: Speech generation model for controllable voice, narration, and audio delivery
-- Context: 1,048,576 in, 65,536 out.
-- Modalities: input text, image. output text, audio.
-- Tools: no. Reasoning: no. Reasoning options: -. Host variants: -.
-- Structured output: no. Temperature: yes. Attachment: yes. Open weights: no. Interleaved field: -.
-- Family: lyria. Canonical: google/lyria-3-pro-preview. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: Audio generation..
-
-### openrouter/liquid/lfm-2.5-2.6b:free
-- Name: LFM2.5-2.6B (free). Status: active. Released: 2026-08-11. Last updated: 2026-08-11. Knowledge cutoff: -.
-- Description: Free provider route for experiments, demos, and cost-sensitive chat workloads
-- Context: 65,536 in, 8,192 out.
-- Modalities: input text. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: -. Host variants: -.
-- Structured output: yes. Temperature: yes. Attachment: no. Open weights: yes. Interleaved field: -.
-- Family: liquid. Canonical: -. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: OpenRouter free route. Rate limits depend on the OpenRouter account..
-
-### openrouter/minimax/minimax-m3.1-flash:free
-- Name: MiniMax M3.1 Flash (free). Status: active. Released: 2026-10-19. Last updated: 2026-10-19. Knowledge cutoff: -.
-- Description: MiniMax multimodal coding model for long-context reasoning and agent tasks
-- Context: 1,000,000 in, 524,288 out.
-- Modalities: input text, image, video. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: effort low, medium, high, xhigh, max. Host variants: low, medium, high, xhigh, max.
-- Structured output: no. Temperature: yes. Attachment: yes. Open weights: yes. Interleaved field: -.
-- Family: minimax. Canonical: minimax/MiniMax-M3.1-Flash. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: Upstream OpenRouter free route of MiniMax M3.1 Flash. Limits depend on the account..
-
-### openrouter/nvidia/nemotron-3.5-content-safety:free
-- Name: Nemotron 3.5 Content Safety (free). Status: active. Released: 2026-06-04. Last updated: 2026-06-04. Knowledge cutoff: -.
-- Description: Safety model for policy screening, moderation, and risk-aware routing workflows
-- Context: 128,000 in, 8,192 out.
-- Modalities: input text, image. output text.
-- Tools: no. Reasoning: yes. Reasoning options: toggle. Host variants: none, thinking.
-- Structured output: no. Temperature: yes. Attachment: yes. Open weights: yes. Interleaved field: -.
-- Family: nemotron. Canonical: nvidia/nemotron-3.5-content-safety. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: Content safety classifier..
-
-### openrouter/nvidia/nemotron-3.5-lightning:free
-- Name: Nemotron 3.5 Lightning (free). Status: active. Released: 2026-08-11. Last updated: 2026-08-11. Knowledge cutoff: -.
-- Description: Nemotron model for efficient reasoning, coding, and specialized AI agents
-- Context: 1,000,000 in, 65,536 out.
-- Modalities: input text. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: toggle. Host variants: none, thinking.
-- Structured output: no. Temperature: yes. Attachment: no. Open weights: yes. Interleaved field: -.
-- Family: nemotron. Canonical: nvidia/nemotron-3.5-lightning. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: OpenRouter free route. Rate limits depend on the OpenRouter account..
-
-### openrouter/nvidia/nemotron-3.5-super-vl:free
-- Name: Nemotron 3.5 Super VL (free). Status: active. Released: 2026-10-15. Last updated: 2026-10-15. Knowledge cutoff: -.
-- Description: Nemotron multimodal model for visual reasoning and agentic AI workflows
-- Context: 1,000,000 in, 131,072 out.
-- Modalities: input text, image, video. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: toggle. Host variants: none, thinking.
-- Structured output: yes. Temperature: yes. Attachment: yes. Open weights: yes. Interleaved field: -.
-- Family: nemotron. Canonical: -. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: OpenRouter free route. Rate limits depend on the OpenRouter account..
-
-### openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free
-- Name: Nemotron 3 Nano Omni (free). Status: active. Released: 2026-04-28. Last updated: 2026-04-28. Knowledge cutoff: -.
-- Description: Open Nemotron omni model combining reasoning with text, vision, and audio
-- Context: 256,000 in, 65,536 out.
-- Modalities: input text, image, video, audio. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: toggle; budget_tokens. Host variants: none, high, max.
-- Structured output: no. Temperature: yes. Attachment: yes. Open weights: yes. Interleaved field: -.
-- Family: nemotron. Canonical: nvidia/nemotron-3-nano-omni-30b-a3b-reasoning. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: Small omni model, audio and video input..
-
-### openrouter/nvidia/nemotron-3-super-120b-a12b:free
-- Name: Nemotron 3 Super (free). Status: active. Released: 2026-03-11. Last updated: 2026-03-11. Knowledge cutoff: -.
-- Description: Nemotron middle tier for collaborative agents and high-volume reasoning workloads
-- Context: 262,144 in, 235,929 out.
-- Modalities: input text. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: effort none, low, medium; budget_tokens. Host variants: none, low, medium.
-- Structured output: yes. Temperature: yes. Attachment: no. Open weights: yes. Interleaved field: -.
-- Family: nemotron. Canonical: nvidia/nemotron-3-super-120b-a12b. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: OpenRouter free route. Rate limits depend on the OpenRouter account..
-
-### openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
-- Name: Nemotron 3 Ultra (free). Status: active. Released: 2026-06-04. Last updated: 2026-06-04. Knowledge cutoff: -.
-- Description: Largest Nemotron 3 model for maximum open-weight reasoning and agent accuracy
-- Context: 1,000,000 in, 65,536 out.
-- Modalities: input text. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: effort none, medium, high; budget_tokens. Host variants: none, medium, high.
-- Structured output: no. Temperature: yes. Attachment: no. Open weights: yes. Interleaved field: -.
-- Family: nemotron. Canonical: nvidia/nemotron-3-ultra-550b-a55b. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: OpenRouter free route. Rate limits depend on the OpenRouter account..
-
-### openrouter/openrouter/auto
-- Name: Auto Router. Status: active. Released: 2023-11-08. Last updated: 2023-11-08. Knowledge cutoff: -.
-- Description: Image model for prompt-driven generation, editing, and visual design workflows
-- Context: 2,000,000 in, 2,000,000 out.
-- Modalities: input text, image, audio, pdf, video. output text, image.
-- Tools: yes. Reasoning: yes. Reasoning options: -. Host variants: -.
-- Structured output: yes. Temperature: yes. Attachment: yes. Open weights: no. Interleaved field: -.
-- Family: auto. Canonical: -. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: General router; catalog lists text and image output modalities..
-
-### openrouter/openrouter/bodybuilder
-- Name: Body Builder (beta). Status: active. Released: 2025-12-05. Last updated: 2025-12-05. Knowledge cutoff: -.
-- Description: Preview model for early access evaluation, prototyping, and compatibility testing
-- Context: 128,000 in, 128,000 out.
-- Modalities: input text. output text.
-- Tools: no. Reasoning: no. Reasoning options: -. Host variants: -.
-- Structured output: no. Temperature: no. Attachment: no. Open weights: no. Interleaved field: -.
-- Family: -. Canonical: -. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: Beta..
-
-### openrouter/openrouter/free
-- Name: Free Models Router. Status: active. Released: 2026-02-01. Last updated: 2026-02-01. Knowledge cutoff: -.
-- Description: Multimodal reasoning model for visual analysis, planning, and tool use
-- Context: 200,000 in, 8,000 out.
-- Modalities: input text, image. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: -. Host variants: -.
-- Structured output: yes. Temperature: yes. Attachment: yes. Open weights: no. Interleaved field: -.
-- Family: -. Canonical: -. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: Router that selects among free models..
-
-### openrouter/openrouter/fusion
-- Name: Fusion. Status: active. Released: 2026-06-13. Last updated: 2026-06-13. Knowledge cutoff: -.
-- Description: General-purpose chat model for instruction following, writing, and analysis
-- Context: 1,000,000 in, 128,000 out.
-- Modalities: input text. output text.
-- Tools: no. Reasoning: no. Reasoning options: -. Host variants: -.
-- Structured output: no. Temperature: no. Attachment: no. Open weights: no. Interleaved field: -.
-- Family: -. Canonical: -. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: Chat model..
-
-### openrouter/openrouter/pareto-code
-- Name: Pareto Code Router. Status: active. Released: 2026-04-21. Last updated: 2026-04-21. Knowledge cutoff: -.
-- Description: Coding model for repository understanding, refactors, and agentic engineering tasks
-- Context: 2,000,000 in, 200,000 out.
-- Modalities: input text. output text.
-- Tools: no. Reasoning: no. Reasoning options: -. Host variants: -.
-- Structured output: no. Temperature: no. Attachment: no. Open weights: no. Interleaved field: -.
-- Family: -. Canonical: -. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: Code router; large-context fallback..
-
-### openrouter/poolside/laguna-s-2.1:free
-- Name: Laguna S 2.1 (free). Status: active. Released: 2026-07-21. Last updated: 2026-07-21. Knowledge cutoff: -.
-- Description: Free provider route for experiments, demos, and cost-sensitive chat workloads
-- Context: 262,144 in, 32,768 out.
-- Modalities: input text. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: toggle. Host variants: none, thinking.
-- Structured output: no. Temperature: yes. Attachment: no. Open weights: yes. Interleaved field: -.
-- Family: laguna-s. Canonical: -. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: OpenRouter free route. Rate limits depend on the OpenRouter account..
-
-### openrouter/poolside/laguna-xs-2.1:free
-- Name: Laguna XS 2.1 (free). Status: active. Released: 2026-07-02. Last updated: 2026-07-02. Knowledge cutoff: -.
-- Description: Free provider route for experiments, demos, and cost-sensitive chat workloads
-- Context: 262,144 in, 32,768 out.
-- Modalities: input text. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: toggle. Host variants: none, thinking.
-- Structured output: no. Temperature: yes. Attachment: no. Open weights: yes. Interleaved field: -.
-- Family: laguna. Canonical: poolside/laguna-xs-2.1. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: OpenRouter free route. Rate limits depend on the OpenRouter account..
-
-### openrouter/thinkingmachines/inkling:free
-- Name: Inkling (free). Status: active. Released: 2026-07-15. Last updated: 2026-07-15. Knowledge cutoff: -.
-- Description: Multimodal reasoning model for visual analysis, planning, and tool use
-- Context: 1,048,576 in, 262,144 out.
-- Modalities: input text, image, audio. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: effort none, minimal, low, medium, high, max. Host variants: none, minimal, low, medium, high, max.
-- Structured output: no. Temperature: yes. Attachment: yes. Open weights: yes. Interleaved field: -.
-- Family: ling. Canonical: thinkingmachines/inkling. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: OpenRouter free route. Rate limits depend on the OpenRouter account..
-
-### openrouter/thinkingmachines/inkling-small:free
-- Name: Inkling Small (free). Status: active. Released: 2026-07-30. Last updated: 2026-07-30. Knowledge cutoff: -.
-- Description: Multimodal reasoning model for visual analysis, planning, and tool use
-- Context: 1,048,576 in, 262,144 out.
-- Modalities: input text, image, audio. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: effort none, minimal, low, medium, high, max. Host variants: none, minimal, low, medium, high, max.
-- Structured output: no. Temperature: yes. Attachment: yes. Open weights: yes. Interleaved field: -.
-- Family: ling. Canonical: thinkingmachines/inkling-small. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: OpenRouter free route. Rate limits depend on the OpenRouter account..
-
-### openrouter/xingchen-agi/xing4.0-29b-a4b:free
-- Name: Xing4.0 29B A4B (free). Status: active. Released: 2026-10-16. Last updated: 2026-10-16. Knowledge cutoff: -.
-- Description: Free provider route for experiments, demos, and cost-sensitive chat workloads
-- Context: 262,144 in, 235,929 out.
-- Modalities: input text. output text.
-- Tools: yes. Reasoning: yes. Reasoning options: toggle. Host variants: none, thinking.
-- Structured output: yes. Temperature: yes. Attachment: no. Open weights: yes. Interleaved field: -.
-- Family: agi. Canonical: -. In Console free list: no.
-- Auth: OPENROUTER_API_KEY. Endpoint: https://openrouter.ai/api/v1 (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: OpenRouter free route. Rate limits depend on the OpenRouter account..
-
-### groq/allam-2-7b
-- Name: ALLaM-2-7b. Status: active. Released: 2025-01-23. Last updated: 2025-01-23. Knowledge cutoff: -.
-- Description: ALLaM-2-7b instruction tuned model by SDAIA
-- Context: 4,096 in, 4,096 out.
-- Modalities: input text. output text.
-- Tools: no. Reasoning: no. Reasoning options: -. Host variants: -.
-- Structured output: -. Temperature: yes. Attachment: no. Open weights: yes. Interleaved field: -.
-- Family: -. Canonical: sdaia/allam-2-7b. In Console free list: no.
-- Auth: GROQ_API_KEY. Endpoint: - (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: Groq free-tier route. Limits depend on the Groq account..
-
-### groq/groq/compound
-- Name: Compound. Status: active. Released: 2025-09-04. Last updated: 2025-09-04. Knowledge cutoff: -.
-- Description: General-purpose chat model for instruction following, writing, and analysis
-- Context: 131,072 in, 8,192 out.
-- Modalities: input text. output text.
-- Tools: no. Reasoning: no. Reasoning options: -. Host variants: -.
-- Structured output: -. Temperature: yes. Attachment: no. Open weights: no. Interleaved field: -.
-- Family: groq. Canonical: -. In Console free list: no.
-- Auth: GROQ_API_KEY. Endpoint: - (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: Groq free-tier route. Limits depend on the Groq account..
-
-### groq/groq/compound-mini
-- Name: Compound Mini. Status: active. Released: 2025-09-04. Last updated: 2025-09-04. Knowledge cutoff: -.
-- Description: Efficient model for low-latency assistance, extraction, and routine automation
-- Context: 131,072 in, 8,192 out.
-- Modalities: input text. output text.
-- Tools: no. Reasoning: no. Reasoning options: -. Host variants: -.
-- Structured output: -. Temperature: yes. Attachment: no. Open weights: no. Interleaved field: -.
-- Family: groq. Canonical: -. In Console free list: no.
-- Auth: GROQ_API_KEY. Endpoint: - (upstream). SDK: @ai-sdk/openai-compatible.
-- Policy: upstream-unverified. Route policy is not covered by OpenCode Console statements. Verify with the upstream provider.
-- Notes: Groq free-tier route. Limits depend on the Groq account..
-
 <!-- END AUTO:cards -->
 
 ## 5. Devices
 
-### LAPTOP-F7FU0SSN, Windows, recorded 2026-10-17
+### arch-btw, Arch Linux ARM64 chroot, recorded 2026-10-23
 
-- OpenCode 2.0.32 via the pi-node wrapper. Config source: `C:\Users\Amol\.config\opencode`.
-- Credentials by environment variable name: OPENCODE_API_KEY (Console and Go), GROQ_API_KEY, MISTRAL_API_KEY, OPENROUTER_API_KEY. No values recorded.
-- Local model servers on 11434, 1234, 8000: all closed.
+- OpenCode 2.1.3, installed at `/usr/bin/opencode`. Config source: `/root/.config/opencode` with `opencode.json`.
+- Credentials: none authenticated. The omniroute provider keeps a key inline in `opencode.json`; no values are recorded here.
+- Default model: `opencode/glm-5.3-flash-free`. The hidden `title` agent points at an omniroute model.
 - Agents: build and plan primary, explore and general subagents, hidden system agents present.
+- Local model servers on 11434, 1234, 8000: all closed.
+- Reachability: all 9 free models answered a one-turn probe on 2026-10-23.
 
 ## 6. Drift watchlist
 
-Documented free offers absent from this device catalog today: ll-alpha-free, exo-free, mimo-v2.5-free, muse-spark-1.3-contributor-free, jev-1.13-free (System One endpoint, not a chat model).
+Absent free offers documented upstream: exo-free, mimo-v2.5-free, longcat-2.5-preview-free, ll-alpha-free, muse-spark-1.3-contributor-free, jev-1.13-free. Jev is a scoring endpoint, not a chat model.
 
-Reveal and retirement, 2026-10-19: Space Bunny Free left the catalog. MiniMax M3.1 Flash Free appeared on Console, Go, and OpenRouter the same day. You report that Space Bunny was MiniMax M3.1 Flash. The docs replace Space Bunny with MiniMax in the free list. The mapping is recorded as reported, not officially confirmed.
+Providers not configured on this device: opencode-go, groq, mistral, openrouter.
 
-Catalog entries outside the Console free list: the OpenRouter routes are OpenRouter's own free offers. Groq entries are Groq free-tier routes. Routers, the Lyria audio models, and the safety classifier are priced free in the catalog but are not chat agent drivers.
+The omniroute gateway lists 449 models with empty cost arrays. Its pricing is unmeasured. No entry qualifies as free.
 
-Open questions carried forward: Console free model rate limits are not stated in the docs. OpenRouter free route limits depend on account credits. Groq free-tier limits are unverified from this device. Deprecated models are removed on rolling dates.
-
-Watch rules: re-check the Console free models list and the Go model list daily. Treat a model as removed only after it is absent from the host catalog for two runs. Never reclassify a route as free because a blog says so; the catalog is the source of truth.
+Watch rules: check the Console free models list and the Console models table daily. Treat a model as removed only after two runs absent from the host catalog. Use the catalog as the source of truth.
 
 ## 7. Privacy and data handling
 
-Console states: all models hosted in the US and EU, zero-retention default, no training on data. Exceptions, quoted and dated 2026-10-17:
+Console states: all models hosted in the US and EU, zero-retention default, no training on data. Exceptions, as stated today:
 
 | Scope | Training | Retention |
 | :--- | :--- | :--- |
 | Console default | not used | zero retention |
-| GLM-5.3-Flash Free, DeepSeek V4.1 Flash Free, MiniMax M3.1 Flash Free, LongCat 2.5 Preview Free | not used | zero retention |
-| Beam Free, both routes | not used | 30 days for safety |
-| Big Pickle, MiMo-V2.6-Flash Free | may be used to improve the model during the free period | not stated |
-| Nemotron 3 Ultra, 3.5 Lightning, 3.5 Super VL Free first-party routes | NVIDIA trial terms, logged for security and product improvement, not linked to identity | do not submit personal or confidential data |
-| OpenRouter free routes | upstream policy, not covered by Console statements | account-dependent |
-| Groq free routes | upstream policy | account-dependent |
-
-Go privacy table, checked 2026-10-19: MiniMax M3.1 Flash Free is not used for training and retains data for 0 days.
+| GLM-5.3-Flash Free, DeepSeek V4.1 Flash Free | not used | zero retention |
+| Beam Free, Console route | not used | 30 days for safety, plus region blocklist below |
+| Big Pickle, MiMo-V2.6-Flash Free, Flint 40B Free | may be used to improve the model during the free period | Flint 40B Free keeps data 30 days, others not stated |
+| Nemotron 3 Ultra, 3.5 Lightning, 3.5 Super VL Free | NVIDIA trial terms, logged for security and product improvement, not linked to identity | do not submit personal or confidential data |
+| Omniroute local gateway | locally configured provider, not covered by Console statements | unmeasured |
 
 Beam Free region blocklist: Angola, Belarus, Cambodia, China including Hong Kong and Macau, Cuba, Democratic Republic of the Congo, Equatorial Guinea, Iran, Iraq, Laos, Libya, Nigeria, North Korea, Russia, Syria, Turkmenistan, Uzbekistan, Venezuela, Crimea, Donetsk and Luhansk regions of Ukraine.
 
-Documented but not on this device today, privacy rows for the watchlist: LL Alpha Free retains 30 days and may use data. Exo Free may use data. MiMo-V2.5 Free may use data. Muse Spark 1.3 Contributor trains Meta models. Jev 1.13 Free is limited-time.
+All 9 free routes answered a one-turn probe on 2026-10-23.
 
 ## 8. Ranking policy
 
 - R1 capability fit: tools, reasoning controls, modalities, context.
-- R2 route preference: first-party host routes, Console and Go, before configured upstream free routes, Groq and OpenRouter, before routers.
+- R2 route preference: first-party host routes before configured upstream free routes before routers.
 - R3 recency: newer release and last_updated wins ties.
-- R4 data policy preference: zero-retention before 30-day retention before may-use before upstream-unverified.
+- R4 data policy preference: zero-retention before 30-day retention before may-use-during-free-period before nvidia-trial-terms before unmeasured.
 - R5 review work prefers a different model family than the primary pick.
-- R6 fallback chain: beam-free, minimax-m3.1-flash-free, glm-5.3-flash-free, deepseek-v4.1-flash-free, openrouter/openrouter/free.
-- R7 family preference: avoid Nemotron chat and reasoning routes. User judgement, 2026-10-19: quality ranks below other free routes. Exception: opencode/nemotron-3.5-super-vl-free stays eligible for vision work. The Nemotron content-safety classifier stays eligible as a narrow utility. This is a preference, not a measured benchmark.
-- Override rule: a dated measurement with a stated method replaces a capability pick. A dated user preference replaces a family preference. Record both in CHANGELOG.md and in the card notes.
+- R6 fallback chain: beam-free, flint-40b-free, glm-5.3-flash-free, deepseek-v4.1-flash-free.
+- Override rule: a dated measurement with a stated method replaces a capability pick.
 
 ## 9. Provenance and sources
 
-Checked 2026-10-17 and 2026-10-19: https://opencode.ai/v2/docs/console/models/, https://opencode.ai/v2/docs/console/go/, https://opencode.ai/v2/docs/models/, https://opencode.ai/v2/docs/agents/, https://opencode.ai/v2/docs/commands/, https://models.dev/api.json. The Go privacy table was re-checked on 2026-10-19 for MiniMax M3.1 Flash Free.
+Checked 2026-10-23: https://opencode.ai/v2/docs/console/models/, https://opencode.ai/v2/docs/console/go/, https://opencode.ai/v2/docs/models/, https://models.dev/api.json.
 
-Host commands: `opencode --version`, `opencode auth list`, `opencode debug paths`, `opencode debug config`, `opencode debug agents`, `opencode models`. Catalog tool: models list paging, all=true, limit=100, offset 0 through 4.
+Host commands: `opencode --version`, `opencode auth list`, `opencode debug paths`, `opencode debug config`, `opencode debug agents`, `opencode models`. Catalog tool: models list paging, all=true, limit=100. The tool total and the `opencode models` line count both gave 458.
+
+Reachability: all 9 free refs answered a one-turn `opencode run` probe on 2026-10-23: beam, big-pickle, deepseek-v4.1, flint-40b, glm-5.3, mimo-v2.6, nemotron-3.5-lightning, nemotron-3.5-super-vl, nemotron-3-ultra.
 
 Evidence tags: C host catalog, D models.dev, O OpenCode docs, A auth list, H host probe.
 
 ## 10. Stats
 
 <!-- BEGIN AUTO:stats -->
-- Catalog: 488 models across 5 providers.
-- opencode: 41 models, 10 free.
-- groq: 12 models, 3 free.
-- mistral: 18 models, 0 free.
-- opencode-go: 29 models, 3 free.
-- openrouter: 388 models, 24 free.
-- Free set: 40 entries.
-- opencode: 10 free.
-- groq: 3 free.
-- opencode-go: 3 free.
-- openrouter: 24 free.
-- Run: 2026-10-19-laptop-f7fu0ssn, collected 2026-10-19T14:06:46Z.
-- models.dev snapshot sha256: f6548e9a8644538a883c988fcfc981a1bb8ecf42d444e15d66228de3e3c4b52b.
+- Catalog: 458 models across 2 providers.
+- opencode: 9 models, 9 free.
+- omniroute: 449 models, 0 proven free (cost arrays empty, unmeasured).
+- Free set: 9 entries.
+- opencode: 9 free.
+- Run: 2026-10-23-arch-btw, collected 2026-10-23T04:34:16Z.
+- models.dev snapshot sha256: 470452beddc8610ffb429fc14a0332e500bb9a6e1662075d6fee7bbe919cd690.
 - Enrichment misses: none.
 <!-- END AUTO:stats -->
-
