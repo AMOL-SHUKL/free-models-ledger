@@ -46,18 +46,18 @@ Alternates: opencode/deepseek-v4.1-flash-free (image input).
 
 | Pick | Ref | Why |
 | :--- | :--- | :--- |
-| 1 | opencode/deepseek-v4.1-flash-free | Flash class, 200k context, 32k out, effort low, high, max |
-| 2 | opencode/mimo-v2.6-flash-free | Flash class, 200k, multimodal input |
-| 3 | opencode/flint-40b-free | Flash class, 262k in, 64k out, MoE with 2.5B active parameters |
+| 1 | opencode/mimo-v2.6-flash-free | Flash class, 200k, multimodal input |
+| 2 | opencode/flint-40b-free | Flash class, 262k in, 64k out, MoE with 2.5B active parameters |
+| 3 | opencode/nemotron-3.5-lightning-free | 262k in and out, NVIDIA trial, fast bulk |
 
-Alternates: opencode/glm-5.3-flash-free (200k, document input).
+Alternates: opencode/glm-5.3-flash-free (200k, document input). DeepSeek is manual only.
 
 ### 1.5 Deliberate reasoning and review
 
 | Pick | Ref | Why |
 | :--- | :--- | :--- |
 | 1 | opencode/beam-free#max | Full effort budget on the largest first-party route |
-| 2 | opencode/deepseek-v4.1-flash-free#max | Different family, effort low to max |
+| 2 | opencode/deepseek-v4.1-flash-free#max | Different family, effort low to max. Manual use only |
 | 3 | opencode/big-pickle | Stealth reasoning model for deliberate analysis |
 
 Alternates: opencode/nemotron-3-ultra-free (1M context, open weights), opencode/nemotron-3.5-super-vl-free (1M, reasoning effort none to xhigh).
@@ -214,6 +214,7 @@ No router, classifier, or audio generation routes exist on this device today.
 - Credentials: none authenticated. The omniroute provider keeps a key inline in `opencode.json`; no values are recorded here.
 - Default model: `opencode/glm-5.3-flash-free`. The hidden `title` agent points at an omniroute model.
 - Agents: build and plan primary, explore and general subagents, hidden system agents present.
+- User rule: do not route subagents to `opencode/deepseek-v4.1-flash-free`. Manual use only.
 - Local model servers on 11434, 1234, 8000: all closed.
 - Reachability: all 9 free models answered a one-turn probe on 2026-10-23.
 
