@@ -2,6 +2,14 @@
 
 Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed changed`.
 
+## 2026-10-27, fix(gateway): AI Horde works anonymously
+
+- AI Horde is not broken. `aihorde/google/gemma-4-31b` answered HTTP 200 in 4 s with no key.
+- Only the `horde/` alias demands a key, and it returns 401. The `aihorde/` prefix uses the anonymous tier.
+- No AI Horde key exists in either env file, in either `storage.sqlite`, or in the connection record. The connection is `auth_type=no-auth`.
+- Counts corrected: usable gateway providers 7 to 8, working connections 5 to 6, broken 2 to 1.
+- Not promoted to the shortlist. The shared queue is slower than DuckDuckGo for background work.
+
 ## 2026-10-27, routing(console): three accounts, no keys in config, expiry clarified
 
 - `opencode.json` carries no key material. All seven `apiKey` entries removed and every route re-tested.

@@ -2,7 +2,7 @@
 
 Routing table for zero-price model access on this device. Two quota domains exist: OpenCode Console, capped per account, and the OmniRoute gateway, capped per upstream. The unit of cost is one request, not one token.
 
-**State 2026-10-27. OpenCode 2.2.0, gateway 3.8.52. 3 routed Console accounts, 17 gateway connections, 9 Console free models, 7 gateway providers usable. No key material in `opencode.json`.**
+**State 2026-10-27. OpenCode 2.2.0, gateway 3.8.52. 3 routed Console accounts, 17 gateway connections, 9 Console free models, 8 gateway providers usable. No key material in `opencode.json`.**
 
 Sections: 1 Metric, 2 Domains, 3 Shortlist, 4 Gateway, 5 Budget, 6 Uncapped and expiry, 7 Archive, 8 Console inventory, 9 Cards, 10 Devices, 11 Drift, 12 Privacy, 13 Policy, 14 Provenance, 15 Stats.
 
@@ -85,7 +85,7 @@ Two sets exist. Seventeen connections are configured. Fourteen providers expose 
 | `opencode-zen` College | API key | inert | Orphaned: CLI lists it, API returns 404, no models |
 | `opencode-zen` Personal | API key | inert | Orphaned: CLI lists it, API returns 404, no models |
 | `opencode-zen` Ronaldo | API key | inert | Orphaned: CLI lists it, API returns 404, no models |
-| `aihorde` | none | broken | No key in any env file or in the connection record |
+| `aihorde` | none | working | `aihorde/google/gemma-4-31b` OK, 4 s, anonymous queue. `horde/` alias requires a key |
 | `cloudflare-playground` | none | broken | Needs Playwright and Chromium |
 | `chipotle` | none | unverified | No models exposed |
 | `theoldllm` | none | unverified | No models exposed |
@@ -109,7 +109,7 @@ These five appear in `/v1/models` with model counts but have no configured conne
 - The three `opencode-zen` connections are orphaned. `providers list` and their `/api/providers` record disagree: the API returns `Connection not found`, so they cannot be disabled through the API. The CLI has no remove command. They expose no models, and auto-routing is disabled, so no request can reach them. They are harmless but unremovable without a database edit.
 - `gpt-6.1-terra` is listed on the gateway through Cline, not Codex. Every variant returns 402 Insufficient credits. Codex carries `gpt-5.6-terra` and `gpt-6-luna` only.
 - `cline` returns 500 on some models and 402 on paid ones. Treat it as opportunistic, not a default.
-- `aihorde` has no key in `/root/.omniroute/.env`, `/home/amol/.omniroute/.env`, or the connection record. Add the key in the gateway, or leave it broken.
+- `aihorde` works anonymously through the `aihorde/` prefix. `gemma-4-31b` answers in 4 s. The `horde/` alias returns 401 because it wants an AI Horde key, and no key is stored in any env file or in the connection record. An account key would raise queue priority, not add models.
 - `groq` works at the gateway and fails inside OpenCode. The agent system prompt exceeds the model limit. Do not route agent sessions there.
 - `gemini` serves gemma models only. `gemma-4-31b-it` is confirmed working.
 - The gateway does not enforce auth on chat completions. It does on `/v1/models`. No `apiKey` is stored in `opencode.json`, and provider routes still work.
@@ -168,7 +168,8 @@ Rules:
 | `omni-cline/openai/gpt-6.1-terra*` | Listed, but every variant returns 402 Insufficient credits |
 | `omni-cline/*/beam-free` | HTTP 500 at the provider |
 | `opencode/*` | Anonymous fallback. Not routed while an account key is valid |
-| 9 unusable connections and 5 catalog-only providers | Section 4 states the reason for each |
+| `aihorde/google/gemma-4-31b` | Works anonymously, but the shared queue is slower than DDG for background work |
+| 8 unusable connections and 5 catalog-only providers | Section 4 states the reason for each |
 | 30 paid `opencode/` refs | Non-zero price. No place in a free ledger |
 
 A model leaves archive only with a measured step count that beats a listed pick. Record it in section 14.
@@ -321,9 +322,9 @@ Measurement protocol for a pick change:
 - Console free models: 9 distinct.
 - Console free refs: 33, from 9 models across 4 prefixes.
 - Routed Console accounts: 3. Anonymous `opencode/` is fallback only.
-- Gateway connections: 17 configured. Working 5, partial 3, inert 3, broken 2, unverified 3, inactive 1.
+- Gateway connections: 17 configured. Working 6, partial 3, inert 3, broken 1, unverified 3, inactive 1.
 - Gateway catalog-only providers: 5, all blocked on a local dependency.
-- Gateway providers usable: 7. Fully working 4, partial 3.
+- Gateway providers usable: 8. Fully working 5, partial 3.
 - Gateway model entries: 1850. Wired into OpenCode: 154.
 - Shortlist: 8 entries across 2 domains.
 - Key material in `opencode.json`: none.
