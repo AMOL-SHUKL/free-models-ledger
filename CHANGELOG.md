@@ -2,6 +2,12 @@
 
 Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed changed`.
 
+## 2026-10-27, fix(ledger): Console free count corrected to 8
+
+- Removed stale `opencode/big-pickle` from the Console inventory. It left the free list on 2026-10-23.
+- Console free models: 8 distinct. Console free refs: 32, from 8 models across 4 prefixes.
+- `snapshot.json` already recorded 8. The narrative now matches it.
+
 ## 2026-10-27, fix(gateway): AI Horde works anonymously
 
 - AI Horde is not broken. `aihorde/google/gemma-4-31b` answered HTTP 200 in 4 s with no key.
