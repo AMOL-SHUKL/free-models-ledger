@@ -2,6 +2,18 @@
 
 Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed changed`.
 
+## 2026-10-27, docs(routing): rank by steps, split shortlist from archive
+
+- Policy shift. The metric is now requests, not price. Every free model costs zero tokens, so the 200-per-day Console cap makes steps the scarce resource.
+- Shortlist cut to six models, one per task class: deepseek-v4.1#max, flint-40b#medium, beam#high, glm-5.3, nemotron-3.5-super-vl#high, mimo-v2.6.
+- Archive section added. `big-pickle` restored with a stated reason, no longer silently purged. `nemotron-3.5-lightning-free` and `nemotron-3-ultra-free` moved there as dominated.
+- New section 3. The same model is reachable from four Console prefixes, so the cap is per account and failover preserves the model instead of downgrading it.
+- New section 4. Daily step budget by share, 60/25/10/5.
+- New section 5. Promo mode with a declared state table and a mandatory expiry date.
+- Counts corrected: 217 refs, 10 prefixes, 9 free models, 33 free refs. Prior ledger claimed 458 models, 2 providers, 8 free.
+- Recorded tool-versus-CLI delta, 213 against 217. The tool omits three free refs. CLI is authoritative for routing.
+- No probe run this revision. Reachability still dates from 2026-10-23.
+
 ## 2026-10-23, docs(orchestration): designate DeepSeek V4.1 Flash as Primary Orchestrator
 
 - Free set: 8 entries.
