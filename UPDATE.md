@@ -20,15 +20,19 @@ Agent-only. No scripts live in this repo. Any agent, on any device, follows the 
 
 ## Step 2: catalog pull
 
-Call the models tool with `{ all: true, limit: 100, offset: 0 }` and follow `next` until null. Expected shape today: 5 pages, 458 models, 2 providers.
+Call the models tool with `{ all: true, limit: 100, offset: 0 }` and follow `next` until null. Expected shape today: 213 refs.
 
-Cross-check with `opencode models` and count the lines. The two numbers must match.
+Cross-check with `opencode models` and count the lines. Today that gives 217. The CLI is authoritative for routing, because it lists what `opencode run` resolves.
 
-Free filter: every pricing tier is zero.
+A gap between the two counts is expected. Record it in section 13. Never rebuild the free set from the tool alone. The tool has already dropped three free refs.
+
+Free filter: every pricing tier must be present and zero. An empty cost array is not proof of zero price.
 
 ```
-cost.every(c => c.input === 0 && c.output === 0)
+cost.length > 0 && cost.every(c => c.input === 0 && c.output === 0)
 ```
+
+Dedupe by model id, not by ref. One model appears under `opencode/` and under each Console account prefix. Count distinct models for the free total. Count refs only for quota buckets.
 
 ## Step 3: enrichment
 
@@ -60,11 +64,20 @@ Regenerate only these regions of LEDGER.md:
 
 | Region | Content |
 | :--- | :--- |
-| AUTO:inventory | one table row per free ref: ctx, out, input modalities, tools, host variants, released, policy class, canonical |
-| AUTO:cards | one card per free ref: name, dates, description, limits, modalities, capabilities, variants, family, auth, endpoint, policy, regions, notes |
-| AUTO:stats | catalog and free totals, enrichment misses |
+| AUTO:inventory | one table row per distinct free model: ctx, out, input modalities, tools, host variants, released, policy class, canonical |
+| AUTO:cards | one card per shortlisted free model: name, dates, description, limits, modalities, capabilities, policy, route |
+| AUTO:stats | distinct free models, free refs, per-prefix counts, archive counts, mode |
 
-Edit narrative sections only when facts moved: Top 3 picks re-derive from the ranking policy, drift lists, privacy matrix, device block for a new device.
+Edit narrative sections only when facts moved: drift lists, privacy matrix, device block.
+
+These sections are judgment, not machine output. Never regenerate them from a script.
+
+| Section | Owner | Rule |
+| :--- | :--- | :--- |
+| 2 Shortlist | human or measured probe | six entries maximum. A seventh needs a measured class the six cannot serve |
+| 4 Budget | human | shares sum to 100 percent |
+| 5 Promo state | human | update the table, never prose. An expiry date is mandatory before enabling |
+| 6 Archive | human | append only. A model leaves with a measurement in section 13 |
 
 ## Step 7: commit and push
 
@@ -80,12 +93,16 @@ Append the changelog entry first, then commit `LEDGER.md`, `snapshot.json`, `CHA
 
 | Id | Check |
 | :--- | :--- |
-| V1 | free count in snapshot equals the number of inventory rows |
-| V2 | every Top 3 ref exists in the inventory and is zero-price |
-| V3 | every free ref appears exactly once in inventory and once in cards |
+| V1 | distinct free model count equals the inventory row count |
+| V2 | every section 2 shortlist ref resolves in `opencode models` and is zero-price |
+| V3 | every free model appears once in inventory, and once in either cards or archive |
 | V4 | AUTO marker pairs are intact: 3 begin markers, 3 end markers |
 | V5 | changelog has an entry for the run date |
 | V6 | no secret values anywhere in changed files, env names only |
+| V7 | every archive entry states a reason, not just a name |
+| V8 | promo mode carries an expiry date, or reads `none` |
+| V9 | tool and CLI counts are both recorded, with the delta named |
+| V10 | the four Console prefix counts match each other |
 
 ## Traps
 
@@ -99,4 +116,4 @@ Append the changelog entry first, then commit `LEDGER.md`, `snapshot.json`, `CHA
 
 ## Rebuild
 
-Lost LEDGER.md narrative: rebuild it from the newest snapshot, top to bottom, using the section order in README.md. Lost snapshots: recollect with steps 1 to 3 and start a fresh baseline entry in CHANGELOG.md. A full overhaul is safe; history files are the only irreplaceable content and they are append-only.
+Lost LEDGER.md narrative: rebuild it from the newest snapshot, top to bottom, using the section order in LEDGER.md itself. Lost snapshots: recollect with steps 1 to 3 and start a fresh baseline entry in CHANGELOG.md. A full overhaul is safe; history files are the only irreplaceable content and they are append-only.
