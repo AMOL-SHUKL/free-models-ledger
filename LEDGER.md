@@ -2,7 +2,7 @@
 
 Routing table for zero-price model access on this device. Two quota domains exist: OpenCode Console, capped per account, and the OmniRoute gateway, capped per upstream. The unit of cost is one request, not one token.
 
-**State 2026-10-27. OpenCode 2.2.0, gateway 3.8.52. 3 routed Console accounts, 17 gateway connections, 9 Console free models, 8 gateway providers usable. No key material in `opencode.json`.**
+**State 2026-10-27. OpenCode 2.2.0, gateway 3.8.52. 3 routed Console accounts, 17 gateway connections, 8 Console free models, 8 gateway providers usable. No key material in `opencode.json`.**
 
 Sections: 1 Metric, 2 Domains, 3 Shortlist, 4 Gateway, 5 Budget, 6 Uncapped and expiry, 7 Archive, 8 Console inventory, 9 Cards, 10 Devices, 11 Drift, 12 Privacy, 13 Policy, 14 Provenance, 15 Stats.
 
@@ -180,7 +180,6 @@ A model leaves archive only with a measured step count that beats a listed pick.
 | Ref | Ctx | Out | Input | Tools | Variants | Released | Policy | Canonical |
 | :--- | ---: | ---: | :--- | :--- | :--- | :--- | :--- | :--- |
 | opencode/beam-free | 1,048,576 | 131,072 | text | yes | low, medium, high, xhigh, max | 2026-10-05 | retained-30-days | reflection/beam-1.0-501b-a23b |
-| opencode/big-pickle | 200,000 | 32,000 | text | yes | - | 2025-10-17 | not stated | big-pickle |
 | opencode/deepseek-v4.1-flash-free | 200,000 | 32,000 | text, image | yes | low, high, max | 2026-09-10 | zero-retention | deepseek/deepseek-v4.1-flash |
 | opencode/flint-40b-free | 262,144 | 65,536 | text | yes | low, medium, high, xhigh, max | 2026-10-21 | may-use-during-free-period | recursive/flint |
 | opencode/glm-5.3-flash-free | 200,000 | 32,000 | text, image, video, pdf | yes | low, high, max | 2026-08-26 | zero-retention | zhipuai/glm-5.3-flash |
@@ -319,8 +318,8 @@ Measurement protocol for a pick change:
 
 <!-- BEGIN AUTO:stats -->
 - Console refs: 217 across 10 configured prefixes.
-- Console free models: 9 distinct.
-- Console free refs: 33, from 9 models across 4 prefixes.
+- Console free models: 8 distinct.
+- Console free refs: 32, from 8 models across 4 prefixes.
 - Routed Console accounts: 3. Anonymous `opencode/` is fallback only.
 - Gateway connections: 17 configured. Working 6, partial 3, inert 3, broken 1, unverified 3, inactive 1.
 - Gateway catalog-only providers: 5, all blocked on a local dependency.
