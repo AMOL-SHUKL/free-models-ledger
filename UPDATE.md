@@ -95,7 +95,7 @@ These sections are judgment, not machine output. Never regenerate them from a sc
 | 3 Shortlist | human or measured probe | eight entries maximum. A ninth needs a measured class the eight cannot serve |
 | 4 Gateway | human | two tables. Connections and catalog-only providers. A row without a probe result is unverified |
 | 5 Budget | human | shares sum to 100 percent |
-| 6 Promo state | human | update the table, never prose. An expiry date is mandatory before enabling |
+| 6 Uncapped and expiry | human | every connection with an expiry date gets a row. Re-auth is a user action |
 | 7 Archive | human | append only. A model leaves with a measurement in section 14 |
 
 ## Step 7: commit and push
@@ -119,9 +119,9 @@ Append the changelog entry first, then commit `LEDGER.md`, `snapshot.json`, `CHA
 | V5 | changelog has an entry for the run date |
 | V6 | no secret values anywhere in changed files, env names only |
 | V7 | every archive entry states a reason, not just a name |
-| V8 | promo mode carries an expiry date, or reads `none` |
+| V8 | every connection with an expiry date appears in section 6 |
 | V9 | tool and CLI counts are both recorded, with the delta named |
-| V10 | the four Console prefix counts match each other |
+| V10 | the three routed Console account prefixes carry equal model counts |
 | V11 | every gateway connection in section 4 carries a state and a probe result |
 | V12 | connection count and model-provider count are recorded separately |
 | V13 | every shortlist gateway ref has a dated live chat result in section 14 |

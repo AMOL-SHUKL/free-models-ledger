@@ -8,7 +8,7 @@ The ledger is not a catalog dump. It covers two quota domains: OpenCode Console,
 
 | File | Role |
 | :--- | :--- |
-| LEDGER.md | The report. Opens with the metric, the shortlist, quota domains, budget, and promo state. Then archive, inventory, cards, devices, drift, privacy, policy, provenance, stats. |
+| LEDGER.md | The report. Opens with the metric, the shortlist, quota domains, budget, and credential expiry. Then archive, inventory, cards, devices, drift, privacy, policy, provenance, stats. |
 | UPDATE.md | The update protocol. Any agent, any device, follows it top to bottom. |
 | CHANGELOG.md | Append-only run history, newest first. |
 | snapshot.json | Latest machine-readable collection. Source of truth for diffs. |
@@ -24,7 +24,7 @@ The ledger is not a catalog dump. It covers two quota domains: OpenCode Console,
 - Archive: every other ref, listed with a reason. Never routed.
 - Domain: one quota bucket with its own auth. Console account or gateway upstream. Steps do not cross domains.
 - Connection: one authenticated upstream entry in the gateway. Connections and model providers are separate sets.
-- Promo mode: an uncapped window. Switches ranking from step economy to raw capability.
+- Uncapped domain: a provider outside the 200/day cap. Ranking switches from step economy to raw capability there.
 
 ## Rules
 
