@@ -2,6 +2,20 @@
 
 Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed changed`.
 
+## 2026-10-27, docs(providers): add gateway domain and verified inventory
+
+- Ledger now covers two quota domains. OpenCode Console, capped per account. OmniRoute gateway, capped per upstream.
+- Gateway inventoried live. 17 connections configured, 14 providers expose models, 5 catalog-only providers, 1850 model entries.
+- Verified working: codex (2 accounts), openrouter, mistral, duckduckgo-web. Partial: cline, gemini, groq.
+- Inert: opencode-zen x3. Valid auth, no models, no default model, nothing routes to them.
+- Four Console prefixes probed live and all answered. `opencode-ronaldo` is valid, not a stale entry.
+- Promo mode enabled. Codex OAuth window ends 2026-10-29. Revert target is deepseek-v4.1-flash-free#max.
+- Shortlist extended to eight entries across two domains. Codex becomes the uncapped default for hard work.
+- Found: gateway `opencode-zen` returns 404 while native Console routes work. Same accounts, different transport.
+- Found: Groq rejects the agent prompt with 413 inside OpenCode. Gateway-only use.
+- Found: the Console API rejects direct credential use with 403, so quota is unreadable outside OpenCode.
+- Corrected: the `omni-codex` key in `opencode.json` is an `{env:...}` reference, not an invalid literal key.
+
 ## 2026-10-27, docs(routing): rank by steps, split shortlist from archive
 
 - Policy shift. The metric is now requests, not price. Every free model costs zero tokens, so the 200-per-day Console cap makes steps the scarce resource.
