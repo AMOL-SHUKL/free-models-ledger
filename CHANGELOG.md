@@ -2,6 +2,25 @@
 
 Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed changed`.
 
+## 2026-10-27, fix(gateway): AI Horde works anonymously
+
+- AI Horde is not broken. `aihorde/google/gemma-4-31b` answered HTTP 200 in 4 s with no key.
+- Only the `horde/` alias demands a key, and it returns 401. The `aihorde/` prefix uses the anonymous tier.
+- No AI Horde key exists in either env file, in either `storage.sqlite`, or in the connection record. The connection is `auth_type=no-auth`.
+- Counts corrected: usable gateway providers 7 to 8, working connections 5 to 6, broken 2 to 1.
+- Not promoted to the shortlist. The shared queue is slower than DuckDuckGo for background work.
+
+## 2026-10-27, routing(console): three accounts, no keys in config, expiry clarified
+
+- `opencode.json` carries no key material. All seven `apiKey` entries removed and every route re-tested.
+- Default model moved from the anonymous `opencode/` prefix to `opencode-college/deepseek-v4.1-flash-free`.
+- Routing now uses the three authenticated Console accounts. Anonymous `opencode/` is fallback only.
+- Section 6 rewritten. "Promo" replaced with uncapped domains plus credential expiry dates. Expiry is a token date, not a promotion.
+- `gpt-6.1-terra` recorded as listed but unusable. Cline returns 402 Insufficient credits on every variant. Codex does not carry it.
+- AI Horde status corrected: no key exists in any env file or in the connection record.
+- `opencode-zen` x3 recorded as orphaned. The API cannot find them, the CLI cannot remove them, and auto-routing is disabled, so no request can reach them.
+- Verified after the change: Codex, College, and Mistral all answered with no `apiKey` in config.
+
 ## 2026-10-27, docs(providers): add gateway domain and verified inventory
 
 - Ledger now covers two quota domains. OpenCode Console, capped per account. OmniRoute gateway, capped per upstream.

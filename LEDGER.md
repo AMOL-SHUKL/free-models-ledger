@@ -2,9 +2,9 @@
 
 Routing table for zero-price model access on this device. Two quota domains exist: OpenCode Console, capped per account, and the OmniRoute gateway, capped per upstream. The unit of cost is one request, not one token.
 
-**State 2026-10-27. Mode: promo. OpenCode 2.2.0, gateway 3.8.52. 4 Console prefixes, 17 gateway connections, 9 Console free models, 7 gateway providers verified.**
+**State 2026-10-27. OpenCode 2.2.0, gateway 3.8.52. 3 routed Console accounts, 17 gateway connections, 9 Console free models, 8 gateway providers usable. No key material in `opencode.json`.**
 
-Sections: 1 Metric, 2 Domains, 3 Shortlist, 4 Gateway, 5 Budget, 6 Promo, 7 Archive, 8 Console inventory, 9 Cards, 10 Devices, 11 Drift, 12 Privacy, 13 Policy, 14 Provenance, 15 Stats.
+Sections: 1 Metric, 2 Domains, 3 Shortlist, 4 Gateway, 5 Budget, 6 Uncapped and expiry, 7 Archive, 8 Console inventory, 9 Cards, 10 Devices, 11 Drift, 12 Privacy, 13 Policy, 14 Provenance, 15 Stats.
 
 An agent that only needs to route work reads sections 2, 3, and 6. Stop there.
 
@@ -28,11 +28,11 @@ A domain is a quota bucket with its own auth. Steps in one domain do not drain a
 
 | Domain | Ref prefix | Auth | Cap | Counts against 200/day | State |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| OpenCode anonymous | `opencode/` | none stored | undisclosed free tier | assumed yes | verified |
-| Console College | `opencode-college/` | API key | about 200 steps | yes | verified |
-| Console Personal | `opencode-personal/` | API key | about 200 steps | yes | verified |
-| Console Ronaldo | `opencode-ronaldo/` | API key | about 200 steps | yes | verified |
-| Gateway Codex | `omni-codex/` | OAuth, 2 accounts | plan quota, window ends 2026-10-29 | no | verified |
+| OpenCode anonymous | `opencode/` | none stored | undisclosed free tier | assumed yes | fallback only, not routed |
+| Console College | `opencode-college/` | API key | about 200 steps | yes | primary |
+| Console Personal | `opencode-personal/` | API key | about 200 steps | yes | failover 1 |
+| Console Ronaldo | `opencode-ronaldo/` | API key | about 200 steps | yes | failover 2 |
+| Gateway Codex | `omni-codex/` | OAuth, 2 accounts | plan quota, token expires 2026-10-29 | no | verified |
 | Gateway OpenRouter | `omni-openrouter/` | API key | free-tier rate limits | no | verified |
 | Gateway Mistral | `omni-mistral/` | API key | free tier | no | verified |
 | Gateway Cline | `omni-cline/` | OAuth | plan quota, key expires 2026-10-27 | no | partial |
@@ -41,11 +41,11 @@ A domain is a quota bucket with its own auth. Steps in one domain do not drain a
 | Gateway Groq | `omni-groq/` | API key | free tier, rejects agent prompt | no | partial |
 | Local | none installed | not applicable | not applicable | not applicable | none |
 
-Four Console prefixes answer a live probe. `auth.json` holds three Console keys and one gateway key. The bare `opencode/` prefix has no stored credential, so it is the anonymous route.
+The three Console accounts are the routed OpenCode surface. The bare `opencode/` prefix is an anonymous fallback. It stays documented but is not used while an account key is valid.
 
-Unverified: whether the four Console prefixes drain separate buckets. A direct credential probe returns HTTP 403, so quota cannot be read outside OpenCode. Treat the split as likely, not proven.
+Unverified: whether the three Console accounts drain separate buckets. A direct credential probe returns HTTP 403, so quota cannot be read outside OpenCode. Treat the split as likely, not proven.
 
-The gateway is the relief valve. Spend a Console step only when no gateway domain can do the work.
+The gateway is the relief valve. Spend a Console step only when no gateway domain can do the work. No `apiKey` is stored in `opencode.json`. The gateway does not enforce auth on chat completions, only on the models endpoint.
 
 ## 3. Shortlist
 
@@ -53,18 +53,18 @@ Eight entries. Each wins one task class in one domain. Anything absent is archiv
 
 | Class | Ref | Domain | Why it wins | Fallback |
 | :--- | :--- | :--- | :--- | :--- |
-| Hard agentic, multi-file | `omni-codex/codex/gpt-5.6-terra` | gateway | Strongest route, 3.3 s, no cap. Default while the window is live | `opencode/deepseek-v4.1-flash-free#max` |
-| Hard agentic, capped | `opencode/deepseek-v4.1-flash-free#max` | Console | DeepSWE 77.0, Apex 72.1. Best measured planner on the capped side | next Console prefix |
-| Large context over 200k | `opencode/beam-free#high` | Console | Only strong 1M route, 131k output | `omni-openrouter/openrouter/nvidia/nemotron-3-super-120b-a12b:free` |
-| Atomic edit, bulk | `opencode/flint-40b-free#medium` | Console | SWE-bench Pro 89.7%, 2.5B active. Edits in place | `omni-mistral/mistral/codestral-latest` |
-| Vision, large context | `omni-openrouter/openrouter/nvidia/nemotron-3.5-super-vl:free` | gateway | 1M input with images, uncapped | `opencode/nemotron-3.5-super-vl-free#high` |
-| Cheap bulk and background | `omni-ddg/duckduckgo-web/gpt-5.6-luna` | gateway | No auth, no cap, 7 s. Good for scans and summaries | `omni-cline/cline/nvidia/nemotron-3.5-lightning-free` |
-| Document input, pdf and video | `opencode/glm-5.3-flash-free` | Console | Only route with pdf and video input | none |
-| Audio input | `opencode/mimo-v2.6-flash-free` | Console | Only route with audio input | none |
+| Hard agentic, multi-file | `omni-codex/codex/gpt-5.6-terra` | gateway | Strongest route, 3.3 s, no cap. Default for hard work | `opencode-college/deepseek-v4.1-flash-free#max` |
+| Hard agentic, capped | `opencode-college/deepseek-v4.1-flash-free#max` | Console | DeepSWE 77.0, Apex 72.1. Best measured planner on the capped side | personal, then ronaldo |
+| Large context over 200k | `opencode-college/beam-free#high` | Console | Only strong 1M route, 131k output | `omni-openrouter/openrouter/nvidia/nemotron-3-super-120b-a12b:free` |
+| Atomic edit, bulk | `opencode-college/flint-40b-free#medium` | Console | SWE-bench Pro 89.7%, 2.5B active. Edits in place | `omni-mistral/mistral/codestral-latest` |
+| Vision, large context | `omni-openrouter/openrouter/nvidia/nemotron-3.5-super-vl:free` | gateway | 1M input with images, uncapped | `opencode-college/nemotron-3.5-super-vl-free#high` |
+| Cheap bulk and background | `omni-ddg/duckduckgo-web/gpt-5.6-luna` | gateway | No auth, no cap, 7 s. Good for scans and summaries | `opencode-college/mimo-v2.6-flash-free` |
+| Document input, pdf and video | `opencode-college/glm-5.3-flash-free` | Console | Only route with pdf and video input | none |
+| Audio input | `opencode-college/mimo-v2.6-flash-free` | Console | Only route with audio input | none |
 
 Selection order: fewest steps, then cheapest domain, then lowest variance, then data policy.
 
-Do not add an eighth entry without a measured class the seven cannot serve.
+Do not add a ninth entry without a measured class the eight cannot serve.
 
 ## 4. Gateway providers
 
@@ -82,10 +82,10 @@ Two sets exist. Seventeen connections are configured. Fourteen providers expose 
 | `cline` AMOL SHUKLA | OAuth | partial | `nemotron-3.5-lightning-free` OK. `beam-free` returns 500. Key expires 2026-10-27 |
 | `gemini` main | API key | partial | `gemma-4-31b-it` OK. Gemini-branded models return 404 |
 | `groq` main | API key | partial | Gateway OK, 0.4 s. OpenCode gets 413, prompt too large |
-| `opencode-zen` College | API key | inert | Valid auth, no models exposed, no default model |
-| `opencode-zen` Personal | API key | inert | Valid auth, no models exposed, no default model |
-| `opencode-zen` Ronaldo | API key | inert | Valid auth, no models exposed, no default model |
-| `aihorde` | none | broken | Needs an API key |
+| `opencode-zen` College | API key | inert | Orphaned: CLI lists it, API returns 404, no models |
+| `opencode-zen` Personal | API key | inert | Orphaned: CLI lists it, API returns 404, no models |
+| `opencode-zen` Ronaldo | API key | inert | Orphaned: CLI lists it, API returns 404, no models |
+| `aihorde` | none | working | `aihorde/google/gemma-4-31b` OK, 4 s, anonymous queue. `horde/` alias requires a key |
 | `cloudflare-playground` | none | broken | Needs Playwright and Chromium |
 | `chipotle` | none | unverified | No models exposed |
 | `theoldllm` | none | unverified | No models exposed |
@@ -106,10 +106,13 @@ These five appear in `/v1/models` with model counts but have no configured conne
 
 ### 4.3 Gateway notes
 
-- The three `opencode-zen` connections authenticate but expose no models and carry no default model. Only an explicit provider probe returns 404. Nothing routes to them, so they are inert, not harmful. Either register a model list or remove them.
+- The three `opencode-zen` connections are orphaned. `providers list` and their `/api/providers` record disagree: the API returns `Connection not found`, so they cannot be disabled through the API. The CLI has no remove command. They expose no models, and auto-routing is disabled, so no request can reach them. They are harmless but unremovable without a database edit.
+- `gpt-6.1-terra` is listed on the gateway through Cline, not Codex. Every variant returns 402 Insufficient credits. Codex carries `gpt-5.6-terra` and `gpt-6-luna` only.
+- `cline` returns 500 on some models and 402 on paid ones. Treat it as opportunistic, not a default.
+- `aihorde` works anonymously through the `aihorde/` prefix. `gemma-4-31b` answers in 4 s. The `horde/` alias returns 401 because it wants an AI Horde key, and no key is stored in any env file or in the connection record. An account key would raise queue priority, not add models.
 - `groq` works at the gateway and fails inside OpenCode. The agent system prompt exceeds the model limit. Do not route agent sessions there.
-- `gemini` serves gemma models only. The Gemini-branded model map is stale.
-- The `omni-codex` key in `opencode.json` is an `{env:...}` reference, resolved at runtime. It is not a literal key.
+- `gemini` serves gemma models only. `gemma-4-31b-it` is confirmed working.
+- The gateway does not enforce auth on chat completions. It does on `/v1/models`. No `apiKey` is stored in `opencode.json`, and provider routes still work.
 - Codex account priority is 1 for ronaldoamol and 2 for amolshukla. The second drains only after the first throttles.
 - The gateway reports 1850 model entries. OpenCode wires 154 of them. Entry count is not availability.
 
@@ -131,26 +134,27 @@ Rules:
 - Keep 20% of the Console budget for the last quarter of the day.
 - Use one orchestrator per task. Nested subagents multiply steps in one domain.
 
-## 6. Promo mode
+## 6. Uncapped domains and expiry
 
-A promo window is a domain with quota outside the 200/day cap. While one is live, the Console budget stops binding for the classes that domain covers.
+A domain outside the 200/day cap changes the ranking for the classes it covers. Today that is the gateway: Codex plan quota, OpenRouter free tier, Mistral free tier, DuckDuckGo.
 
-| Field | Value |
-| :--- | :--- |
-| Mode | promo |
-| Promo provider | `omni-codex`, two OAuth accounts |
-| Window start | 2026-10-27 |
-| Window end | 2026-10-29 |
-| Evidence | `omniroute providers status`, expiry 10/29/2026 on both accounts |
-| Revert to | section 3, deepseek-v4.1-flash-free#max |
+No promotional unlimited provider is live today. If one appears, it joins this section and becomes the default for every class it can serve.
+
+Expiry is not a promotion. It is the date the stored credential stops working. `omniroute providers status` reports it per connection.
+
+| Connection | Expires | Effect on expiry |
+| :--- | :--- | :--- |
+| `codex` ronaldoamol.9699 | 2026-10-29 | Route fails until re-auth |
+| `codex` amolshukla.bcr21221 | 2026-10-29 | Second account, same date |
+| `cline` AMOL SHUKLA | 2026-10-27 | Route fails until re-auth |
 
 Rules:
 
-- In promo mode rank by capability. Use Codex for hard work by default.
+- In an uncapped domain rank by capability, not steps.
 - Keep specialists for pdf, audio, and 1M vision. Codex covers none of them.
-- Record the end date before enabling. On expiry revert to section 3. A dead promo never stays default.
-- Second expiring window: `cline` key expires 2026-10-27. Verify before routing to it.
-- Guard: check section 12 before sending private code to a promo route.
+- Record an expiry date for every connection that has one. A lapsed credential looks like a 500 or a timeout.
+- On expiry, fall through to section 3. Never leave a dead route as default.
+- Re-auth is a user action. The ledger only records the date.
 
 ## 7. Archive, do not route
 
@@ -161,8 +165,11 @@ Rules:
 | `opencode/nemotron-3-ultra-free` | Dominated by beam and deepseek. No unique modality |
 | `omni-groq/*` | Prompt size rejected inside OpenCode. Gateway-only use |
 | `omni-gemini/gemini-*` | Branded models 404. Gemma models remain usable |
+| `omni-cline/openai/gpt-6.1-terra*` | Listed, but every variant returns 402 Insufficient credits |
 | `omni-cline/*/beam-free` | HTTP 500 at the provider |
-| 9 unusable connections and 5 catalog-only providers | Section 4 states the reason for each |
+| `opencode/*` | Anonymous fallback. Not routed while an account key is valid |
+| `aihorde/google/gemma-4-31b` | Works anonymously, but the shared queue is slower than DDG for background work |
+| 8 unusable connections and 5 catalog-only providers | Section 4 states the reason for each |
 | 30 paid `opencode/` refs | Non-zero price. No place in a free ledger |
 
 A model leaves archive only with a measured step count that beats a listed pick. Record it in section 14.
@@ -245,7 +252,9 @@ Cards cover the shortlist. The three archived Console models keep full specs in 
 
 - OpenCode 2.2.0 at `/usr/bin/opencode`. Config `/root/.config/opencode/opencode.json`.
 - Credentials: three Console API keys and one gateway key in `auth.json`. Values never recorded.
-- Configured prefixes: `opencode`, three Console accounts, seven `omni-*` gateway providers.
+- Configured prefixes: three routed Console accounts, seven `omni-*` gateway providers, and the anonymous `opencode/` fallback.
+- `opencode.json` stores no key material. All seven `apiKey` entries were removed on 2026-10-27 and every route still answers.
+- Default model: `opencode-college/deepseek-v4.1-flash-free`. Small model: `omni-codex/codex/gpt-5.6-luna`.
 - Gateway: OmniRoute 3.8.52, `http://localhost:20128/v1`, healthy, 14 requests in 24 h.
 - Gateway connections: 17 configured, 16 active, 1 unavailable.
 - Local servers on 11434, 1234, 8000: none listening.
@@ -279,11 +288,12 @@ Cards cover the shortlist. The three archived Console models keep full specs in 
 
 - R1 step efficiency: fewest expected steps for the class wins.
 - R2 quality gate: a model must clear the class minimum. A cheap failure is not a saving.
-- R3 domain economy: gateway before Console. Never downgrade the model to stay in one bucket.
+- R3 domain economy: gateway before Console. Failover across the three Console accounts before any model downgrade.
 - R4 capability fit: tools, reasoning control, modalities, context length.
 - R5 data policy: zero retention before 30-day before may-train before trial terms.
 - R6 review work uses a different model family than the author.
 - R7 archive is inert. A model returns only with a measurement.
+- R8 no key material in `opencode.json`. Keys live in `auth.json` or the gateway env file.
 - Override: a dated measurement with a stated method replaces a pick.
 
 ## 14. Provenance and measurements
@@ -311,12 +321,14 @@ Measurement protocol for a pick change:
 - Console refs: 217 across 10 configured prefixes.
 - Console free models: 9 distinct.
 - Console free refs: 33, from 9 models across 4 prefixes.
-- Gateway connections: 17 configured. Working 5, partial 3, inert 3, broken 2, unverified 3, inactive 1.
+- Routed Console accounts: 3. Anonymous `opencode/` is fallback only.
+- Gateway connections: 17 configured. Working 6, partial 3, inert 3, broken 1, unverified 3, inactive 1.
 - Gateway catalog-only providers: 5, all blocked on a local dependency.
-- Gateway providers usable: 7. Fully working 4, partial 3.
+- Gateway providers usable: 8. Fully working 5, partial 3.
 - Gateway model entries: 1850. Wired into OpenCode: 154.
 - Shortlist: 8 entries across 2 domains.
-- Mode: promo. Window ends 2026-10-29.
+- Key material in `opencode.json`: none.
+- Next credential expiry: cline 2026-10-27, codex 2026-10-29.
 - Host: OpenCode 2.2.0, OmniRoute 3.8.52, Arch Linux ARM64 chroot, `arch-btw`.
 - Collected: 2026-10-27.
 <!-- END AUTO:stats -->
