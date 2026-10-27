@@ -1,132 +1,173 @@
 # Free Models Ledger
 
-Routing table for zero-price models on this device. The unit of cost is one request, not one token. Each opencode Console account allows about 200 requests per day. Model choice sets requests per task, so rank by steps to done.
+Routing table for zero-price model access on this device. Two quota domains exist: OpenCode Console, capped per account, and the OmniRoute gateway, capped per upstream. The unit of cost is one request, not one token.
 
-**State 2026-10-27. Mode: budgeted. OpenCode 2.2.0. 217 refs, 10 providers, 9 free models, 4 Console prefixes.**
+**State 2026-10-27. Mode: promo. OpenCode 2.2.0, gateway 3.8.52. 4 Console prefixes, 17 gateway connections, 9 Console free models, 7 gateway providers verified.**
 
-Sections: 1 Metric, 2 Shortlist, 3 Quota domains, 4 Budget, 5 Promo mode, 6 Archive, 7 Inventory, 8 Cards, 9 Devices, 10 Drift, 11 Privacy, 12 Policy, 13 Provenance, 14 Stats.
+Sections: 1 Metric, 2 Domains, 3 Shortlist, 4 Gateway, 5 Budget, 6 Promo, 7 Archive, 8 Console inventory, 9 Cards, 10 Devices, 11 Drift, 12 Privacy, 13 Policy, 14 Provenance, 15 Stats.
 
-An agent that only needs to route work reads sections 2 and 3. Stop there.
+An agent that only needs to route work reads sections 2, 3, and 6. Stop there.
 
 ## 1. The metric
 
-One request is one agent step. A turn that reads, edits, and stops costs one step. A repair loop costs another step.
+One request is one agent step. A turn that reads, edits, and stops costs one step. A repair loop costs another.
 
 Measured 2026-10-27 with `opencode stats`: 39 prompts, 1.4k steps, 12 subagents, 5 active days. That is about 36 steps per prompt.
 
-Three consequences drive every pick below.
+Three consequences drive the picks.
 
 - A model that finishes in 20 steps beats one that finishes in 60, at equal quality.
-- Delegation is not free. A subagent spends its own steps from the same account.
+- Delegation is not free. A subagent spends its own steps from the same domain.
 - A published benchmark is a proxy. A measured step count replaces it.
 
-Rule: pick the model with the fewest expected steps for the task class. Treat quality as a gate, not a tiebreak. A failed task costs more than a slow one.
+Rule: pick the model with the fewest expected steps, in the cheapest domain that can run it. Quality is a gate, not a tiebreak. A failed task costs more than a slow one.
 
-## 2. Pareto shortlist
+## 2. Domains
 
-Six models cover every task class on this device. Route here first. Anything absent from this table is archive, and archive is never routed.
+A domain is a quota bucket with its own auth. Steps in one domain do not drain another.
 
-| Class | Ref | Step profile | Why it wins | Fallback |
+| Domain | Ref prefix | Auth | Cap | Counts against 200/day | State |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| OpenCode anonymous | `opencode/` | none stored | undisclosed free tier | assumed yes | verified |
+| Console College | `opencode-college/` | API key | about 200 steps | yes | verified |
+| Console Personal | `opencode-personal/` | API key | about 200 steps | yes | verified |
+| Console Ronaldo | `opencode-ronaldo/` | API key | about 200 steps | yes | verified |
+| Gateway Codex | `omni-codex/` | OAuth, 2 accounts | plan quota, window ends 2026-10-29 | no | verified |
+| Gateway OpenRouter | `omni-openrouter/` | API key | free-tier rate limits | no | verified |
+| Gateway Mistral | `omni-mistral/` | API key | free tier | no | verified |
+| Gateway Cline | `omni-cline/` | OAuth | plan quota, key expires 2026-10-27 | no | partial |
+| Gateway DuckDuckGo | `omni-ddg/` | none | unofficial, unmeasured | no | verified |
+| Gateway Gemini | `omni-gemini/` | API key | free tier, gemma only | no | partial |
+| Gateway Groq | `omni-groq/` | API key | free tier, rejects agent prompt | no | partial |
+| Local | none installed | not applicable | not applicable | not applicable | none |
+
+Four Console prefixes answer a live probe. `auth.json` holds three Console keys and one gateway key. The bare `opencode/` prefix has no stored credential, so it is the anonymous route.
+
+Unverified: whether the four Console prefixes drain separate buckets. A direct credential probe returns HTTP 403, so quota cannot be read outside OpenCode. Treat the split as likely, not proven.
+
+The gateway is the relief valve. Spend a Console step only when no gateway domain can do the work.
+
+## 3. Shortlist
+
+Eight entries. Each wins one task class in one domain. Anything absent is archive.
+
+| Class | Ref | Domain | Why it wins | Fallback |
 | :--- | :--- | :--- | :--- | :--- |
-| Hard agentic, multi-file | `opencode/deepseek-v4.1-flash-free#max` | Lowest steps on hard work | DeepSWE 77.0, Apex 72.1. Best measured planner. Fewest repair loops | next account, same model |
-| Atomic edit, bulk mechanical | `opencode/flint-40b-free#medium` | Fast turns, high first-pass rate | SWE-bench Pro 89.7%, 2.5B active. Edits in place, no rewrite | next account, same model |
-| Large context over 200k | `opencode/beam-free#high` | Steady on long input | Only strong 1M route. 131k output | next account, same model |
-| Document input, pdf and video | `opencode/glm-5.3-flash-free` | Single pass on documents | Only free route with pdf and video input | next account, same model |
-| Large-context vision | `opencode/nemotron-3.5-super-vl-free#high` | Single pass on large images | 1M input with image support | next account, same model |
-| Audio input | `opencode/mimo-v2.6-flash-free` | Single pass on audio | Only free route with audio input | next account, same model |
+| Hard agentic, multi-file | `omni-codex/codex/gpt-5.6-terra` | gateway | Strongest route, 3.3 s, no cap. Default while the window is live | `opencode/deepseek-v4.1-flash-free#max` |
+| Hard agentic, capped | `opencode/deepseek-v4.1-flash-free#max` | Console | DeepSWE 77.0, Apex 72.1. Best measured planner on the capped side | next Console prefix |
+| Large context over 200k | `opencode/beam-free#high` | Console | Only strong 1M route, 131k output | `omni-openrouter/openrouter/nvidia/nemotron-3-super-120b-a12b:free` |
+| Atomic edit, bulk | `opencode/flint-40b-free#medium` | Console | SWE-bench Pro 89.7%, 2.5B active. Edits in place | `omni-mistral/mistral/codestral-latest` |
+| Vision, large context | `omni-openrouter/openrouter/nvidia/nemotron-3.5-super-vl:free` | gateway | 1M input with images, uncapped | `opencode/nemotron-3.5-super-vl-free#high` |
+| Cheap bulk and background | `omni-ddg/duckduckgo-web/gpt-5.6-luna` | gateway | No auth, no cap, 7 s. Good for scans and summaries | `omni-cline/cline/nvidia/nemotron-3.5-lightning-free` |
+| Document input, pdf and video | `opencode/glm-5.3-flash-free` | Console | Only route with pdf and video input | none |
+| Audio input | `opencode/mimo-v2.6-flash-free` | Console | Only route with audio input | none |
 
-Selection order inside a class:
+Selection order: fewest steps, then cheapest domain, then lowest variance, then data policy.
 
-1. Lowest expected steps.
-2. Lowest step variance. Prefer the model that does not need a retry.
-3. Data policy. Zero retention before trial terms.
+Do not add an eighth entry without a measured class the seven cannot serve.
 
-Do not add a seventh model without a measured class that the six cannot serve.
+## 4. Gateway providers
 
-## 3. Quota domains
+Two sets exist. Seventeen connections are configured. Fourteen providers expose models. The sets overlap but do not match.
 
-The daily cap applies per Console account, not per device. Four Console prefixes are configured, so the same model is reachable from four separate buckets.
+### 4.1 Configured connections, 17
 
-| Domain | Ref prefix | Cap | Counts against opencode | Failover |
-| :--- | :--- | :--- | :--- | :--- |
-| Console shared | `opencode/` | about 200 steps | yes | next account |
-| Console account 1 | `opencode-college/` | about 200 steps | separate bucket | next account |
-| Console account 2 | `opencode-personal/` | about 200 steps | separate bucket | next account |
-| Console account 3 | `opencode-ronaldo/` | about 200 steps | separate bucket | next model in section 2 |
-| Gateway | `omni-*` | upstream quota | no | provider specific |
-| Local | none installed | not applicable | not applicable | none |
+| Connection | Auth | State | Evidence |
+| :--- | :--- | :--- | :--- |
+| `codex` ronaldoamol.9699 | OAuth | working | `codex/gpt-5.6-terra` OK, 3.3 s. Expires 2026-10-29 |
+| `codex` amolshukla.bcr21221 | OAuth | working | Second account, same window. Expires 2026-10-29 |
+| `openrouter` GitHub | API key | working | `nemotron-3.5-super-vl:free` OK, 1.3 s |
+| `mistral` Mistral | API key | working | `codestral-latest` OK, 5.7 s |
+| `duckduckgo-web` | none | working | `gpt-5.6-luna` OK, 7.5 s |
+| `cline` AMOL SHUKLA | OAuth | partial | `nemotron-3.5-lightning-free` OK. `beam-free` returns 500. Key expires 2026-10-27 |
+| `gemini` main | API key | partial | `gemma-4-31b-it` OK. Gemini-branded models return 404 |
+| `groq` main | API key | partial | Gateway OK, 0.4 s. OpenCode gets 413, prompt too large |
+| `opencode-zen` College | API key | inert | Valid auth, no models exposed, no default model |
+| `opencode-zen` Personal | API key | inert | Valid auth, no models exposed, no default model |
+| `opencode-zen` Ronaldo | API key | inert | Valid auth, no models exposed, no default model |
+| `aihorde` | none | broken | Needs an API key |
+| `cloudflare-playground` | none | broken | Needs Playwright and Chromium |
+| `chipotle` | none | unverified | No models exposed |
+| `theoldllm` | none | unverified | No models exposed |
+| `uncloseai` | none | unverified | No models exposed |
+| `felo-web` | none | inactive | Connection disabled |
 
-Failover order: `opencode`, then `opencode-college`, then `opencode-personal`, then `opencode-ronaldo`.
+### 4.2 Catalog-only providers, no connection
 
-Two properties make this useful.
+These five appear in `/v1/models` with model counts but have no configured connection. Each fails on a missing local dependency.
 
-- The model ref is identical across prefixes. Switching account keeps the model, so quality does not drop.
-- The buckets drain independently. A throttled route is a routing error, not a reason to accept a weaker model.
+| Provider | Models | Failure |
+| :--- | ---: | :--- |
+| `auggie` | 28 | Auggie CLI not installed |
+| `codex-app-server` | 52 | Transport not configured |
+| `devin-cli-agentic` | 127 | `DEVIN_AGENTIC_HOME` invalid |
+| `zcode` | 14 | Binary missing |
+| `veoaifree-web` | 4 | Timeout at 50 s |
 
-Status: the per-account cap is an assumption. Neither the catalog nor the CLI exposes a quota counter. Confirm it with one probe per prefix before trusting the failover.
+### 4.3 Gateway notes
 
-Unresolved: `opencode auth list` prints College, Github, and Personal. The mapping of Github to `opencode-ronaldo` is inferred, not verified.
+- The three `opencode-zen` connections authenticate but expose no models and carry no default model. Only an explicit provider probe returns 404. Nothing routes to them, so they are inert, not harmful. Either register a model list or remove them.
+- `groq` works at the gateway and fails inside OpenCode. The agent system prompt exceeds the model limit. Do not route agent sessions there.
+- `gemini` serves gemma models only. The Gemini-branded model map is stale.
+- The `omni-codex` key in `opencode.json` is an `{env:...}` reference, resolved at runtime. It is not a literal key.
+- Codex account priority is 1 for ronaldoamol and 2 for amolshukla. The second drains only after the first throttles.
+- The gateway reports 1850 model entries. OpenCode wires 154 of them. Entry count is not availability.
 
-## 4. Step budget
+## 5. Step budget
 
-One account per day holds about five substantial tasks at 36 steps each. Spend by share, not by impulse.
+Console steps are the scarce resource. Gateway steps are not. Drain the gateway first.
 
 | Share | Steps | Class | Ref |
 | :--- | ---: | :--- | :--- |
-| 60% | 120 | hard agentic and review | `deepseek-v4.1-flash-free#max` |
-| 25% | 50 | bulk and atomic edits | `flint-40b-free#medium` |
-| 10% | 20 | large context | `beam-free#high` |
-| 5% | 10 | multimodal | `glm-5.3-flash-free`, `nemotron-3.5-super-vl-free#high`, `mimo-v2.6-flash-free` |
+| 45% | 90 | hard agentic and review | Codex, then deepseek on fallback |
+| 25% | 50 | bulk and atomic edits | flint, codestral, ddg |
+| 20% | 40 | large context and vision | beam, nemotron super-vl |
+| 10% | 20 | multimodal documents | glm, mimo |
 
 Rules:
 
-- Keep 20% for the last quarter of the day. Do not exhaust a bucket before noon.
-- Send file search and bulk reads to the gateway. Gateway steps do not drain a capped bucket.
-- Use one orchestrator per task. Nested subagents multiply steps against one bucket.
-- Rotate accounts on throttle, not on model quality. Never downgrade the model to save a step.
+- Try gateway first. Move to Console only when the gateway class is missing or fails.
+- Rotate Console prefixes on throttle, not on model quality.
+- Keep 20% of the Console budget for the last quarter of the day.
+- Use one orchestrator per task. Nested subagents multiply steps in one domain.
 
-## 5. Promo mode
+## 6. Promo mode
 
-A promotional provider grants unlimited or high-limit use for a window. When one is live, the step budget stops binding and the ranking changes.
-
-Declared state. Update this table, not prose.
+A promo window is a domain with quota outside the 200/day cap. While one is live, the Console budget stops binding for the classes that domain covers.
 
 | Field | Value |
 | :--- | :--- |
-| Mode | budgeted |
-| Promo provider | none |
-| Window start | none |
-| Window end | none |
-| Evidence | none |
-| Revert to | section 2 shortlist |
+| Mode | promo |
+| Promo provider | `omni-codex`, two OAuth accounts |
+| Window start | 2026-10-27 |
+| Window end | 2026-10-29 |
+| Evidence | `omniroute providers status`, expiry 10/29/2026 on both accounts |
+| Revert to | section 3, deepseek-v4.1-flash-free#max |
 
-Detection signals:
+Rules:
 
-- `opencode auth list` shows a new credential or a changed tier.
-- The Console plan page shows a promotional window.
-- A route keeps answering past the 200 step mark.
+- In promo mode rank by capability. Use Codex for hard work by default.
+- Keep specialists for pdf, audio, and 1M vision. Codex covers none of them.
+- Record the end date before enabling. On expiry revert to section 3. A dead promo never stays default.
+- Second expiring window: `cline` key expires 2026-10-27. Verify before routing to it.
+- Guard: check section 12 before sending private code to a promo route.
 
-Switch rule: in promo mode rank by capability only. The promo model becomes the default for every class where it is not clearly weaker. Keep the specialists for pdf, audio, and 1M vision.
+## 7. Archive, do not route
 
-Exit rule: record the end date before enabling promo mode. On expiry revert to section 2. A dead promo must never stay default.
-
-Guard: promo routes often allow training on submitted data. Check row 11 before sending private code.
-
-## 6. Archive, do not route
-
-Excluded models stay listed so a future run does not re-add them by accident. No agent routes to this section.
-
-| Ref | Why excluded |
+| Ref or connection | Why excluded |
 | :--- | :--- |
-| `opencode/big-pickle` | 2025 route, text only, closed weights, no unique modality. 200k input, 32k output |
-| `opencode/nemotron-3.5-lightning-free` | Dominated by flint on coding. Keep only if one response must exceed 131k output |
-| `opencode/nemotron-3-ultra-free` | Dominated by beam and deepseek. Older, no structured output, no unique modality |
-| `omni-*` refs, 154 total | Price unmeasured, upstream quota only, not part of the capped budget |
-| Paid `opencode/` refs, 30 total | Non-zero price. No place in a free ledger |
+| `opencode/big-pickle` | 2025 route, text only, closed weights, no unique modality |
+| `opencode/nemotron-3.5-lightning-free` | Dominated by flint. Keep only for output over 131k |
+| `opencode/nemotron-3-ultra-free` | Dominated by beam and deepseek. No unique modality |
+| `omni-groq/*` | Prompt size rejected inside OpenCode. Gateway-only use |
+| `omni-gemini/gemini-*` | Branded models 404. Gemma models remain usable |
+| `omni-cline/*/beam-free` | HTTP 500 at the provider |
+| 9 unusable connections and 5 catalog-only providers | Section 4 states the reason for each |
+| 30 paid `opencode/` refs | Non-zero price. No place in a free ledger |
 
-A model leaves archive only with a measured step count that beats a listed pick. Record the measurement in section 13.
+A model leaves archive only with a measured step count that beats a listed pick. Record it in section 14.
 
-## 7. Inventory
+## 8. Console inventory
 
 <!-- BEGIN AUTO:inventory -->
 | Ref | Ctx | Out | Input | Tools | Variants | Released | Policy | Canonical |
@@ -142,9 +183,9 @@ A model leaves archive only with a measured step count that beats a listed pick.
 | opencode/nemotron-3-ultra-free | 1,000,000 | 128,000 | text | yes | - | 2026-06-04 | nvidia-trial-terms | nvidia/nemotron-3-ultra-550b-a55b |
 <!-- END AUTO:inventory -->
 
-Each of the nine free models above is also available under `opencode-college/`, `opencode-personal/`, and `opencode-ronaldo/`. Those 24 duplicate refs add no distinct model. They add quota buckets.
+Each free model is also reachable under `opencode-college/`, `opencode-personal/`, and `opencode-ronaldo/`. Those 24 duplicate refs add no distinct model. They add quota buckets.
 
-## 8. Model cards
+## 9. Cards
 
 <!-- BEGIN AUTO:cards -->
 ### opencode/deepseek-v4.1-flash-free
@@ -153,38 +194,38 @@ Each of the nine free models above is also available under `opencode-college/`, 
 - Context: 200,000 in, 32,000 out. Input text and image.
 - Reasoning: yes, effort low, high, max. Tools: yes. Structured output: yes. Open weights: yes.
 - Policy: zero-retention. Prompts and responses are not used for training.
-- Route: primary for hard agentic work. Keep context tight. Delegate edits.
+- Route: hard agentic work on the capped side. Keep context tight.
 
 ### opencode/flint-40b-free
 - Name: Flint 40B Free. Status: active. Released: 2026-10-21. Knowledge cutoff: 2026-06.
 - Description: Open-weight mixture-of-experts with about 2.5B active parameters.
 - Context: 262,144 in, 65,536 out. Input text.
-- Reasoning: yes, effort low to max. Tools: yes. Structured output: yes. Open weights: yes.
+- Reasoning: yes, effort low to max. Tools: yes. Open weights: yes.
 - Policy: may-use-during-free-period. Data may train the model. Retained 30 days.
-- Route: atomic edits and bulk mechanical work. Not a fallback for hard reasoning.
+- Route: atomic edits and bulk mechanical work.
 
 ### opencode/beam-free
 - Name: Beam Free. Status: active. Released: 2026-10-05. Knowledge cutoff: 2026-06-30.
 - Description: Sparse mixture-of-experts with 23B active parameters for coding and agentic work.
 - Context: 1,048,576 in, 131,072 out. Input text.
-- Reasoning: yes, effort low to max. Tools: yes. Structured output: yes. Open weights: yes.
+- Reasoning: yes, effort low to max. Tools: yes. Open weights: yes.
 - Policy: retained 30 days for safety. Regional blocklist applies.
-- Route: the only strong 1M class route. Use for large repositories and long documents.
+- Route: large repositories and long documents.
 
 ### opencode/glm-5.3-flash-free
 - Name: GLM-5.3-Flash Free. Status: active. Released: 2026-08-26.
 - Description: Native multimodal model for efficient coding and long-horizon agent tasks.
 - Context: 200,000 in, 32,000 out. Input text, image, video, pdf.
-- Reasoning: yes, effort low, high, max. Tools: yes. Structured output: yes. Open weights: yes.
+- Reasoning: yes, effort low, high, max. Tools: yes. Open weights: yes.
 - Policy: zero-retention. Not used for training.
-- Route: sole pdf and video route. Also a sound mixed document and code driver.
+- Route: sole pdf and video route.
 
 ### opencode/nemotron-3.5-super-vl-free
 - Name: Nemotron 3.5 Super VL Free. Status: active. Released: 2026-10-15.
 - Description: Vision-language reasoning model for text, image, and video understanding.
 - Context: 1,048,576 in, 131,072 out. Input text and image.
 - Reasoning: yes, effort none to xhigh. Tools: yes. Open weights: yes.
-- Policy: nvidia-trial-terms. Logged for security and product improvement. No personal data.
+- Policy: nvidia-trial-terms. Logged for security and product improvement.
 - Route: large-context vision. Smaller images go to glm.
 
 ### opencode/mimo-v2.6-flash-free
@@ -196,88 +237,86 @@ Each of the nine free models above is also available under `opencode-college/`, 
 - Route: sole audio route.
 <!-- END AUTO:cards -->
 
-Cards cover the shortlist only. The three archived free models keep full specs in the inventory table, so restoration needs no research.
+Cards cover the shortlist. The three archived Console models keep full specs in section 8, so restoration needs no research.
 
-`nemotron-3.5-lightning-free` and `nemotron-3-ultra-free` are archived for dominance, not for failure. Either returns on a measured step win.
-
-## 9. Devices
+## 10. Devices
 
 ### arch-btw, Arch Linux ARM64 chroot, recorded 2026-10-27
 
-- OpenCode 2.2.0 at `/usr/bin/opencode`. Config source `/root/.config/opencode/opencode.json`.
-- Credentials: three Console accounts stored, College, Github, Personal. Values are never recorded here.
-- Configured providers: `opencode`, three Console account prefixes, and seven `omni-*` gateway prefixes.
-- Default model in config: `opencode/deepseek-v4.1-flash-free`. Small model: `omni-codex/codex/gpt-5.6-luna`.
-- Gateway: `omniroute` on `http://localhost:20128/v1`. Answers, unmeasured price.
+- OpenCode 2.2.0 at `/usr/bin/opencode`. Config `/root/.config/opencode/opencode.json`.
+- Credentials: three Console API keys and one gateway key in `auth.json`. Values never recorded.
+- Configured prefixes: `opencode`, three Console accounts, seven `omni-*` gateway providers.
+- Gateway: OmniRoute 3.8.52, `http://localhost:20128/v1`, healthy, 14 requests in 24 h.
+- Gateway connections: 17 configured, 16 active, 1 unavailable.
 - Local servers on 11434, 1234, 8000: none listening.
-- Steps consumed this period: 1.4k over 39 prompts, 7 sessions, 12 subagents.
+- Steps this period: 1.4k over 39 prompts, 7 sessions, 12 subagents.
 
-## 10. Drift watchlist
+## 11. Drift watchlist
 
-- Free models absent from this catalog but documented upstream: exo-free, mimo-v2.5-free, longcat-2.5-preview-free, ll-alpha-free, muse-spark-1.3-contributor-free, jev-1.13-free.
-- `opencode` paid list carries 30 non-free refs. Ignore them.
-- The gateway lists 154 refs with empty cost arrays. Empty cost is not proof of zero price.
-- Catalog tool and CLI disagree by four refs. See section 13.
-- Watch rules: check the Console free list daily. Remove a model only after two runs absent. Use the CLI as the routing source of truth.
+- Console free list and gateway connection list change independently. Check both.
+- `opencode-zen` gateway connections return 404 while native Console routes work. Recheck after each gateway upgrade.
+- `cline` and both `codex` accounts carry expiry dates. A silent expiry looks like a 500 or a timeout.
+- `gemini` model map is stale. Verify a branded model before routing.
+- Catalog tool and CLI disagree by four refs. See section 14.
+- Use the CLI as the routing source of truth for Console refs. Use `/v1/models` for gateway refs.
 
-## 11. Privacy and data handling
+## 12. Privacy and data handling
 
 | Scope | Training | Retention |
 | :--- | :--- | :--- |
 | Console default | not used | zero retention |
 | DeepSeek V4.1 Flash Free | not used | zero retention |
 | GLM-5.3-Flash Free | not used | zero retention |
-| Beam Free | not used | 30 days for safety, regional blocklist |
+| Beam Free | not used | 30 days, regional blocklist |
 | MiMo-V2.6-Flash Free, Flint 40B Free | may train during the free period | Flint keeps 30 days |
-| Nemotron Ultra, 3.5 Lightning, 3.5 Super VL | nvidia trial terms, logged, not linked to identity | no personal or confidential data |
+| Nemotron Ultra, 3.5 Lightning, 3.5 Super VL | nvidia trial terms | no personal or confidential data |
+| Codex via gateway | governed by the OpenAI account plan | check before use |
+| OpenRouter, Mistral, Cline, Gemini, Groq | governed by each upstream account | check before use |
+| DuckDuckGo web | unofficial web route | no private data |
 | Big Pickle | not stated | not stated |
-| Promo routes | check before use | check before use |
 
-Beam blocklist: Angola, Belarus, Cambodia, China including Hong Kong and Macau, Cuba, Democratic Republic of the Congo, Equatorial Guinea, Iran, Iraq, Laos, Libya, Nigeria, North Korea, Russia, Syria, Turkmenistan, Uzbekistan, Venezuela, Crimea, Donetsk and Luhansk.
-
-## 12. Ranking policy
+## 13. Policy
 
 - R1 step efficiency: fewest expected steps for the class wins.
 - R2 quality gate: a model must clear the class minimum. A cheap failure is not a saving.
-- R3 quota domain: prefer the bucket that still holds steps. Never downgrade the model to stay in one bucket.
+- R3 domain economy: gateway before Console. Never downgrade the model to stay in one bucket.
 - R4 capability fit: tools, reasoning control, modalities, context length.
 - R5 data policy: zero retention before 30-day before may-train before trial terms.
 - R6 review work uses a different model family than the author.
 - R7 archive is inert. A model returns only with a measurement.
-- Override: a dated measurement with a stated method replaces a pick in section 2.
+- Override: a dated measurement with a stated method replaces a pick.
 
-## 13. Provenance and sources
+## 14. Provenance and measurements
 
 Checked 2026-10-27.
 
 - Host: `opencode --version` 2.2.0, `opencode stats`, `opencode auth list`, `opencode models` 217 lines.
-- Catalog tool: 213 refs. CLI: 217 refs. Delta is four refs.
-- The CLI is authoritative for routing, because it lists what `opencode run` resolves.
-- Tool-only census misses `glm-5.3-flash-free`, `nemotron-3.5-lightning-free`, and `nemotron-3-ultra-free`. A rebuild from the tool alone deletes three models.
-- Enrichment: `https://models.dev/api.json`, sha256 recorded in section 14.
-- Prior probe: eight free refs answered one turn on 2026-10-23. `big-pickle` has never been probed.
-- Evidence tags: C host catalog, D models.dev, O OpenCode docs, A auth list, H host probe.
+- Gateway: OmniRoute 3.8.52, `providers list`, `providers status`, `providers test-all`, `/v1/models` 1850 entries.
+- Catalog tool: 213 refs. CLI: 217 refs. Delta four. The tool omits three free Console refs.
+- Console probes: all four prefixes answered `beam-free` on 2026-10-27.
+- Gateway probes: one live chat call per connection, then targeted retries where a model-level error appeared.
+- Direct credential probe to the Console endpoint returns 403. Quota is not readable outside OpenCode.
+- Prior probe: eight Console free refs answered on 2026-10-23. `big-pickle` has never been probed.
 
 Measurement protocol for a pick change:
 
 1. Fix one task with a stated acceptance check.
 2. Run the candidate and the incumbent on the same task.
-3. Record prompt, steps, tool calls, and pass or fail.
+3. Record prompt, steps, tool calls, domain, and pass or fail.
 4. Promote on fewer steps with a pass. Demote on failure, not on slowness.
 
-## 14. Stats
+## 15. Stats
 
 <!-- BEGIN AUTO:stats -->
-- Catalog: 217 refs across 10 configured prefixes.
-- Free models: 9 distinct.
-- Free refs: 33, from 9 models across 4 Console prefixes.
-- `opencode/`: 39 refs, 9 free.
-- Console account prefixes: 8 each, all free.
-- `omni-*`: 154 refs, price unmeasured.
-- Archive: 3 free models, 154 gateway refs, 30 paid refs.
-- Shortlist: 6 entries.
-- Mode: budgeted. No promo live.
-- Host: OpenCode 2.2.0, Arch Linux ARM64 chroot, `arch-btw`.
-- Collected: 2026-10-27, unprobed revision. Prior probe run 2026-10-23.
-- models.dev snapshot sha256: 470452beddc8610ffb429fc14a0332e500bb9a6e1662075d6fee7bbe919cd690.
+- Console refs: 217 across 10 configured prefixes.
+- Console free models: 9 distinct.
+- Console free refs: 33, from 9 models across 4 prefixes.
+- Gateway connections: 17 configured. Working 5, partial 3, inert 3, broken 2, unverified 3, inactive 1.
+- Gateway catalog-only providers: 5, all blocked on a local dependency.
+- Gateway providers usable: 7. Fully working 4, partial 3.
+- Gateway model entries: 1850. Wired into OpenCode: 154.
+- Shortlist: 8 entries across 2 domains.
+- Mode: promo. Window ends 2026-10-29.
+- Host: OpenCode 2.2.0, OmniRoute 3.8.52, Arch Linux ARM64 chroot, `arch-btw`.
+- Collected: 2026-10-27.
 <!-- END AUTO:stats -->
