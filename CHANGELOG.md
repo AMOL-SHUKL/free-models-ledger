@@ -2,6 +2,17 @@
 
 Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed changed`.
 
+## 2026-10-27, routing(console): three accounts, no keys in config, expiry clarified
+
+- `opencode.json` carries no key material. All seven `apiKey` entries removed and every route re-tested.
+- Default model moved from the anonymous `opencode/` prefix to `opencode-college/deepseek-v4.1-flash-free`.
+- Routing now uses the three authenticated Console accounts. Anonymous `opencode/` is fallback only.
+- Section 6 rewritten. "Promo" replaced with uncapped domains plus credential expiry dates. Expiry is a token date, not a promotion.
+- `gpt-6.1-terra` recorded as listed but unusable. Cline returns 402 Insufficient credits on every variant. Codex does not carry it.
+- AI Horde status corrected: no key exists in any env file or in the connection record.
+- `opencode-zen` x3 recorded as orphaned. The API cannot find them, the CLI cannot remove them, and auto-routing is disabled, so no request can reach them.
+- Verified after the change: Codex, College, and Mistral all answered with no `apiKey` in config.
+
 ## 2026-10-27, docs(providers): add gateway domain and verified inventory
 
 - Ledger now covers two quota domains. OpenCode Console, capped per account. OmniRoute gateway, capped per upstream.
