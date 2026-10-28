@@ -2,6 +2,13 @@
 
 Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed changed`.
 
+## 2026-10-28, routing(console): dual-stream architecture, OAuth and API key split verified
+
+- Restored native `opencode` provider alongside custom Console account providers in `fm-models`.
+- Verified multi-stream quota independence: Console College processed 536 steps today at $0.00 (171 on OAuth user seat, 365 on Console API key).
+- User starts sessions and invokes orchestrator via OAuth (`opencode/*`, switched via `/connectors`).
+- Orchestrator executes subagents, background tasks, and code edits via API key streams (`opencode-college/`, `opencode-personal/`, `opencode-ronaldo/`).
+
 ## 2026-10-27, fix(ledger): Console free count corrected to 8
 
 - Removed stale `opencode/big-pickle` from the Console inventory. It left the free list on 2026-10-23.

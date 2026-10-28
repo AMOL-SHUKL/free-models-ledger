@@ -26,24 +26,24 @@ Rule: pick the model with the fewest expected steps, in the cheapest domain that
 
 A domain is a quota bucket with its own auth. Steps in one domain do not drain another.
 
-| Domain | Ref prefix | Auth | Cap | Counts against 200/day | State |
+| Domain | Ref prefix | Auth | Cap | Multi-stream quota split | State |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| OpenCode anonymous | `opencode/` | none stored | undisclosed free tier | assumed yes | fallback only, not routed |
-| Console College | `opencode-college/` | API key | about 200 steps | yes | primary |
-| Console Personal | `opencode-personal/` | API key | about 200 steps | yes | failover 1 |
-| Console Ronaldo | `opencode-ronaldo/` | API key | about 200 steps | yes | failover 2 |
-| Gateway Codex | `omni-codex/` | OAuth, 2 accounts | plan quota, token expires 2026-10-29 | no | verified |
-| Gateway OpenRouter | `omni-openrouter/` | API key | free-tier rate limits | no | verified |
-| Gateway Mistral | `omni-mistral/` | API key | free tier | no | verified |
-| Gateway Cline | `omni-cline/` | OAuth | plan quota, key expires 2026-10-27 | no | partial |
-| Gateway DuckDuckGo | `omni-ddg/` | none | unofficial, unmeasured | no | verified |
-| Gateway Gemini | `omni-gemini/` | API key | free tier, gemma only | no | partial |
-| Gateway Groq | `omni-groq/` | API key | free tier, rejects agent prompt | no | partial |
+| OpenCode OAuth | `opencode/` | OAuth (`/connectors`) | ~200 steps/seat | separate from API keys | user entry, fallback |
+| Console College | `opencode-college/` | API key (`auth.json`) | high throughput | 365+ steps verified | primary orchestrator |
+| Console Personal | `opencode-personal/` | API key (`auth.json`) | high throughput | dedicated key bucket | failover 1 |
+| Console Ronaldo | `opencode-ronaldo/` | API key (`auth.json`) | high throughput | dedicated key bucket | failover 2 |
+| Gateway Codex | `omni-codex/` | OAuth, 2 accounts | plan quota, token expires 2026-10-29 | outside Console | verified |
+| Gateway OpenRouter | `omni-openrouter/` | API key | free-tier rate limits | outside Console | verified |
+| Gateway Mistral | `omni-mistral/` | API key | free tier | outside Console | verified |
+| Gateway Cline | `omni-cline/` | OAuth | plan quota, key expires 2026-10-27 | outside Console | partial |
+| Gateway DuckDuckGo | `omni-ddg/` | none | unofficial, unmeasured | outside Console | verified |
+| Gateway Gemini | `omni-gemini/` | API key | free tier, gemma only | outside Console | partial |
+| Gateway Groq | `omni-groq/` | API key | free tier, rejects agent prompt | outside Console | partial |
 | Local | none installed | not applicable | not applicable | not applicable | none |
 
-The three Console accounts are the routed OpenCode surface. The bare `opencode/` prefix is an anonymous fallback. It stays documented but is not used while an account key is valid.
+The three Console accounts provide the routed OpenCode surface. The user starts interactive sessions via the OAuth stream (`opencode/`). The orchestrator executes tasks, subagents, and edits through the API key streams (`opencode-college/`, `opencode-personal/`, `opencode-ronaldo/`).
 
-Unverified: whether the three Console accounts drain separate buckets. A direct credential probe returns HTTP 403, so quota cannot be read outside OpenCode. Treat the split as likely, not proven.
+Verified 2026-10-28: OAuth user seats and Console API keys drain separate quota buckets in the same workspace. Console College logged 536 steps in one day at zero cost (171 via OAuth user, 365 via API key).
 
 The gateway is the relief valve. Spend a Console step only when no gateway domain can do the work. No `apiKey` is stored in `opencode.json`. The gateway does not enforce auth on chat completions, only on the models endpoint.
 
