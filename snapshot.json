@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "ledgerVersion": 1,
-  "runId": "2026-10-23-arch-btw",
-  "runDate": "2026-10-23",
-  "collectedAt": "2026-10-23T04:34:16Z",
-  "catalogPulledAt": "2026-10-23T04:34:16Z",
+  "runId": "2026-10-30-arch-btw",
+  "runDate": "2026-10-30",
+  "collectedAt": "2026-10-30T00:00:00Z",
+  "catalogPulledAt": "2026-10-30T11:30:59Z",
   "definitions": {
     "freeModel": "Catalog entry whose effective price is zero on every pricing tier: input, output, cache read, cache write.",
     "stableKey": "providerID/modelID",
@@ -15,8 +15,8 @@
     "hostname": "arch-btw",
     "os": "Arch Linux ARM64 chroot",
     "user": "root",
-    "opencodeVersion": "2.1.3",
-    "opencodeRaw": "opencode v2.1.3",
+    "opencodeVersion": "2.2.2",
+    "opencodeRaw": "opencode v2.2.2",
     "installPath": "/usr/bin/opencode",
     "shell": "bash"
   },
@@ -40,8 +40,26 @@
     "auth": [
       {
         "provider": "omniroute",
-        "credential": "stored in opencode.json provider settings",
-        "method": "inline-value",
+        "credential": "gateway key",
+        "method": "stored",
+        "valuesRecorded": false
+      },
+      {
+        "provider": "opencode-college",
+        "credential": "Console API key",
+        "method": "stored",
+        "valuesRecorded": false
+      },
+      {
+        "provider": "opencode-personal",
+        "credential": "Console API key",
+        "method": "stored",
+        "valuesRecorded": false
+      },
+      {
+        "provider": "opencode-ronaldo",
+        "credential": "Console API key",
+        "method": "stored",
         "valuesRecorded": false
       }
     ],
@@ -56,6 +74,10 @@
       },
       {
         "port": 8000,
+        "listening": false
+      },
+      {
+        "port": 8080,
         "listening": false
       }
     ],
@@ -98,23 +120,94 @@
     ],
     "defaultModel": {
       "providerID": "opencode",
-      "model": "glm-5.3-flash-free"
+      "model": "deepseek-v4.1-flash-free"
+    },
+    "smallModel": {
+      "providerID": "omni-codex",
+      "model": "codex/gpt-5.6-luna"
+    },
+    "gateway": {
+      "version": "3.8.52",
+      "endpoint": "http://localhost:20128/v1",
+      "healthy": true,
+      "requests24h": 14,
+      "uptimeSeconds": 15640
     }
   },
   "catalog": {
-    "totalModels": 458,
-    "providerCount": 2,
+    "totalModels": 218,
+    "providerCount": 12,
     "providers": [
       {
         "id": "opencode",
-        "name": "OpenCode",
-        "models": 9,
-        "freeModels": 9
+        "name": "OpenCode OAuth",
+        "models": 80,
+        "freeModels": 8
       },
       {
-        "id": "omniroute",
-        "name": "OmniRoute local gateway",
-        "models": 449,
+        "id": "opencode-college",
+        "name": "Console College",
+        "models": 8,
+        "freeModels": 8
+      },
+      {
+        "id": "opencode-personal",
+        "name": "Console Personal",
+        "models": 8,
+        "freeModels": 8
+      },
+      {
+        "id": "opencode-ronaldo",
+        "name": "Console Ronaldo",
+        "models": 8,
+        "freeModels": 8
+      },
+      {
+        "id": "omni-codex",
+        "name": "Gateway Codex",
+        "models": 5,
+        "freeModels": 0
+      },
+      {
+        "id": "omni-openrouter",
+        "name": "Gateway OpenRouter",
+        "models": 16,
+        "freeModels": 0
+      },
+      {
+        "id": "omni-mistral",
+        "name": "Gateway Mistral",
+        "models": 26,
+        "freeModels": 0
+      },
+      {
+        "id": "omni-cline",
+        "name": "Gateway Cline",
+        "models": 19,
+        "freeModels": 0
+      },
+      {
+        "id": "omni-gemini",
+        "name": "Gateway Gemini",
+        "models": 18,
+        "freeModels": 0
+      },
+      {
+        "id": "omni-groq",
+        "name": "Gateway Groq",
+        "models": 8,
+        "freeModels": 0
+      },
+      {
+        "id": "omni-aihorde",
+        "name": "Gateway AI Horde",
+        "models": 21,
+        "freeModels": 0
+      },
+      {
+        "id": "ornith",
+        "name": "Local Ornith",
+        "models": 1,
         "freeModels": 0
       }
     ],
@@ -125,6 +218,24 @@
         "env": "OPENCODE_API_KEY",
         "doc": "https://opencode.ai/v2/docs/console/models/"
       },
+      "opencode-college": {
+        "name": "Console College",
+        "api": "https://opencode.ai/inference/openai/v1",
+        "env": "OPENCODE_API_KEY",
+        "doc": null
+      },
+      "opencode-personal": {
+        "name": "Console Personal",
+        "api": "https://opencode.ai/inference/openai/v1",
+        "env": "OPENCODE_API_KEY",
+        "doc": null
+      },
+      "opencode-ronaldo": {
+        "name": "Console Ronaldo",
+        "api": "https://opencode.ai/inference/openai/v1",
+        "env": "OPENCODE_API_KEY",
+        "doc": null
+      },
       "omniroute": {
         "name": "OmniRoute local gateway",
         "api": "http://localhost:20128/v1",
@@ -133,7 +244,7 @@
         "measured": false
       }
     },
-    "catalogVisibilityNote": "Signed out with no OPENCODE_API_KEY, the catalog exposes the Console free models of the opencode provider. Paid opencode models appear only after connecting."
+    "catalogVisibilityNote": "CLI lists 218 refs. Console API-key prefixes expose only the 8 free models each. Gateway prefixes expose 113 wired refs. Gateway pricing is not measured."
   },
   "freeTotals": {
     "count": 8,
@@ -142,6 +253,54 @@
     }
   },
   "free": [
+    {
+      "ref": "opencode/big-pickle",
+      "provider": "opencode",
+      "modelId": "big-pickle",
+      "name": "Big Pickle",
+      "status": "active",
+      "releasedDate": "2025-10-17",
+      "lastUpdated": "2025-10-17",
+      "knowledgeCutoff": "2025-01",
+      "description": "Reasoning model for deliberate analysis, multi-step problem solving, and tool use",
+      "family": "big-pickle",
+      "canonicalModelId": null,
+      "limits": {
+        "context": 200000,
+        "input": 160000,
+        "output": 32000
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [],
+      "hostVariants": [],
+      "structuredOutput": true,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": false,
+      "temperature": true,
+      "openWeights": false,
+      "cost": "all tiers 0: input, output, cache read, cache write",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "not-stated",
+      "policyNote": "No policy published for this model.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "notes": null
+    },
     {
       "ref": "opencode/beam-free",
       "provider": "opencode",
@@ -233,14 +392,13 @@
       "name": "DeepSeek V4.1 Flash Free",
       "status": "active",
       "releasedDate": "2026-09-10",
-      "lastUpdated": "2026-10-17",
+      "lastUpdated": "2026-09-10",
       "knowledgeCutoff": "2025-05",
-      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding (1017 update: DeepSWE 77.0, Apex Bench 72.1). Primary high-level orchestrator",
+      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
       "family": "deepseek-flash",
       "canonicalModelId": "deepseek/deepseek-v4.1-flash",
       "limits": {
         "context": 200000,
-        "input": 160000,
         "output": 32000
       },
       "modalities": {
@@ -375,8 +533,7 @@
         "input": [
           "text",
           "image",
-          "video",
-          "pdf"
+          "video"
         ],
         "output": [
           "text"
@@ -463,53 +620,6 @@
       "sdkPackage": "@ai-sdk/openai-compatible",
       "policyClass": "may-use-during-free-period",
       "policyNote": "During the free period, collected data may be used to improve the model.",
-      "regionRestricted": false,
-      "regionBlocklist": [],
-      "inConsoleFreeList": true,
-      "notes": null
-    },
-    {
-      "ref": "opencode/nemotron-3-ultra-free",
-      "provider": "opencode",
-      "modelId": "nemotron-3-ultra-free",
-      "name": "Nemotron 3 Ultra Free",
-      "status": "active",
-      "releasedDate": "2026-06-04",
-      "lastUpdated": "2026-06-04",
-      "knowledgeCutoff": "2025-09",
-      "description": "Largest Nemotron 3 model for maximum open-weight reasoning and agent accuracy",
-      "family": "nemotron",
-      "canonicalModelId": "nvidia/nemotron-3-ultra-550b-a55b",
-      "limits": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "toolCall": true,
-      "reasoning": true,
-      "reasoningOptions": [],
-      "hostVariants": [],
-      "structuredOutput": null,
-      "interleavedField": {
-        "field": "reasoning_content"
-      },
-      "attachment": false,
-      "temperature": true,
-      "openWeights": true,
-      "cost": "all tiers 0: input, output, cache read, cache write",
-      "authEnvVar": "OPENCODE_API_KEY",
-      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
-      "endpointKind": "console",
-      "sdkPackage": "@ai-sdk/openai-compatible",
-      "policyClass": "nvidia-trial-terms",
-      "policyNote": "NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.",
       "regionRestricted": false,
       "regionBlocklist": [],
       "inConsoleFreeList": true,
@@ -633,141 +743,118 @@
   ],
   "drift": {
     "added": [
-      "opencode/flint-40b-free"
+      "opencode/big-pickle"
     ],
     "removed": [
-      "groq/allam-2-7b",
-      "groq/groq/compound",
-      "groq/groq/compound-mini",
-      "opencode-go/beam-free",
-      "opencode-go/longcat-2.5-preview-free",
-      "opencode-go/minimax-m3.1-flash-free",
-      "opencode/longcat-2.5-preview-free",
-      "opencode/minimax-m3.1-flash-free",
-      "openrouter/cohere/north-mini-code:free",
-      "openrouter/dots-studio/dots-3-note-preview:free",
-      "openrouter/google/gemma-4-26b-a4b-it:free",
-      "openrouter/google/gemma-4-31b-it:free",
-      "openrouter/google/lyria-3-clip-preview",
-      "openrouter/google/lyria-3-pro-preview",
-      "openrouter/liquid/lfm-2.5-2.6b:free",
-      "openrouter/minimax/minimax-m3.1-flash:free",
-      "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
-      "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
-      "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
-      "openrouter/nvidia/nemotron-3.5-content-safety:free",
-      "openrouter/nvidia/nemotron-3.5-lightning:free",
-      "openrouter/nvidia/nemotron-3.5-super-vl:free",
-      "openrouter/openrouter/auto",
-      "openrouter/openrouter/bodybuilder",
-      "openrouter/openrouter/free",
-      "openrouter/openrouter/fusion",
-      "openrouter/openrouter/pareto-code",
-      "openrouter/poolside/laguna-s-2.1:free",
-      "openrouter/poolside/laguna-xs-2.1:free",
-      "openrouter/thinkingmachines/inkling-small:free",
-      "openrouter/thinkingmachines/inkling:free",
-      "openrouter/xingchen-agi/xing4.0-29b-a4b:free"
+      "opencode/nemotron-3-ultra-free"
     ],
     "changed": [
       {
-        "ref": "opencode/nemotron-3.5-lightning-free",
+        "ref": "opencode/deepseek-v4.1-flash-free",
         "fields": [
-          "knowledgeCutoff"
+          "lastUpdated",
+          "description",
+          "limits"
         ],
-        "detail": "changed from null to 2025-09."
+        "detail": "lastUpdated: '2026-10-17' -> '2026-09-10'; description: 'DeepSeek V4.1 Flash model for reasoning and agentic coding (1017 update: DeepSWE 77.0, Apex Bench 72.1). Primary high-level orchestrator' -> 'DeepSeek V4.1 Flash model for reasoning and agentic coding'; limits: {'context': 200000, 'input': 160000, 'output': 32000} -> {'context': 200000, 'output': 32000}"
       },
       {
-        "ref": "opencode/nemotron-3-ultra-free",
+        "ref": "opencode/glm-5.3-flash-free",
         "fields": [
-          "knowledgeCutoff"
+          "modalities"
         ],
-        "detail": "changed from 2026-02 to 2025-09."
+        "detail": "modalities: {'input': ['text', 'image', 'video', 'pdf'], 'output': ['text']} -> {'input': ['text', 'image', 'video'], 'output': ['text']}"
       }
     ],
-    "endedUpstream": [
-      "opencode/minimax-m3.1-flash-free"
-    ],
-    "documentedFreeNotInCatalog": [
-      "exo-free",
-      "mimo-v2.5-free",
-      "longcat-2.5-preview-free",
-      "ll-alpha-free",
-      "muse-spark-1.3-contributor-free",
-      "jev-1.13-free"
-    ],
-    "jevNote": "jev-1.13-free is a System One endpoint model, not a chat model.",
-    "providersNotConfiguredOnThisDevice": [
-      "opencode-go",
-      "groq",
-      "mistral",
-      "openrouter"
-    ],
-    "removedReasoning": "Big Pickle is excluded by user preference. DeepSeek V4.1 Flash is designated for primary high-level orchestration.",
+    "endedUpstream": [],
+    "documentedFreeNotInCatalog": [],
+    "providersNotConfiguredOnThisDevice": [],
+    "removedReasoning": "Big Pickle replaces Nemotron Ultra in the Console free list. Ultra is absent from the catalog on 2026-10-30.",
     "unmeasuredGateways": [
       {
         "provider": "omniroute",
         "name": "OmniRoute local gateway",
         "endpoint": "http://localhost:20128/v1",
-        "models": 449,
-        "reason": "Host catalog cost arrays are empty. Pricing is not measured, so none of these entries are classified free."
+        "models": 494,
+        "reason": "Gateway cost arrays are not measured. Only Console catalog free flags classify a model as free."
       }
     ],
     "openQuestions": [
       "Console free model rate limits are not stated in the docs.",
-      "Omniroute gateway pricing and policies are unmeasured.",
+      "OmniRoute gateway pricing and policies are unmeasured.",
       "Deprecated models are removed on rolling dates; check the Deprecated models table monthly."
     ],
-    "curationExcluded": [
-      "opencode/big-pickle"
-    ]
+    "curationExcluded": [],
+    "cliVsCatalog": {
+      "cliRefs": 218,
+      "gatewayLiveEntries": 494,
+      "gatewayCatalogEntries": 394,
+      "gatewayWiredRefs": 113,
+      "consoleCatalogEntries": 198,
+      "consoleFreeEntries": 24
+    }
   },
   "sources": [
     {
       "type": "docs",
       "url": "https://opencode.ai/v2/docs/console/models/",
-      "checked": "2026-10-23"
-    },
-    {
-      "type": "docs",
-      "url": "https://opencode.ai/v2/docs/console/go/",
-      "checked": "2026-10-23"
+      "checked": "2026-10-30"
     },
     {
       "type": "docs",
       "url": "https://opencode.ai/v2/docs/models/",
-      "checked": "2026-10-23"
+      "checked": "2026-10-30"
     },
     {
       "type": "catalog",
       "url": "https://models.dev/api.json",
-      "checked": "2026-10-23"
+      "checked": "2026-10-30"
+    },
+    {
+      "type": "catalog",
+      "url": "/usr/local/share/fm/catalog.json",
+      "checked": "2026-10-30"
     },
     {
       "type": "host",
-      "url": "opencode --version, opencode auth list, opencode debug paths, opencode debug config, opencode debug agents, opencode models",
-      "checked": "2026-10-23"
+      "url": "opencode --version, opencode auth list, opencode debug paths, opencode debug config, opencode debug agents, opencode models, opencode stats",
+      "checked": "2026-10-30"
     },
     {
       "type": "host",
-      "url": "models tool paging all=true limit=100",
-      "checked": "2026-10-23"
+      "url": "omniroute health, omniroute providers status, /v1/models",
+      "checked": "2026-10-30"
     }
   ],
   "validation": {
     "freeCount": 8,
-    "providerCount": 2,
+    "providerCount": 12,
     "missingEnrichment": [],
     "allCostTiersZero": true,
     "consoleListedFree": 8,
     "unmeasuredProviders": [
       "omniroute"
     ],
+    "cliRefs": 218,
+    "gatewayLiveEntries": 494,
+    "gatewayCatalogEntries": 394,
+    "gatewayWiredRefs": 113,
     "reachabilityProbe": {
-      "date": "2026-10-23",
+      "date": "2026-10-30",
       "passed": 8,
       "failed": 0,
       "method": "opencode run --model <ref> \"Reply with OK only.\""
-    }
+    },
+    "gatewayProbe": {
+      "date": "2026-10-30",
+      "passed": 2,
+      "failed": 0,
+      "refs": [
+        "omni-codex/codex/gpt-5.6-terra",
+        "omni-codex/codex/gpt-5.6-luna"
+      ]
+    },
+    "authProviders": 4,
+    "configKeyMaterial": false
   }
 }
