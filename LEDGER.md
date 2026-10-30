@@ -56,7 +56,7 @@ Eight entries. Each wins one task class in one domain. Anything absent is archiv
 | Large context over 200k | `opencode-college/beam-free#high` | Console API | Only strong 1M route, 131k output | personal beam, then `omni-codex/codex/gpt-5.6-terra` |
 | Atomic edit, bulk | `opencode-college/flint-40b-free#medium` | Console API | 262k context, 65k output, fast edits | `omni-mistral/mistral/codestral-latest` |
 | Vision, large context | `opencode-college/nemotron-3.5-super-vl-free#high` | Console API | 1M input with images | `omni-openrouter/openrouter/nvidia/nemotron-3.5-super-vl:free` |
-| Cheap background | `opencode-college/nemotron-3.5-lightning-free` | Console API | 2 s, 262k output, no tiers | `omni-openrouter/openrouter/google/gemma-4-31b-it:free` |
+| Cheap background | `opencode-college/nemotron-3.5-lightning-free` | Console API | 2 s, 262k output, no tiers | `omni-openrouter/openrouter/poolside/laguna-xs-2.1:free` |
 | Video input | `opencode-college/glm-5.3-flash-free` | Console API | Text, image, video input | `opencode-college/mimo-v2.6-flash-free` |
 | Audio input | `opencode-college/mimo-v2.6-flash-free` | Console API | Only route with audio input | none |
 | PDF input | `omni-codex/codex/gpt-5.6-luna` | gateway | Only route with pdf input | `omni-codex/codex/gpt-5.6-terra` |
@@ -307,7 +307,8 @@ Checked 2026-10-30.
 - Gateway: OmniRoute 3.8.52, `providers status` 14 connections, `/v1/models` 494 entries, catalog 394 entries, CLI 113 gateway refs.
 - Catalog tool: 394 gateway entries and 198 Console entries. CLI: 218 refs. Console API-key prefixes expose 8 free refs each.
 - Console probes: all 8 free models answered on 2026-10-30. Times: big-pickle 2 s, beam 2 s, deepseek 4 s, flint 3 s, glm 7 s, mimo 3 s, lightning 2 s, super-vl 2 s.
-- Gateway probes: `codex/gpt-5.6-terra` 4 s, `codex/gpt-5.6-luna` 3 s.
+- Gateway probes: `codex/gpt-5.6-terra` 4 s, `codex/gpt-5.6-luna` 3 s, `openrouter/nvidia/nemotron-3.5-super-vl:free` 10 s, `mistral/codestral-latest` 7 s, `openrouter/poolside/laguna-xs-2.1:free` 2 s.
+- Gateway failure: `openrouter/google/gemma-4-31b-it:free` returned no reply in 75 s. Removed as a fallback.
 - Direct credential probe to the Console endpoint returns 403. Quota is not readable outside OpenCode.
 - Prior probe: eight Console free refs answered on 2026-10-23. `big-pickle` answered on 2026-10-30.
 
