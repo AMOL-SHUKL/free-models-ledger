@@ -2,6 +2,17 @@
 
 Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed changed`.
 
+## 2026-10-30, snapshot(2026-10-30): +1 -1 2 changed
+
+- Console free set corrected. `opencode/big-pickle` is free again and replaces `opencode/nemotron-3-ultra-free`, which is absent from the catalog. Set stays at 8.
+- Routing order flipped. Console API keys first, Console OAuth second, OmniRoute gateway last. The gateway is now the relief valve, not the default.
+- Gateway inventory refreshed. 14 connections, 13 active, 1 unavailable. 7 providers expose models. The three `opencode-zen` connections are gone. `duckduckgo-web` is active but exposes no wired models.
+- Counts: OpenCode 2.2.2, CLI 218 refs, `/v1/models` 494 entries, catalog 394 entries, 113 gateway refs wired.
+- Expiries: `cline` 2026-10-30, both `codex` accounts 2026-11-08.
+- All 8 free Console models probed on 2026-10-30. All answered. Gateway `gpt-5.6-terra` and `gpt-5.6-luna` also answered.
+- Ledger and instruction mirrors synced to `/sdcard/Backup/OPD2403/Tweaks/`.
+- Repo file modes normalized to 0644.
+
 ## 2026-10-28, routing(console): dual-stream architecture, OAuth and API key split verified
 
 - Restored native `opencode` provider alongside custom Console account providers in `fm-models`.
