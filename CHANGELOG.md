@@ -2,6 +2,13 @@
 
 Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed changed`.
 
+## 2026-11-05, routing(ledger): orchestrator-selected variants, qwen title
+
+- Reasoning variants removed from the routing and share tables. The orchestrator picks `#low`, `#high`, or `#max` per task, and table entries name the base model only.
+- Bulk edit class now routes to `opencode-college/deepseek-v4.1-flash-free`. Flint 40B is banned.
+- `opencode.json` policy recorded: root `opencode/deepseek-v4.1-flash-free`, small model and compaction `omni-codex/codex/gpt-5.6-luna`, title `omni-groq/groq/qwen/qwen3.8-27b`.
+- Ledger mirrors synced to `/LEDGER.md` and `/sdcard/Backup/OPD2403/Tweaks/`.
+
 ## 2026-10-30, snapshot(2026-10-30): +1 -1 2 changed
 
 - Console free set corrected. `opencode/big-pickle` is free again and replaces `opencode/nemotron-3-ultra-free`, which is absent from the catalog. Set stays at 8.

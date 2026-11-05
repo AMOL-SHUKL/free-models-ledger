@@ -52,14 +52,16 @@ Eight entries. Each wins one task class in one domain. Anything absent is archiv
 
 | Class | Ref | Domain | Why it wins | Fallback |
 | :--- | :--- | :--- | :--- | :--- |
-| Hard agentic, multi-file | `opencode-college/deepseek-v4.1-flash-free#max` | Console API | Best measured planner on the API-key side | personal, ronaldo, then `omni-codex/codex/gpt-5.6-terra` |
-| Large context over 200k | `opencode-college/beam-free#high` | Console API | Only strong 1M route, 131k output | personal beam, then `omni-codex/codex/gpt-5.6-terra` |
-| Atomic edit, bulk | `opencode-college/flint-40b-free#medium` | Console API | 262k context, 65k output, fast edits | `omni-mistral/mistral/codestral-latest` |
-| Vision, large context | `opencode-college/nemotron-3.5-super-vl-free#high` | Console API | 1M input with images | `omni-openrouter/openrouter/nvidia/nemotron-3.5-super-vl:free` |
+| Hard agentic, multi-file | `opencode-college/deepseek-v4.1-flash-free` | Console API | Best measured planner on the API-key side | personal, ronaldo, then `omni-codex/codex/gpt-5.6-terra` |
+| Large context over 200k | `opencode-college/beam-free` | Console API | Only strong 1M route, 131k output | personal beam, then `omni-codex/codex/gpt-5.6-terra` |
+| Atomic edit, bulk | `opencode-college/deepseek-v4.1-flash-free` | Console API | Strong planner, 1M context, cheap bulk edits | `omni-mistral/mistral/codestral-latest` |
+| Vision, large context | `opencode-college/nemotron-3.5-super-vl-free` | Console API | 1M input with images | `omni-openrouter/openrouter/nvidia/nemotron-3.5-super-vl:free` |
 | Cheap background | `opencode-college/nemotron-3.5-lightning-free` | Console API | 2 s, 262k output, no tiers | `omni-openrouter/openrouter/poolside/laguna-xs-2.1:free` |
 | Video input | `opencode-college/glm-5.3-flash-free` | Console API | Text, image, video input | `opencode-college/mimo-v2.6-flash-free` |
 | Audio input | `opencode-college/mimo-v2.6-flash-free` | Console API | Only route with audio input | none |
 | PDF input | `omni-codex/codex/gpt-5.6-luna` | gateway | Only route with pdf input | `omni-codex/codex/gpt-5.6-terra` |
+
+The orchestrator selects the variant per task. The table names the model only.
 
 Selection order: fewest steps, then cheapest domain, then lowest variance, then data policy.
 
@@ -110,9 +112,9 @@ Console steps are the scarce resource. Spend Console API keys first, then OAuth,
 
 | Share | Steps | Class | Ref |
 | :--- | ---: | :--- | :--- |
-| 45% | 90 | hard agentic and review | deepseek#max, then codex terra |
-| 25% | 50 | bulk and atomic edits | flint#medium, codestral |
-| 20% | 40 | large context and vision | beam#high, nemotron super vl |
+| 45% | 90 | hard agentic and review | deepseek, then codex terra |
+| 25% | 50 | bulk and atomic edits | deepseek, codestral |
+| 20% | 40 | large context and vision | beam, nemotron super vl |
 | 10% | 20 | multimodal documents | glm, mimo, codex luna |
 
 Rules:
@@ -258,7 +260,7 @@ Cards cover the shortlist. Big Pickle keeps full specs in section 8, so restorat
 - Credentials: three Console API keys and one gateway key in `auth.json`. Values never recorded.
 - Configured prefixes: three Console API key accounts, seven `omni-*` gateway providers, one OAuth `opencode/` stream, and one local `ornith/` route.
 - `opencode.json` stores no key material except the dummy 5-character `ornith` key. That server is closed.
-- Default model: `opencode/deepseek-v4.1-flash-free`. Small model: `omni-codex/codex/gpt-5.6-luna`.
+- Default model: `opencode/deepseek-v4.1-flash-free`. Small model: `omni-codex/codex/gpt-5.6-luna`. Title agent: `omni-groq/groq/qwen/qwen3.8-27b`. Compaction agent: `omni-codex/codex/gpt-5.6-luna`.
 - Gateway: OmniRoute 3.8.52, `http://localhost:20128/v1`, healthy, 14 requests in 24 h, uptime 15,640 s.
 - Gateway connections: 14 configured, 13 active, 1 unavailable.
 - Local servers on 11434, 1234, 8000, 8080: none listening.
