@@ -2,6 +2,18 @@
 
 Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed changed`.
 
+## 2026-11-09, snapshot(2026-11-09): +4 -0 1 changed
+
+- Console free set grew from 8 to 12. Added `longcat-2.5-free`, `crouton-alpha-free`, `iceman-free`, `inkling-2-small-free`.
+- LongCat 2.5 enters the shortlist for orchestration and long-horizon automation. Cap is 100 requests/day, shared across all four Console prefixes. Every LongCat probe returned `Free usage limit reached`.
+- DeepSeek and GLM remain the permanent subagent models. LongCat trails DeepSeek on DeepSWE, 64.6 against 74.2, and SkillsBench, 63.3 against 69.8. It leads AutomationBench, 65.1 against 54.8.
+- Crouton, Iceman, and Inkling are archived unmeasured. All three answered a live probe.
+- Big Pickle policy changed from not stated to may improve the model during the free period.
+- Gateway: 14 connections, 444 live entries, 378 catalog, 96 wired. Codex expiry moved to 2026-11-19. Cline expires 2026-11-09.
+- OpenCode 2.2.6. CLI 217 refs. 11 of 12 free Console models answered. LongCat is quota-blocked.
+- `orchestrator` agent added to `opencode.json` for `opencode-college/longcat-2.5-free`. The running service predates the edit; a restart activates it.
+- Snapshot: `history/2026-11-09-arch-btw.snapshot.json`. Ledger mirror synced to `/LEDGER.md`.
+
 ## 2026-11-05, routing(ledger): orchestrator-selected variants, qwen title
 
 - Reasoning variants removed from the routing and share tables. The orchestrator picks `#low`, `#high`, or `#max` per task, and table entries name the base model only.

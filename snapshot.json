@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "ledgerVersion": 1,
-  "runId": "2026-10-30-arch-btw",
-  "runDate": "2026-10-30",
-  "collectedAt": "2026-10-30T00:00:00Z",
-  "catalogPulledAt": "2026-10-30T11:30:59Z",
+  "runId": "2026-11-09-arch-btw",
+  "runDate": "2026-11-09",
+  "collectedAt": "2026-11-09T16:01:33Z",
+  "catalogPulledAt": "2026-11-09T15:11:50Z",
   "definitions": {
     "freeModel": "Catalog entry whose effective price is zero on every pricing tier: input, output, cache read, cache write.",
     "stableKey": "providerID/modelID",
@@ -15,8 +15,8 @@
     "hostname": "arch-btw",
     "os": "Arch Linux ARM64 chroot",
     "user": "root",
-    "opencodeVersion": "2.2.2",
-    "opencodeRaw": "opencode v2.2.2",
+    "opencodeVersion": "2.2.6",
+    "opencodeRaw": "opencode v2.2.6",
     "installPath": "/usr/bin/opencode",
     "shell": "bash"
   },
@@ -35,15 +35,10 @@
     },
     "configSources": [
       "/root/.config/opencode/opencode.json",
-      "/root/.config/opencode"
+      "/root/.config/opencode",
+      "/root/opencode.json"
     ],
     "auth": [
-      {
-        "provider": "omniroute",
-        "credential": "gateway key",
-        "method": "stored",
-        "valuesRecorded": false
-      },
       {
         "provider": "opencode-college",
         "credential": "Console API key",
@@ -58,11 +53,12 @@
       },
       {
         "provider": "opencode-ronaldo",
-        "credential": "Console API key",
+        "credential": "Console API key (display: Github)",
         "method": "stored",
         "valuesRecorded": false
       }
     ],
+    "gatewayKey": "from the gateway env file, not auth.json",
     "localServers": [
       {
         "port": 11434,
@@ -118,6 +114,7 @@
         "hidden": true
       }
     ],
+    "agentsNote": "orchestrator is defined in opencode.json and resolves in a fresh config load (verified 2026-11-09 in an isolated standalone). The running service started 2026-11-09 20:41 IST, before the edit, so it omits the agent until restart.",
     "defaultModel": {
       "providerID": "opencode",
       "model": "deepseek-v4.1-flash-free"
@@ -126,41 +123,47 @@
       "providerID": "omni-codex",
       "model": "codex/gpt-5.6-luna"
     },
+    "orchestratorAgent": {
+      "id": "orchestrator",
+      "providerID": "opencode-college",
+      "model": "longcat-2.5-free",
+      "active": false
+    },
     "gateway": {
       "version": "3.8.52",
       "endpoint": "http://localhost:20128/v1",
       "healthy": true,
       "requests24h": 14,
-      "uptimeSeconds": 15640
+      "uptimeSeconds": 1948
     }
   },
   "catalog": {
-    "totalModels": 218,
+    "totalModels": 217,
     "providerCount": 12,
     "providers": [
       {
         "id": "opencode",
         "name": "OpenCode OAuth",
-        "models": 80,
-        "freeModels": 8
+        "models": 84,
+        "freeModels": 12
       },
       {
         "id": "opencode-college",
         "name": "Console College",
-        "models": 8,
-        "freeModels": 8
+        "models": 12,
+        "freeModels": 12
       },
       {
         "id": "opencode-personal",
         "name": "Console Personal",
-        "models": 8,
-        "freeModels": 8
+        "models": 12,
+        "freeModels": 12
       },
       {
         "id": "opencode-ronaldo",
         "name": "Console Ronaldo",
-        "models": 8,
-        "freeModels": 8
+        "models": 12,
+        "freeModels": 12
       },
       {
         "id": "omni-codex",
@@ -171,7 +174,7 @@
       {
         "id": "omni-openrouter",
         "name": "Gateway OpenRouter",
-        "models": 16,
+        "models": 12,
         "freeModels": 0
       },
       {
@@ -183,7 +186,7 @@
       {
         "id": "omni-cline",
         "name": "Gateway Cline",
-        "models": 19,
+        "models": 13,
         "freeModels": 0
       },
       {
@@ -201,7 +204,7 @@
       {
         "id": "omni-aihorde",
         "name": "Gateway AI Horde",
-        "models": 21,
+        "models": 14,
         "freeModels": 0
       },
       {
@@ -244,12 +247,12 @@
         "measured": false
       }
     },
-    "catalogVisibilityNote": "CLI lists 218 refs. Console API-key prefixes expose only the 8 free models each. Gateway prefixes expose 113 wired refs. Gateway pricing is not measured."
+    "catalogVisibilityNote": "CLI lists 217 refs. Console API-key prefixes expose only the 12 free models each. Gateway prefixes expose 96 wired refs. Gateway pricing is not measured. The fm catalog file counts 205 console entries across the three accounts, including paid models and duplicates."
   },
   "freeTotals": {
-    "count": 8,
+    "count": 12,
     "byProvider": {
-      "opencode": 8
+      "opencode": 12
     }
   },
   "free": [
@@ -289,13 +292,13 @@
       "attachment": false,
       "temperature": true,
       "openWeights": false,
-      "cost": "all tiers 0: input, output, cache read, cache write",
+      "cost": "all published tiers 0",
       "authEnvVar": "OPENCODE_API_KEY",
       "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
       "endpointKind": "console",
       "sdkPackage": "@ai-sdk/openai-compatible",
-      "policyClass": "not-stated",
-      "policyNote": "No policy published for this model.",
+      "policyClass": "may-use-during-free-period",
+      "policyNote": "During its free period, collected data may be used to improve the model.",
       "regionRestricted": false,
       "regionBlocklist": [],
       "inConsoleFreeList": true,
@@ -353,7 +356,7 @@
       "attachment": false,
       "temperature": true,
       "openWeights": true,
-      "cost": "all tiers 0: input, output, cache read, cache write",
+      "cost": "all published tiers 0",
       "authEnvVar": "OPENCODE_API_KEY",
       "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
       "endpointKind": "console",
@@ -384,6 +387,95 @@
       ],
       "inConsoleFreeList": true,
       "notes": null
+    },
+    {
+      "ref": "opencode/crouton-alpha-free",
+      "provider": "opencode",
+      "modelId": "crouton-alpha-free",
+      "name": "Crouton Alpha Free",
+      "status": "active",
+      "releasedDate": "2026-11-03",
+      "lastUpdated": "2026-11-03",
+      "knowledgeCutoff": null,
+      "description": "Stealth reasoning model with text, image, video and PDF input and tool use",
+      "family": null,
+      "canonicalModelId": null,
+      "limits": {
+        "context": 1048576,
+        "output": 270000
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [
+        {
+          "type": "effort",
+          "values": [
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "hostVariants": [
+        "minimal",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "structuredOutput": true,
+      "interleavedField": null,
+      "attachment": true,
+      "temperature": true,
+      "openWeights": false,
+      "cost": "all published tiers 0",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "retained-30-days",
+      "policyNote": "Collected data is retained for 30 days and is not used for model training. Some regions within otherwise supported countries are also excluded.",
+      "regionRestricted": true,
+      "regionBlocklist": [
+        "European Union",
+        "Afghanistan",
+        "Belarus",
+        "China including Hong Kong and Macau",
+        "Cambodia",
+        "Cuba",
+        "Eritrea",
+        "Ethiopia",
+        "Haiti",
+        "Iran",
+        "Iraq",
+        "Libya",
+        "Myanmar",
+        "Nicaragua",
+        "North Korea",
+        "Pakistan",
+        "Russia",
+        "Somalia",
+        "Syria",
+        "Venezuela",
+        "Western Sahara"
+      ],
+      "inConsoleFreeList": true,
+      "notes": "Stealth model. Unmeasured on this host. Live probe answered 2026-11-09. Archived until a measured step count beats a listed pick."
     },
     {
       "ref": "opencode/deepseek-v4.1-flash-free",
@@ -437,7 +529,7 @@
       "attachment": true,
       "temperature": true,
       "openWeights": true,
-      "cost": "all tiers 0: input, output, cache read, cache write",
+      "cost": "all published tiers 0",
       "authEnvVar": "OPENCODE_API_KEY",
       "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
       "endpointKind": "console",
@@ -447,7 +539,7 @@
       "regionRestricted": false,
       "regionBlocklist": [],
       "inConsoleFreeList": true,
-      "notes": "DeepSWE v1.1 77.0, Apex Bench 72.1, Terminal-Bench 42.3. Positioned as primary high-level orchestrator with tight context."
+      "notes": "DeepSWE v1.1 74.2. SkillsBench 69.8, #1 of 35 (Vals, 2026-11-09). Permanent executor; Console route caps context at 200k."
     },
     {
       "ref": "opencode/flint-40b-free",
@@ -501,7 +593,7 @@
       "attachment": false,
       "temperature": true,
       "openWeights": true,
-      "cost": "all tiers 0: input, output, cache read, cache write",
+      "cost": "all published tiers 0",
       "authEnvVar": "OPENCODE_API_KEY",
       "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
       "endpointKind": "console",
@@ -563,7 +655,7 @@
       "attachment": true,
       "temperature": true,
       "openWeights": true,
-      "cost": "all tiers 0: input, output, cache read, cache write",
+      "cost": "all published tiers 0",
       "authEnvVar": "OPENCODE_API_KEY",
       "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
       "endpointKind": "console",
@@ -574,6 +666,181 @@
       "regionBlocklist": [],
       "inConsoleFreeList": true,
       "notes": null
+    },
+    {
+      "ref": "opencode/iceman-free",
+      "provider": "opencode",
+      "modelId": "iceman-free",
+      "name": "Iceman Free",
+      "status": "active",
+      "releasedDate": "2026-11-06",
+      "lastUpdated": "2026-11-06",
+      "knowledgeCutoff": null,
+      "description": "Stealth model, free for a limited time",
+      "family": null,
+      "canonicalModelId": null,
+      "limits": {
+        "context": 262144,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [],
+      "hostVariants": [],
+      "structuredOutput": null,
+      "interleavedField": null,
+      "attachment": false,
+      "temperature": null,
+      "openWeights": false,
+      "cost": "all published tiers 0",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "may-use-during-free-period",
+      "policyNote": "During its free period, collected data is retained and used to improve the model.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "notes": "Stealth model. Unmeasured on this host. Live probe answered 2026-11-09. Archived until a measured step count beats a listed pick."
+    },
+    {
+      "ref": "opencode/inkling-2-small-free",
+      "provider": "opencode",
+      "modelId": "inkling-2-small-free",
+      "name": "Inkling 2 Small Free",
+      "status": "active",
+      "releasedDate": "2026-11-05",
+      "lastUpdated": "2026-11-05",
+      "knowledgeCutoff": null,
+      "description": "Inkling 2 Small, free for a limited time",
+      "family": "ling",
+      "canonicalModelId": "thinkingmachines/inkling-2-small",
+      "limits": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "hostVariants": [
+        "none",
+        "minimal",
+        "low",
+        "medium",
+        "high",
+        "max"
+      ],
+      "structuredOutput": null,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": true,
+      "temperature": true,
+      "openWeights": false,
+      "cost": "all published tiers 0",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "may-train",
+      "policyNote": "Data is retained and may be used to monitor real-world performance and for model training.",
+      "regionRestricted": true,
+      "regionBlocklist": [
+        "European Union",
+        "Iceland",
+        "Liechtenstein",
+        "Norway",
+        "Cuba",
+        "Iran",
+        "North Korea",
+        "Russia",
+        "Ukraine",
+        "Venezuela"
+      ],
+      "inConsoleFreeList": true,
+      "notes": "Unmeasured on this host. Live probe answered 2026-11-09. Archived until a measured step count beats a listed pick."
+    },
+    {
+      "ref": "opencode/longcat-2.5-free",
+      "provider": "opencode",
+      "modelId": "longcat-2.5-free",
+      "name": "LongCat 2.5 Free",
+      "status": "active",
+      "releasedDate": "2026-11-02",
+      "lastUpdated": "2026-11-02",
+      "knowledgeCutoff": null,
+      "description": "Meituan's multimodal reasoning model for long-horizon coding and agent tasks, with visual understanding and a 1M-token context window",
+      "family": "longcat",
+      "canonicalModelId": "meituan/longcat-2.5",
+      "limits": {
+        "context": 1000000,
+        "output": 262144
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "hostVariants": [],
+      "structuredOutput": null,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": true,
+      "temperature": false,
+      "openWeights": false,
+      "cost": "all published tiers 0",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "zero-retention",
+      "policyNote": "Prompts and other inputs are not used for training or retained. Hosted in China.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "notes": "Vendor table: Terminal Bench v2.1 88.4, v4.0 38.5, DeepSWE 64.6, AutomationBench 65.1, SkillsBench 63.3. Trails DeepSeek on DeepSWE and SkillsBench. 100 requests/day shared across all Console prefixes. Promotional window ends 2026-11-23 by workstation decision."
     },
     {
       "ref": "opencode/mimo-v2.6-flash-free",
@@ -613,13 +880,13 @@
       "attachment": true,
       "temperature": true,
       "openWeights": true,
-      "cost": "all tiers 0: input, output, cache read, cache write",
+      "cost": "all published tiers 0",
       "authEnvVar": "OPENCODE_API_KEY",
       "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
       "endpointKind": "console",
       "sdkPackage": "@ai-sdk/openai-compatible",
       "policyClass": "may-use-during-free-period",
-      "policyNote": "During the free period, collected data may be used to improve the model.",
+      "policyNote": "During its free period, collected data may be used to improve the model.",
       "regionRestricted": false,
       "regionBlocklist": [],
       "inConsoleFreeList": true,
@@ -660,7 +927,7 @@
       "attachment": false,
       "temperature": true,
       "openWeights": true,
-      "cost": "all tiers 0: input, output, cache read, cache write",
+      "cost": "all published tiers 0",
       "authEnvVar": "OPENCODE_API_KEY",
       "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
       "endpointKind": "console",
@@ -728,7 +995,7 @@
       "attachment": true,
       "temperature": true,
       "openWeights": true,
-      "cost": "all tiers 0: input, output, cache read, cache write",
+      "cost": "all published tiers 0",
       "authEnvVar": "OPENCODE_API_KEY",
       "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
       "endpointKind": "console",
@@ -743,33 +1010,34 @@
   ],
   "drift": {
     "added": [
-      "opencode/big-pickle"
+      "opencode/crouton-alpha-free",
+      "opencode/iceman-free",
+      "opencode/inkling-2-small-free",
+      "opencode/longcat-2.5-free"
     ],
-    "removed": [
-      "opencode/nemotron-3-ultra-free"
-    ],
+    "removed": [],
     "changed": [
       {
-        "ref": "opencode/deepseek-v4.1-flash-free",
+        "ref": "opencode/big-pickle",
         "fields": [
-          "lastUpdated",
-          "description",
-          "limits"
+          "policyClass"
         ],
-        "detail": "lastUpdated: '2026-10-17' -> '2026-09-10'; description: 'DeepSeek V4.1 Flash model for reasoning and agentic coding (1017 update: DeepSWE 77.0, Apex Bench 72.1). Primary high-level orchestrator' -> 'DeepSeek V4.1 Flash model for reasoning and agentic coding'; limits: {'context': 200000, 'input': 160000, 'output': 32000} -> {'context': 200000, 'output': 32000}"
-      },
-      {
-        "ref": "opencode/glm-5.3-flash-free",
-        "fields": [
-          "modalities"
-        ],
-        "detail": "modalities: {'input': ['text', 'image', 'video', 'pdf'], 'output': ['text']} -> {'input': ['text', 'image', 'video'], 'output': ['text']}"
+        "detail": "policyClass: \"not-stated\" -> \"may-use-during-free-period\""
       }
     ],
     "endedUpstream": [],
-    "documentedFreeNotInCatalog": [],
+    "documentedFreeNotInCatalog": [
+      {
+        "ref": "opencode/nemotron-3-ultra-free",
+        "reason": "Listed in the free-models docs and pricing table, absent from the Console catalog and CLI."
+      },
+      {
+        "ref": "opencode/jev-1.13-free",
+        "reason": "Listed as a free decision model. Type decision, not a chat route, so it is outside this ledger scope."
+      }
+    ],
     "providersNotConfiguredOnThisDevice": [],
-    "removedReasoning": "Big Pickle replaces Nemotron Ultra in the Console free list. Ultra is absent from the catalog on 2026-10-30.",
+    "removedReasoning": "No free ref left the Console list. Four were added between 2026-10-30 and 2026-11-09.",
     "unmeasuredGateways": [
       {
         "provider": "omniroute",
@@ -780,81 +1048,111 @@
       }
     ],
     "openQuestions": [
-      "Console free model rate limits are not stated in the docs.",
+      "The LongCat 100/day reset boundary is not published.",
+      "Console free rate limits other than LongCat are not stated in the docs.",
       "OmniRoute gateway pricing and policies are unmeasured.",
       "Deprecated models are removed on rolling dates; check the Deprecated models table monthly."
     ],
     "curationExcluded": [],
     "cliVsCatalog": {
-      "cliRefs": 218,
-      "gatewayLiveEntries": 494,
-      "gatewayCatalogEntries": 394,
-      "gatewayWiredRefs": 113,
-      "consoleCatalogEntries": 198,
-      "consoleFreeEntries": 24
+      "cliRefs": 217,
+      "gatewayLiveEntries": 444,
+      "gatewayCatalogEntries": 378,
+      "gatewayWiredRefs": 96,
+      "consoleCatalogEntries": 205,
+      "consoleFreeEntries": 36
     }
   },
   "sources": [
     {
       "type": "docs",
       "url": "https://opencode.ai/v2/docs/console/models/",
-      "checked": "2026-10-30"
+      "checked": "2026-11-09"
     },
     {
       "type": "docs",
       "url": "https://opencode.ai/v2/docs/models/",
-      "checked": "2026-10-30"
+      "checked": "2026-11-09"
     },
     {
       "type": "catalog",
       "url": "https://models.dev/api.json",
-      "checked": "2026-10-30"
+      "checked": "2026-11-09",
+      "sha256": "06e84728d3e478d73fe1c1bdd85f6be4b8d502b78b492301ad53b78aa165c464"
     },
     {
       "type": "catalog",
       "url": "/usr/local/share/fm/catalog.json",
-      "checked": "2026-10-30"
+      "checked": "2026-11-09",
+      "sha256": "bfd69e2dd794fb64304de24864850f275e5841c23a50bde1861645ec37ea5720"
+    },
+    {
+      "type": "benchmark",
+      "url": "https://www.longcatai.org/benchmarks/longcat-2-5.html",
+      "checked": "2026-11-09"
+    },
+    {
+      "type": "benchmark",
+      "url": "https://www.vals.ai/models/deepseek_deepseek-v4.1-flash",
+      "checked": "2026-11-09"
     },
     {
       "type": "host",
       "url": "opencode --version, opencode auth list, opencode debug paths, opencode debug config, opencode debug agents, opencode models, opencode stats",
-      "checked": "2026-10-30"
+      "checked": "2026-11-09"
     },
     {
       "type": "host",
-      "url": "omniroute health, omniroute providers status, /v1/models",
-      "checked": "2026-10-30"
+      "url": "omniroute health, omniroute providers status, omniroute providers test-all --json, /v1/models",
+      "checked": "2026-11-09"
     }
   ],
   "validation": {
-    "freeCount": 8,
+    "freeCount": 12,
     "providerCount": 12,
     "missingEnrichment": [],
     "allCostTiersZero": true,
-    "consoleListedFree": 8,
+    "consoleListedFree": 12,
     "unmeasuredProviders": [
       "omniroute"
     ],
-    "cliRefs": 218,
-    "gatewayLiveEntries": 494,
-    "gatewayCatalogEntries": 394,
-    "gatewayWiredRefs": 113,
+    "cliRefs": 217,
+    "gatewayLiveEntries": 444,
+    "gatewayCatalogEntries": 378,
+    "gatewayWiredRefs": 96,
     "reachabilityProbe": {
-      "date": "2026-10-30",
-      "passed": 8,
-      "failed": 0,
-      "method": "opencode run --model <ref> \"Reply with OK only.\""
+      "date": "2026-11-09",
+      "passed": 11,
+      "failed": 1,
+      "method": "opencode run --model opencode-college/<model> \"Reply with OK only.\"",
+      "failedRefs": [
+        "opencode-college/longcat-2.5-free: Free usage limit reached"
+      ],
+      "timesSeconds": {
+        "big-pickle": 2,
+        "beam-free": 2,
+        "deepseek-v4.1-flash-free": 7,
+        "flint-40b-free": 2,
+        "glm-5.3-flash-free": 3,
+        "mimo-v2.6-flash-free": 7,
+        "nemotron-3.5-lightning-free": 3,
+        "nemotron-3.5-super-vl-free": 2,
+        "crouton-alpha-free": 2,
+        "iceman-free": 3,
+        "inkling-2-small-free": 3,
+        "longcat-2.5-free": 0
+      }
     },
     "gatewayProbe": {
-      "date": "2026-10-30",
+      "date": "2026-11-09",
       "passed": 2,
       "failed": 0,
       "refs": [
-        "omni-codex/codex/gpt-5.6-terra",
-        "omni-codex/codex/gpt-5.6-luna"
+        "omni-codex/codex/gpt-5.6-luna (10 s)",
+        "omni-codex/codex/gpt-5.6-terra (3 s)"
       ]
     },
-    "authProviders": 4,
+    "authProviders": 3,
     "configKeyMaterial": false
   }
 }
