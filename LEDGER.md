@@ -40,11 +40,11 @@ A domain is a quota bucket with its own auth. Steps in one domain do not drain a
 | Gateway Groq | `omni-groq/` | API key | free tier, rejects agent prompt | partial | 3 |
 | Local | `ornith/` | dummy key | none, server closed | offline | - |
 
-LongCat 2.5 Free is not a separate domain. It shares the Console auth and adds a model cap of 100 requests per day. The cap is shared across all four Console prefixes on this host. Rotating accounts does not reset it. Verified 2026-11-09: all four refs returned `Free usage limit reached`.
+LongCat 2.5 Free is not a separate domain. It shares the Console auth. Its cap is 100 requests per day and that cap belongs to LongCat alone. A `Free usage limit reached` answer on DeepSeek or GLM is an upstream throttle that resets on its own schedule, not the LongCat counter. Rotating accounts does not reset LongCat.
 
 The three Console accounts provide the routed OpenCode surface. The API key streams (`opencode-college/`, `opencode-personal/`, `opencode-ronaldo/`) serve automated agent execution first. The OAuth stream (`opencode/`) serves user interactive sessions second. The gateway (`omni-*`) is last. LongCat orchestrates from the Console API-key stream. Subagents stay on the permanent Console free models.
 
-Verified 2026-10-28: OAuth user seats and Console API keys drain separate quota buckets in the same workspace. Console College logged 536 steps in one day at zero cost (171 via OAuth user, 365 via API key). The LongCat cap is the exception: it is shared, not per bucket.
+Verified 2026-10-28: OAuth user seats and Console API keys drain separate quota buckets in the same workspace. Console College logged 536 steps in one day at zero cost (171 via OAuth user, 365 via API key). The LongCat cap is the exception: it applies to one model, not to the Console stream.
 
 The gateway is the last resort. Spend a gateway step only when both Console streams are throttled or the class needs a gateway-only model. Exception: hard agentic work escalates to Codex terra. No `apiKey` is stored in `opencode.json`. The gateway does not enforce auth on chat completions, only on the models endpoint.
 
@@ -126,7 +126,7 @@ Console steps are the scarce resource. Spend Console API keys first, then OAuth,
 Rules:
 
 - Try the Console API key first. Move to OAuth when the API keys throttle. Use the gateway when both Console streams fail or the class needs a gateway-only model.
-- Rotate Console prefixes on throttle, not on model quality. LongCat is the exception. Its 100/day cap is shared, so a limit hit is final for the day.
+- Rotate Console prefixes on throttle, not on model quality. LongCat is the exception. Its 100/day cap is shared across prefixes, so a LongCat limit hit is final for the day. DeepSeek and GLM throttles reset and do not carry that cap.
 - Give LongCat the orchestration share only. Subagents run DeepSeek or GLM.
 - Keep 20% of the Console budget for the last quarter of the day.
 - Use one orchestrator per task. Nested subagents multiply steps in one domain.
@@ -144,7 +144,7 @@ A promotion is not an uncapped domain. It has a start, an end, a cap, and a fall
 Rules:
 
 - Use LongCat for orchestration, review, and long-horizon automation. Do not spend it on bulk edits.
-- On `Free usage limit reached`, switch to DeepSeek. Do not retry another prefix; the cap is shared.
+- On `Free usage limit reached`, switch to DeepSeek and keep working. The 100/day cap belongs to LongCat alone; a DeepSeek or GLM throttle resets on the provider schedule.
 - The reset boundary is not published. Recheck with a one-line probe at the start of each session; until it answers, treat the day as spent.
 - The 2026-11-23 end date is a workstation review date, not a vendor date. The vendor states only that the model is free for a limited time.
 - On 2026-11-23, remove LongCat from the shortlist. Beam and DeepSeek are the permanent defaults.
