@@ -2,6 +2,22 @@
 
 Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed changed`.
 
+## 2026-11-16, snapshot(2026-11-16): +2 -1 2 changed
+
+- Console free set went from 12 to 13. Added `hy4-flash-free` and `minimax-m3.1-flash-free`. Removed `crouton-alpha-free`, which models.dev marks deprecated and the CLI rejects as unavailable.
+- Hy4 flash takes the routine agentic class on a dated window, 2026-11-16 to 2026-11-30. The cap is vendor-stated as near-unlimited and has no published number. Fallback is DeepSeek.
+- Hy4 flash is not the root default and not the orchestrator. DeepSeek stays the root default and LongCat stays the orchestrator. `opencode.json` was not edited.
+- Added section 3.1, an escalation ladder. Start on Hy4 flash. Escalate to DeepSeek for repo-scale or terminal work, to LongCat for long-horizon automation, to GLM for video input only.
+- Hy4 flash scores below DeepSeek on every hard coding benchmark: Terminal-Bench 4.0 19.2 against 42.3, ProgramBench 16.0 against 29.1, AutomationBench 52.2 against 60.5. It wins on latency, 6.7 min against 10.3, and on cost, 0.26 against 1.20 yuan per task.
+- Step budget rebalanced: 15 orchestration, 20 hard agentic, 35 routine and bulk, 15 large context, 10 multimodal, 5 background.
+- Added policy R12, the root default must be permanent, and R13, escalate on capability and never on price.
+- Corrected `deepseek-v4.1-flash-free` release date from 2026-09-10 to 2026-10-17. Corrected `inkling-2-small-free` open weights from false to true.
+- Device block corrected: user `amol`, paths under `/home/amol`, OpenCode 2.2.7.
+- Console probes: 13 of 13 free refs answered. Hy4 flash answered on all four prefixes, including a retry on `opencode-ronaldo/`.
+- Gateway: 14 connections, 444 live entries, 378 catalog, 112 wired refs. Cline expiry moved to 2026-11-16.
+- CLI lists `hy4-flash-free` once under `opencode/` while the Console catalog carries it under all four accounts. Trust the catalog plus a probe for that ref.
+- Snapshot: `history/2026-11-16-arch-btw.snapshot.json`. Ledger mirror synced to `/LEDGER.md`.
+
 ## 2026-11-09, snapshot(2026-11-09): +4 -0 1 changed
 
 - Console free set grew from 8 to 12. Added `longcat-2.5-free`, `crouton-alpha-free`, `iceman-free`, `inkling-2-small-free`.
