@@ -2,6 +2,24 @@
 
 Newest first. One entry per run. Format: `snapshot(YYYY-MM-DD): +added -removed changed`.
 
+## 2026-11-18, snapshot(2026-11-18): +0 -2 2 changed
+
+- Console free set fell from 13 to 11. Retired `glm-5.3-flash-free` on 2026-11-18 and `minimax-m3.1-flash-free` on 2026-11-17. Both are paid-only refs now. The Console deprecated table confirms both dates.
+- GLM is a phantom ref. The three API prefixes still list `glm-5.3-flash-free` and it returns `Model unavailable` on every call. `opencode/` does not list it.
+- Removed GLM from the shortlist, the escalation ladder, the budget, and the privacy matrix. Moved it and MiniMax to archive with the retirement date.
+- Added `inkling-2-small-free` to the shortlist as the document, image, and 1M-context route, and as second overall. It was previously archived as unmeasured.
+- Inkling beats GLM on every document and vision row of Thinking Machines' head-to-head: GDP.pdf 25.2 against 15.4, OmniDocBench 94.6 against 92.3, PerceptionBench 64.7 against 49.6, ZeroBench 44.0 against 32.0, AA-LCR 83.3 against 80.0, LongBench v2 70.6 against 68.2.
+- Inkling does not take the default. DeepSeek still leads DeepSWE 77.0 against 72.1, Terminal Bench Science 12.9 against 5.7, Vibe Code 87.7 against 81.6, and ComplexConstraints 50.4 against 44.5.
+- Data retention is no longer a routing metric. Removed the zero-retention-first rule from policy and rewrote section 12 as a record. Training use and retention length do not demote a route.
+- MiMo-V2.6-Flash now holds the only free audio and video lane, because GLM and MiniMax were the other video routes and both retired.
+- Orchestrator moved from LongCat to DeepSeek. LongCat keeps the long-horizon and 262k-output class. The root default is unchanged.
+- `opencode.json` edited for the first time in this ledger's history: `small_model` and `title` moved to `opencode-college/nemotron-3.5-lightning-free`, `compaction` to `opencode-college/inkling-2-small-free`. No routing role depends on the codex credential that expires 2026-11-19.
+- Added a `documents` subagent on Inkling at `/home/amol/.config/opencode/agents/documents.md`. This build does not register new agents from the `agents` JSON block; Markdown files only.
+- Upgrade path: OpenCode 2.2.7 to 2.3.2. OmniRoute 3.8.52 to 3.8.53 by clean npm reinstall. A first install was killed mid-write and left an incomplete tree; the clean reinstall finished with 1327 packages and npm created its own binary link. No file was hand-placed.
+- Console probes: 11 of 11 live free models answered on the college prefix. GLM failed on all four prefixes.
+- Gateway: 14 connections, 480 live entries, 385 catalog, 111 wired refs. Codex expiry 2026-11-19, cline 2026-11-18.
+- Snapshot: `history/2026-11-18-arch-btw.snapshot.json`. Ledger mirror synced to `/LEDGER.md`.
+
 ## 2026-11-16, snapshot(2026-11-16): +2 -1 2 changed
 
 - Console free set went from 12 to 13. Added `hy4-flash-free` and `minimax-m3.1-flash-free`. Removed `crouton-alpha-free`, which models.dev marks deprecated and the CLI rejects as unavailable.

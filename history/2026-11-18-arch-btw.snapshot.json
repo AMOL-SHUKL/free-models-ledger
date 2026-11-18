@@ -1,0 +1,1062 @@
+{
+  "schemaVersion": 1,
+  "ledgerVersion": 2,
+  "runId": "2026-11-18-arch-btw",
+  "runDate": "2026-11-18",
+  "collectedAt": "2026-11-18T11:12:40Z",
+  "catalogPulledAt": "2026-11-18T11:12:40Z",
+  "definitions": {
+    "freeModel": "Catalog entry whose effective price is zero on every pricing tier: input, output, cache read, cache write.",
+    "stableKey": "providerID/modelID",
+    "scope": "Models resolvable by OpenCode on the recording device. Big Pickle is excluded by preference.",
+    "evidenceTags": "C host catalog, D models.dev, O OpenCode docs, A auth list, H host probe."
+  },
+  "device": {
+    "hostname": "arch-btw",
+    "os": "Arch Linux ARM64 chroot",
+    "user": "amol",
+    "opencodeVersion": "2.3.2",
+    "opencodeRaw": "opencode v2.3.2",
+    "installPath": "/usr/bin/opencode",
+    "shell": "bash"
+  },
+  "host": {
+    "paths": {
+      "home": "/home/amol",
+      "data": "/home/amol/.local/share/opencode",
+      "cache": "/home/amol/.cache/opencode",
+      "config": "/home/amol/.config/opencode",
+      "state": "/home/amol/.local/state/opencode",
+      "tmp": "/tmp/opencode",
+      "bin": "/home/amol/.cache/opencode/bin",
+      "log": "/home/amol/.local/share/opencode/log",
+      "repos": "/home/amol/.local/share/opencode/repos",
+      "db": "/home/amol/.local/share/opencode/opencode.db"
+    },
+    "configSources": [
+      "/home/amol/.config/opencode/opencode.json",
+      "/home/amol/.config/opencode",
+      "/home/amol/opencode.json"
+    ],
+    "auth": [
+      {
+        "provider": "opencode-college",
+        "credential": "Console API key",
+        "method": "stored",
+        "valuesRecorded": false
+      },
+      {
+        "provider": "opencode-personal",
+        "credential": "Console API key",
+        "method": "stored",
+        "valuesRecorded": false
+      },
+      {
+        "provider": "opencode-ronaldo",
+        "credential": "Console API key (display: Github)",
+        "method": "stored",
+        "valuesRecorded": false
+      }
+    ],
+    "gatewayKey": "from the gateway env file, not auth.json",
+    "localServers": [
+      {
+        "port": 11434,
+        "listening": false
+      },
+      {
+        "port": 1234,
+        "listening": false
+      },
+      {
+        "port": 8000,
+        "listening": false
+      },
+      {
+        "port": 8080,
+        "listening": false
+      }
+    ],
+    "agents": [
+      {
+        "id": "build",
+        "mode": "primary",
+        "hidden": false
+      },
+      {
+        "id": "compaction",
+        "mode": "primary",
+        "hidden": true
+      },
+      {
+        "id": "explore",
+        "mode": "subagent",
+        "hidden": false
+      },
+      {
+        "id": "general",
+        "mode": "subagent",
+        "hidden": false
+      },
+      {
+        "id": "plan",
+        "mode": "primary",
+        "hidden": false
+      },
+      {
+        "id": "summary",
+        "mode": "primary",
+        "hidden": true
+      },
+      {
+        "id": "title",
+        "mode": "primary",
+        "hidden": true
+      }
+    ],
+    "agentsNote": "orchestrator is defined in opencode.json on opencode-college/longcat-2.5-free. That file was not edited this run; the routing change is ledger policy only.",
+    "defaultModel": {
+      "providerID": "opencode",
+      "model": "deepseek-v4.1-flash-free"
+    },
+    "smallModel": {
+      "providerID": "omni-codex",
+      "model": "codex/gpt-5.6-luna"
+    },
+    "orchestratorAgent": {
+      "id": "orchestrator",
+      "providerID": "opencode-college",
+      "model": "longcat-2.5-free",
+      "active": false
+    }
+  },
+  "catalog": {
+    "totalModels": 237,
+    "providerCount": 12,
+    "providers": [
+      {
+        "id": "opencode",
+        "name": "OpenCode OAuth",
+        "models": 89,
+        "freeModels": 10
+      },
+      {
+        "id": "opencode-college",
+        "name": "Console College",
+        "models": 12,
+        "freeModels": 11
+      },
+      {
+        "id": "opencode-personal",
+        "name": "Console Personal",
+        "models": 12,
+        "freeModels": 11
+      },
+      {
+        "id": "opencode-ronaldo",
+        "name": "Console Ronaldo",
+        "models": 12,
+        "freeModels": 11
+      },
+      {
+        "id": "omni-codex",
+        "name": "Gateway Codex",
+        "models": 22
+      },
+      {
+        "id": "omni-openrouter",
+        "name": "Gateway OpenRouter",
+        "models": 78
+      },
+      {
+        "id": "omni-mistral",
+        "name": "Gateway Mistral",
+        "models": 52
+      },
+      {
+        "id": "omni-aihorde",
+        "name": "Gateway AI Horde",
+        "models": 184
+      },
+      {
+        "id": "omni-gemini",
+        "name": "Gateway Gemini",
+        "models": 46
+      },
+      {
+        "id": "omni-groq",
+        "name": "Gateway Groq",
+        "models": 15
+      },
+      {
+        "id": "omni-cline",
+        "name": "Gateway Cline",
+        "models": 15
+      },
+      {
+        "id": "ornith",
+        "name": "Local Ornith",
+        "models": 1
+      }
+    ],
+    "providerMeta": {
+      "opencode": {
+        "name": "OpenCode",
+        "api": "https://opencode.ai/inference/openai/v1",
+        "env": "OPENCODE_API_KEY",
+        "doc": "https://opencode.ai/v2/docs/console/models/"
+      },
+      "opencode-college": {
+        "name": "Console College",
+        "api": "https://opencode.ai/inference/openai/v1",
+        "env": "OPENCODE_API_KEY",
+        "doc": null
+      },
+      "opencode-personal": {
+        "name": "Console Personal",
+        "api": "https://opencode.ai/inference/openai/v1",
+        "env": "OPENCODE_API_KEY",
+        "doc": null
+      },
+      "opencode-ronaldo": {
+        "name": "Console Ronaldo",
+        "api": "https://opencode.ai/inference/openai/v1",
+        "env": "OPENCODE_API_KEY",
+        "doc": null
+      },
+      "omniroute": {
+        "name": "OmniRoute local gateway",
+        "api": "http://localhost:20128/v1",
+        "env": null,
+        "doc": null,
+        "measured": false
+      }
+    },
+    "catalogVisibilityNote": "CLI exposes 230 refs. The Console catalog carries hy4-flash-free under all four accounts, but the CLI lists it once. CLI Console free refs read 49 against a catalog count of 52."
+  },
+  "freeTotals": {
+    "count": 11,
+    "byProvider": {
+      "opencode": 11
+    }
+  },
+  "free": [
+    {
+      "ref": "opencode/beam-free",
+      "provider": "opencode",
+      "modelId": "beam-free",
+      "name": "Beam Free",
+      "status": "active",
+      "releasedDate": "2026-10-05",
+      "lastUpdated": "2026-10-16",
+      "knowledgeCutoff": "2026-06-30",
+      "description": "Sparse mixture-of-experts reasoning model with 23B active parameters for coding and agentic workflows",
+      "family": "beam",
+      "canonicalModelId": "reflection/beam-1.0-501b-a23b",
+      "limits": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "hostVariants": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "structuredOutput": true,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": false,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all published tiers 0",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "retained-30-days",
+      "policyNote": "Not used for training. Data is retained for 30 days for safety reasons.",
+      "regionRestricted": true,
+      "regionBlocklist": [
+        "regional blocklist applies"
+      ],
+      "inConsoleFreeList": true,
+      "prefixes": [
+        "opencode",
+        "opencode-college",
+        "opencode-personal",
+        "opencode-ronaldo"
+      ],
+      "notes": null
+    },
+    {
+      "ref": "opencode/big-pickle",
+      "provider": "opencode",
+      "modelId": "big-pickle",
+      "name": "Big Pickle",
+      "status": "active",
+      "releasedDate": "2025-10-17",
+      "lastUpdated": "2025-10-17",
+      "knowledgeCutoff": "2025-01",
+      "description": "Reasoning model for deliberate analysis, multi-step problem solving, and tool use",
+      "family": "big-pickle",
+      "canonicalModelId": null,
+      "limits": {
+        "context": 200000,
+        "input": 160000,
+        "output": 32000
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [],
+      "hostVariants": [],
+      "structuredOutput": true,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": false,
+      "temperature": true,
+      "openWeights": false,
+      "cost": "all published tiers 0",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "may-use-during-free-period",
+      "policyNote": "During its free period, collected data may be used to improve the model.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "prefixes": [
+        "opencode",
+        "opencode-college",
+        "opencode-personal",
+        "opencode-ronaldo"
+      ],
+      "notes": null
+    },
+    {
+      "ref": "opencode/deepseek-v4.1-flash-free",
+      "provider": "opencode",
+      "modelId": "deepseek-v4.1-flash-free",
+      "name": "DeepSeek V4.1 Flash Free",
+      "status": "active",
+      "releasedDate": "2026-10-17",
+      "lastUpdated": "2026-10-17",
+      "knowledgeCutoff": "2025-05",
+      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
+      "family": "deepseek-flash",
+      "canonicalModelId": "deepseek/deepseek-v4.1-flash-1017",
+      "limits": {
+        "context": 200000,
+        "output": 32000
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "hostVariants": [
+        "low",
+        "high",
+        "max"
+      ],
+      "structuredOutput": true,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": true,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all published tiers 0",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "zero-retention",
+      "policyNote": "Prompts and responses are not used for training. Console states a zero-retention policy for these routes.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "prefixes": [
+        "opencode",
+        "opencode-college",
+        "opencode-personal",
+        "opencode-ronaldo"
+      ],
+      "notes": null
+    },
+    {
+      "ref": "opencode/flint-40b-free",
+      "provider": "opencode",
+      "modelId": "flint-40b-free",
+      "name": "Flint 40B Free",
+      "status": "active",
+      "releasedDate": "2026-10-21",
+      "lastUpdated": "2026-10-21",
+      "knowledgeCutoff": "2026-06",
+      "description": "Open-weight mixture-of-experts model with about 2.5B active parameters for local coding agents",
+      "family": "flint",
+      "canonicalModelId": "recursive/flint",
+      "limits": {
+        "context": 262144,
+        "output": 65536
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "hostVariants": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "structuredOutput": true,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": false,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all published tiers 0",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "may-use-during-free-period",
+      "policyNote": "During the free period, collected data may be used to improve the model. Data is retained for 30 days.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "prefixes": [
+        "opencode",
+        "opencode-college",
+        "opencode-personal",
+        "opencode-ronaldo"
+      ],
+      "notes": null
+    },
+    {
+      "ref": "opencode/hy4-flash-free",
+      "provider": "opencode",
+      "modelId": "hy4-flash-free",
+      "name": "Hy4 flash Free",
+      "status": "active",
+      "releasedDate": "2026-11-16",
+      "lastUpdated": "2026-11-16",
+      "knowledgeCutoff": null,
+      "description": "Tencent's lower-cost Hy4 tier for everyday agent and productivity tasks, with image understanding and a 1M-token context window.",
+      "family": "Hy",
+      "canonicalModelId": "tencent/hy4-flash",
+      "limits": {
+        "context": 1048576,
+        "input": 983040,
+        "output": 65536
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high"
+          ]
+        }
+      ],
+      "hostVariants": [
+        "none",
+        "high"
+      ],
+      "structuredOutput": null,
+      "interleavedField": null,
+      "attachment": true,
+      "temperature": true,
+      "openWeights": false,
+      "cost": "all published tiers 0",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "zero-retention",
+      "policyNote": "OpenCode states ZDR for the Hy4 flash free window.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "prefixes": [
+        "opencode",
+        "opencode-college",
+        "opencode-personal",
+        "opencode-ronaldo"
+      ],
+      "notes": "CLI lists this ref once under opencode/. The Console catalog carries it under all four accounts."
+    },
+    {
+      "ref": "opencode/iceman-free",
+      "provider": "opencode",
+      "modelId": "iceman-free",
+      "name": "Iceman Free",
+      "status": "active",
+      "releasedDate": "2026-11-06",
+      "lastUpdated": "2026-11-06",
+      "knowledgeCutoff": null,
+      "description": "Stealth model, free for a limited time",
+      "family": null,
+      "canonicalModelId": null,
+      "limits": {
+        "context": 262144,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [],
+      "hostVariants": [],
+      "structuredOutput": null,
+      "interleavedField": null,
+      "attachment": false,
+      "temperature": null,
+      "openWeights": false,
+      "cost": "all published tiers 0",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "may-use-during-free-period",
+      "policyNote": "During its free period, collected data is retained and used to improve the model.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "prefixes": [
+        "opencode",
+        "opencode-college",
+        "opencode-personal",
+        "opencode-ronaldo"
+      ],
+      "notes": null
+    },
+    {
+      "ref": "opencode/inkling-2-small-free",
+      "provider": "opencode",
+      "modelId": "inkling-2-small-free",
+      "name": "Inkling 2 Small Free",
+      "status": "active",
+      "releasedDate": "2026-11-05",
+      "lastUpdated": "2026-11-12",
+      "knowledgeCutoff": null,
+      "description": "Inkling 2 Small, free for a limited time",
+      "family": "ling",
+      "canonicalModelId": "thinkingmachines/inkling-2-small",
+      "limits": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "hostVariants": [
+        "none",
+        "minimal",
+        "low",
+        "medium",
+        "high",
+        "max"
+      ],
+      "structuredOutput": null,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": true,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all published tiers 0",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "may-train",
+      "policyNote": "Data is retained and may be used to monitor real-world performance and for model training.",
+      "regionRestricted": true,
+      "regionBlocklist": [
+        "regional blocklist applies"
+      ],
+      "inConsoleFreeList": true,
+      "prefixes": [
+        "opencode",
+        "opencode-college",
+        "opencode-personal",
+        "opencode-ronaldo"
+      ],
+      "notes": null
+    },
+    {
+      "ref": "opencode/longcat-2.5-free",
+      "provider": "opencode",
+      "modelId": "longcat-2.5-free",
+      "name": "LongCat 2.5 Free",
+      "status": "active",
+      "releasedDate": "2026-11-02",
+      "lastUpdated": "2026-11-02",
+      "knowledgeCutoff": null,
+      "description": "Meituan's multimodal reasoning model for long-horizon coding and agent tasks, with visual understanding and a 1M-token context window",
+      "family": "longcat",
+      "canonicalModelId": "meituan/longcat-2.5",
+      "limits": {
+        "context": 1000000,
+        "output": 262144
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "hostVariants": [],
+      "structuredOutput": null,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": true,
+      "temperature": false,
+      "openWeights": false,
+      "cost": "all published tiers 0",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "zero-retention",
+      "policyNote": "Prompts and other inputs are not used for training or retained. Hosted in China.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "prefixes": [
+        "opencode",
+        "opencode-college",
+        "opencode-personal",
+        "opencode-ronaldo"
+      ],
+      "notes": null
+    },
+    {
+      "ref": "opencode/mimo-v2.6-flash-free",
+      "provider": "opencode",
+      "modelId": "mimo-v2.6-flash-free",
+      "name": "MiMo-V2.6-Flash Free",
+      "status": "active",
+      "releasedDate": "2026-09-22",
+      "lastUpdated": "2026-09-22",
+      "knowledgeCutoff": null,
+      "description": "MiMo Flash model for multimodal coding agents and long-context automation",
+      "family": "mimo",
+      "canonicalModelId": "xiaomi/mimo-v2.6-flash",
+      "limits": {
+        "context": 200000,
+        "output": 32000
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [],
+      "hostVariants": [],
+      "structuredOutput": null,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": true,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all published tiers 0",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "may-use-during-free-period",
+      "policyNote": "During its free period, collected data may be used to improve the model.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "prefixes": [
+        "opencode",
+        "opencode-college",
+        "opencode-personal",
+        "opencode-ronaldo"
+      ],
+      "notes": null
+    },
+    {
+      "ref": "opencode/nemotron-3.5-lightning-free",
+      "provider": "opencode",
+      "modelId": "nemotron-3.5-lightning-free",
+      "name": "Nemotron 3.5 Lightning Free",
+      "status": "active",
+      "releasedDate": "2026-08-11",
+      "lastUpdated": "2026-08-11",
+      "knowledgeCutoff": "2025-09",
+      "description": "Fast NVIDIA Nemotron MoE for reliable agentic tasks across enterprise workloads",
+      "family": "nemotron",
+      "canonicalModelId": "nvidia/nemotron-3.5-lightning",
+      "limits": {
+        "context": 262144,
+        "output": 262144
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [],
+      "hostVariants": [],
+      "structuredOutput": true,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": false,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all published tiers 0",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "nvidia-trial-terms",
+      "policyNote": "NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "prefixes": [
+        "opencode",
+        "opencode-college",
+        "opencode-personal",
+        "opencode-ronaldo"
+      ],
+      "notes": null
+    },
+    {
+      "ref": "opencode/nemotron-3.5-super-vl-free",
+      "provider": "opencode",
+      "modelId": "nemotron-3.5-super-vl-free",
+      "name": "Nemotron 3.5 Super VL Free",
+      "status": "active",
+      "releasedDate": "2026-10-15",
+      "lastUpdated": "2026-10-15",
+      "knowledgeCutoff": null,
+      "description": "NVIDIA vision-language reasoning model for text, image, and video understanding and agentic tool use",
+      "family": "nemotron",
+      "canonicalModelId": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "limits": {
+        "context": 1048576,
+        "input": 1048576,
+        "output": 131072
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "toolCall": true,
+      "reasoning": true,
+      "reasoningOptions": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "hostVariants": [
+        "none",
+        "minimal",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "structuredOutput": null,
+      "interleavedField": {
+        "field": "reasoning_content"
+      },
+      "attachment": true,
+      "temperature": true,
+      "openWeights": true,
+      "cost": "all published tiers 0",
+      "authEnvVar": "OPENCODE_API_KEY",
+      "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+      "endpointKind": "console",
+      "sdkPackage": "@ai-sdk/openai-compatible",
+      "policyClass": "nvidia-trial-terms",
+      "policyNote": "NVIDIA free endpoint. Trial use only. Do not submit personal or confidential data. Use is logged for security and product improvement and is not linked to identity.",
+      "regionRestricted": false,
+      "regionBlocklist": [],
+      "inConsoleFreeList": true,
+      "prefixes": [
+        "opencode",
+        "opencode-college",
+        "opencode-personal",
+        "opencode-ronaldo"
+      ],
+      "notes": null
+    }
+  ],
+  "drift": {
+    "added": [],
+    "removed": [
+      "opencode/glm-5.3-flash-free",
+      "opencode/minimax-m3.1-flash-free"
+    ],
+    "changed": [
+      {
+        "ref": "opencode/glm-5.3-flash-free",
+        "fields": [
+          "status"
+        ],
+        "detail": "retired 2026-11-18; free ref absent from opencode/ and dead on the three API prefixes"
+      },
+      {
+        "ref": "opencode/minimax-m3.1-flash-free",
+        "fields": [
+          "status"
+        ],
+        "detail": "retired 2026-11-17; free ref absent from every prefix"
+      }
+    ],
+    "notes": [
+      "Console free set fell from 13 to 11 in two days.",
+      "GLM-5.3-Flash Free and MiniMax M3.1 Flash Free both moved to paid-only refs.",
+      "GLM remains listed under the three API prefixes and fails every call."
+    ]
+  },
+  "sources": [
+    {
+      "type": "docs",
+      "url": "https://opencode.ai/docs/console/models",
+      "checked": "2026-11-18"
+    },
+    {
+      "type": "docs",
+      "url": "https://opencode.ai/docs/console/models",
+      "checked": "2026-11-18",
+      "note": "Deprecated table lists GLM-5.3-Flash Free on 2026-11-18 and MiniMax M3.1 Flash Free on 2026-11-17."
+    },
+    {
+      "type": "benchmark",
+      "url": "https://thinkingmachines.ai/news/inkling-2-small",
+      "checked": "2026-11-18",
+      "note": "Head-to-head covering Inkling 2 Small, GLM-5.3-Flash, MiMo V2.6 Flash, MiniMax M3.1 Flash, DeepSeek V4.1 Flash."
+    },
+    {
+      "type": "catalog",
+      "url": "/usr/local/share/fm/catalog.json",
+      "checked": "2026-11-18",
+      "sha256": "822d7c351adffd676c8d14cef4bbca8eb24daa2a38e5e4744c56bedb2637dfca"
+    },
+    {
+      "type": "gateway",
+      "url": "http://127.0.0.1:20128/v1/models",
+      "checked": "2026-11-18",
+      "note": "480 entries after the 3.8.53 upgrade."
+    }
+  ],
+  "validation": {
+    "freeCount": 11,
+    "providerCount": 11,
+    "missingEnrichment": [],
+    "allCostTiersZero": true,
+    "consoleListedFree": 11,
+    "unmeasuredProviders": [
+      "omniroute"
+    ],
+    "cliRefs": 237,
+    "gatewayLiveEntries": 480,
+    "gatewayCatalogEntries": 385,
+    "gatewayWiredRefs": 111,
+    "reachabilityProbe": {
+      "date": "2026-11-18",
+      "passed": 11,
+      "failed": 0,
+      "method": "opencode run -m opencode-college/<model> 'Reply with exactly: OK'",
+      "failedRefs": [],
+      "timesSeconds": {
+        "nemotron-3.5-lightning-free": 1,
+        "big-pickle": 1,
+        "beam-free": 2,
+        "flint-40b-free": 2,
+        "inkling-2-small-free": 2,
+        "nemotron-3.5-super-vl-free": 2,
+        "deepseek-v4.1-flash-free": 3,
+        "hy4-flash-free": 3,
+        "iceman-free": 3,
+        "longcat-2.5-free": 4,
+        "mimo-v2.6-flash-free": 4
+      },
+      "phantomRefs": [
+        "opencode-college/glm-5.3-flash-free: listed, Model unavailable",
+        "opencode-personal/glm-5.3-flash-free: listed, Model unavailable",
+        "opencode-ronaldo/glm-5.3-flash-free: listed, Model unavailable"
+      ]
+    },
+    "gatewayProbe": {
+      "date": "2026-11-09",
+      "passed": 2,
+      "failed": 0,
+      "refs": [
+        "omni-codex/codex/gpt-5.6-luna (10 s)",
+        "omni-codex/codex/gpt-5.6-terra (3 s)"
+      ],
+      "note": "Not re-probed on 2026-11-16. Carry-forward."
+    },
+    "prefixResidencyProbe": {
+      "date": "2026-11-16",
+      "method": "opencode run -m <prefix>/hy4-flash-free 'say OK'",
+      "results": {
+        "opencode": "OK",
+        "opencode-college": "OK",
+        "opencode-personal": "OK",
+        "opencode-ronaldo": "OK after one overloaded retry"
+      }
+    },
+    "authProviders": 3,
+    "configKeyMaterial": false
+  }
+}
